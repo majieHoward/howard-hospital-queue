@@ -1,0 +1,37 @@
+package com.howard.www;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+/**
+ * 
+ * @ClassName:  HospitalQueueServerApplication   
+ * @Description:TODO
+ * @author: mayijie
+ * @date:   2017年8月23日 下午1:59:42   
+ *     
+ * @Copyright: 2017 https://github.com/majieHoward Inc. All rights reserved.
+ */
+// @SpringBootApplication其包含@EnableAutoConfiguration和@ComponentScan注解,
+//可以自动扫描相关的自动配置类,从而实现自动配置功能的
+//@SpringBootApplication(exclude={});
+@SpringBootApplication
+public class HospitalQueueServerApplication  implements EmbeddedServletContainerCustomizer{
+
+	public static void main(String[] args) {
+		SpringApplication.run(HospitalQueueServerApplication.class, args);
+	}
+    /**
+     * 
+     * <p>Title: customize</p>   
+     * <p>Description: 在application.proerties中配置了端口无效所以在这里实现EmbeddedServletContainerCustomizer接口</p>   
+     * @param container   
+     * @see org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer#customize(org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer)
+     */
+	@Override
+	public void customize(ConfigurableEmbeddedServletContainer container) {
+		container.setPort(9999);
+		
+	}
+}
