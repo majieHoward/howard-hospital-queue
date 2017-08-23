@@ -2,13 +2,11 @@ package com.howard.www.hospital.queue.operation.service.impl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
 import com.howard.www.core.base.util.FrameworkStringUtils;
 import com.howard.www.core.data.transfer.dto.IDataTransferObject;
-import com.howard.www.core.data.transfer.dto.impl.DataTransferObject;
 import com.howard.www.hospital.queue.operation.dao.IOperationConsultingRoomDao;
 import com.howard.www.hospital.queue.operation.service.IOperationConsultingRoomSerivce;
 

@@ -24,4 +24,13 @@ public class ExternalProvidedHisServiceImpl implements IExternalProvidedHisServi
 		return null;
 	}
 
+	@Override
+	public JSONObject registerDoctorOnlineStatus(IDataTransferObject paramDto) throws Exception {
+		// TODO Auto-generated method stub
+		/**
+		 * 判断接口传参是否满足要求
+		 */
+		return null;
+	}
+
 }

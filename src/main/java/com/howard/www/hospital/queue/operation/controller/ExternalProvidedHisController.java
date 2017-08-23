@@ -39,6 +39,9 @@ public class ExternalProvidedHisController {
      */
 	@RequestMapping("/developing/his/transfer/hospital.doctorOnlineStatus.interfaces")
 	public String doctorOnlineStatus(IDataTransferObject requiredParameter) throws Exception {
+		/**
+		 * 医生登陆门诊医生站实现医生签到,退出医生工作站实现医生签退
+		 */
 		return FrameworkStringUtils.asString(JSONObject.fromObject(requiredParameter));
 	}
 	/**

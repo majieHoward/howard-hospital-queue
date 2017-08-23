@@ -1,10 +1,26 @@
 package com.howard.www.hospital.queue.operation.websocket.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
+import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.config.annotation.AbstractWebSocketMessageBrokerConfigurer;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
+import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
+import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+import org.springframework.web.socket.config.annotation.WebSocketTransportRegistration;
+import org.springframework.web.socket.handler.WebSocketHandlerDecoratorFactory;
+
+import com.howard.www.hospital.queue.operation.websocket.handler.HospitalQueueWebSocketHandler;
+import com.howard.www.hospital.queue.operation.websocket.handler.WebSocketSessionCapturingHandlerDecorator;
+import com.howard.www.hospital.queue.operation.websocket.interceptors.HttpSessionIdHandshakeInterceptor;
+import com.howard.www.hospital.queue.operation.websocket.interceptors.SessionKeepAliveChannelInterceptor;
 
 /**
  * 
@@ -16,8 +32,11 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
  * @Copyright: 2017 https://github.com/majieHoward Inc. All rights reserved.
  */
 @Configuration
+@EnableWebSocket
 @EnableWebSocketMessageBroker
-public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
+public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer implements WebSocketConfigurer {
+	protected final Logger log = LoggerFactory.getLogger(WebSocketConfig.class);
+
 	/**
 	 * 
 	 * <p>
@@ -41,45 +60,81 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 		 * 类似于OpenWire(一种二进制协议)。其中最流行的STOMP消息代理是 Apache ActiveMQ
 		 */
 		/**
-		 * 表示添加了一个/hospitalQueue端点，客户端就可以通过这个端点来进行连接 
-		 * withSockJS()的作用是开启SockJS支持
+		 * 表示添加了一个/hospitalQueue端点，客户端就可以通过这个端点来进行连接 withSockJS()的作用是开启SockJS支持
 		 * setAllowedOrigins()方法表示允许连接的域名
 		 */
 		/**
-		 * 配置允许的Origin头值.此检查主要是为浏览器客户端设计的。没有什么可以阻止其他类型的客户
-		 * 端修改 Origin标头值.启用S​​ockJS并且起源受到限制时,不允许检查请求来源
-		 * (基于JSONP和Iframe的传输)的传输类型被禁用.因此,当起源受到限制时,
-		 * 不支持IE 6到9.每个提供的允许来源必须以
-		 * "http://","https://"或"*"开头(意味着允许所有来源).
-		 * 默认情况下,只允许同一个原始请求（空列表）
-		 * 使用通配符 *,表示当前服务端通话任何域名发起请求
+		 * 配置允许的Origin头值.此检查主要是为浏览器客户端设计的。没有什么可以阻止其他类型的客户 端修改
+		 * Origin标头值.启用S​​ockJS并且起源受到限制时,不允许检查请求来源
+		 * (基于JSONP和Iframe的传输)的传输类型被禁用.因此,当起源受到限制时, 不支持IE 6到9.每个提供的允许来源必须以
+		 * "http://","https://"或"*"开头(意味着允许所有来源). 默认情况下,只允许同一个原始请求（空列表） 使用通配符
+		 * *,表示当前服务端通话任何域名发起请求
 		 */
-		registry.addEndpoint("/hospitalQueue").setAllowedOrigins("*").withSockJS();
+
+		registry.addEndpoint("/hospitalQueue").setAllowedOrigins("*").withSockJS()
+				.setInterceptors(httpSessionIdHandshakeInterceptor());
 	}
 
+	
+	@Override
+	public void configureClientInboundChannel(ChannelRegistration registration) {
+		registration.setInterceptors(sessionKeepAliveChannelInterceptor());
+	}
+
+
+	@Bean
+	public HttpSessionIdHandshakeInterceptor httpSessionIdHandshakeInterceptor() {
+		return new HttpSessionIdHandshakeInterceptor();
+	}
+
+	@Bean
+	public SessionKeepAliveChannelInterceptor sessionKeepAliveChannelInterceptor() {
+		return new SessionKeepAliveChannelInterceptor();
+	}
+	
+	@Autowired
+	private WebSocketHandler subProtocolWebSocketHandler;
+
+	@Override
+	public void configureWebSocketTransport(WebSocketTransportRegistration registration) {
+		registration.addDecoratorFactory(new WebSocketHandlerDecoratorFactory() {
+			@Override
+			public WebSocketHandler decorate(WebSocketHandler webSocketHandler) {
+				return new WebSocketSessionCapturingHandlerDecorator(webSocketHandler);
+			}
+		});
+	}
+	
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry registry) {
 		/**
-		 * 启用一个简单的消息代理并配置一个或多个前缀来过滤定位到代理的目标
-		 * (例如，以"/topic"为前缀的目标)
+		 * 启用一个简单的消息代理并配置一个或多个前缀来过滤定位到代理的目标 (例如，以"/topic"为前缀的目标)
 		 */
 		registry.enableSimpleBroker("/screenDevice", "/callTheName");
 		/**
-		 * 指服务端接收地址的前缀，意思就是说客户端给服务端发消息的地址的前缀
-		 * 表示客户单向服务器端发送时的主题上面需要加"/app"作为前缀
+		 * 指服务端接收地址的前缀，意思就是说客户端给服务端发消息的地址的前缀 表示客户单向服务器端发送时的主题上面需要加"/app"作为前缀
 		 */
 		registry.setApplicationDestinationPrefixes("/app");
 		/**
-		 *配置用于标识用户目的地的前缀。
-		 *用户目的地提供用户订阅其会话唯一的队列名称的能力，
-		 *以及其他用户将消息发送到这些唯一的，用户特定的队列。
-		 *例如，当用户尝试订阅"/user/queue/position-updates"时,
-		 *目的地可以转换为"/queue/position-updatesi9oqdfzo",
-		 *产生不与尝试执行的任何其他用户相冲突的唯一队列名称一样.
-		 *随后当消息发送到"/user/{username}/queue/position-updates"时,
-		 *目的地被转换为"/queue/position-updatesi9oqdfzo".
-		 *用于标识这些目的地的默认前缀是"/user/"
+		 * 配置用于标识用户目的地的前缀。 用户目的地提供用户订阅其会话唯一的队列名称的能力， 以及其他用户将消息发送到这些唯一的，用户特定的队列。
+		 * 例如，当用户尝试订阅"/user/queue/position-updates"时,
+		 * 目的地可以转换为"/queue/position-updatesi9oqdfzo",
+		 * 产生不与尝试执行的任何其他用户相冲突的唯一队列名称一样.
+		 * 随后当消息发送到"/user/{username}/queue/position-updates"时,
+		 * 目的地被转换为"/queue/position-updatesi9oqdfzo". 用于标识这些目的地的默认前缀是"/user/"
 		 */
 		registry.setUserDestinationPrefix("/screenDevice/");
+	}
+
+	@Override
+	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+		// TODO Auto-generated method stub
+		log.info("registerWebSocketHandlers(WebSocketHandlerRegistry registry)");
+		registry.addHandler(hospitalQueueWebSocketHandler(), "/hospitalQueue");
+	}
+
+	@Bean
+	public WebSocketHandler hospitalQueueWebSocketHandler() {
+		return new HospitalQueueWebSocketHandler();
 	}
 }

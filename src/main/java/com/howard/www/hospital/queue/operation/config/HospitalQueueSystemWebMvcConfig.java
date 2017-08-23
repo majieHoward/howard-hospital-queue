@@ -14,6 +14,7 @@ import org.springframework.web.servlet.resource.GzipResourceResolver;
 import org.springframework.web.servlet.resource.VersionResourceResolver;
 
 import com.howard.www.core.base.web.mvc.argument.IDataTransferObjectMethodArgumentResolver;
+import com.howard.www.hospital.queue.operation.application.startup.HospitalQueueApplicationStartup;
 /**
  * 
  * @ClassName:  SystemWebConfig   
@@ -94,4 +95,9 @@ public class HospitalQueueSystemWebMvcConfig extends WebMvcConfigurationSupport 
 		IDataTransferObjectMethodArgumentResolver dataTransferObjectMethodArgumentResolver = new IDataTransferObjectMethodArgumentResolver();
 		return dataTransferObjectMethodArgumentResolver;
 	}
+	
+	@Bean
+    public HospitalQueueApplicationStartup applicationStartListener(){
+        return new HospitalQueueApplicationStartup();
+    }
 }

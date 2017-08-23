@@ -19,11 +19,11 @@
 	</parent>
 
 	<repositories>
-        <repository>
-            <id>eclipse</id>
-            <url>https://repo.eclipse.org/content/groups/releases/</url>
-        </repository>
-    </repositories>
+		<repository>
+			<id>eclipse</id>
+			<url>https://repo.eclipse.org/content/groups/releases/</url>
+		</repository>
+	</repositories>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -56,12 +56,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-		<!-- add by mayijie at 2017.08.20  websocket-->
-		<!-- Spring Boot provides WebSockets auto-configuration for embedded Tomcat (8 and 7), Jetty 9 and Undertow. 
-		If you’re deploying a war file to a standalone container, 
-		Spring Boot assumes that the container will be responsible for the configuration of its WebSocket support.
-		Spring Framework provides rich WebSocket support that can be easily accessed via the spring-boot-starter-websocket module. 
-		-->
+		<!-- add by mayijie at 2017.08.20 websocket -->
+		<!-- Spring Boot provides WebSockets auto-configuration for embedded Tomcat 
+			(8 and 7), Jetty 9 and Undertow. If you’re deploying a war file to a standalone 
+			container, Spring Boot assumes that the container will be responsible for 
+			the configuration of its WebSocket support. Spring Framework provides rich 
+			WebSocket support that can be easily accessed via the spring-boot-starter-websocket 
+			module. -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-websocket</artifactId>
@@ -76,15 +77,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!--  
 		<dependency>
-			<groupId>org.apache.thrift</groupId>
-			<artifactId>libthrift</artifactId>
-			<version>0.10.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/libthrift-0.10.0.jar</systemPath>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session</artifactId>
 		</dependency>
-		-->
+		<!-- <dependency> <groupId>org.apache.thrift</groupId> <artifactId>libthrift</artifactId> 
+			<version>0.10.0</version> <scope>system</scope> <systemPath>${project.basedir}/lib/libthrift-0.10.0.jar</systemPath> 
+			</dependency> -->
 		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -122,17 +121,17 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 		</dependency>
-        <!-- https://mvnrepository.com/artifact/org.eclipse.paho/mqtt-client -->
+		<!-- https://mvnrepository.com/artifact/org.eclipse.paho/mqtt-client -->
 		<dependency>
-		    <groupId>org.eclipse.paho</groupId>
-		    <artifactId>mqtt-client</artifactId>
-		    <version>0.4.0</version>
+			<groupId>org.eclipse.paho</groupId>
+			<artifactId>mqtt-client</artifactId>
+			<version>0.4.0</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
 		<dependency>
-		    <groupId>org.jsoup</groupId>
-		    <artifactId>jsoup</artifactId>
-		    <version>1.10.2</version>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.10.2</version>
 		</dependency>
 	</dependencies>
 
