@@ -20,7 +20,7 @@ import lombok.ToString;
 @Builder
 @ToString
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class DoctorBaseInfoEntity  implements Serializable {
+public class DoctorAttributeEntity  implements Serializable {
 	/**   
 	 * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么)   
 	 */  
