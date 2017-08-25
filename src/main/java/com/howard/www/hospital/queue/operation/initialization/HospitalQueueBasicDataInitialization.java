@@ -10,8 +10,8 @@ import com.howard.www.hospital.queue.operation.service.impl.OperationConsultingR
 import com.howard.www.hospital.queue.operation.service.impl.OperationDoctorAttributeServiceImpl;
 
 @Configuration
-public class HospitalConsultingRoomAttributeInitialization {
-	protected final Logger log = LoggerFactory.getLogger(HospitalConsultingRoomAttributeInitialization.class);
+public class HospitalQueueBasicDataInitialization {
+	protected final Logger log = LoggerFactory.getLogger(HospitalQueueBasicDataInitialization.class);
 	@Bean(name = "operationConsultingRoomSerivce")
 	public IOperationConsultingRoomSerivce constructionConsultingRoomSerivce() throws Exception {
 		IOperationConsultingRoomSerivce consultingRoomSerivce = new OperationConsultingRoomSerivceImpl();
