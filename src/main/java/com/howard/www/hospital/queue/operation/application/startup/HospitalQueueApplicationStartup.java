@@ -8,6 +8,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 
 import com.howard.www.core.data.transfer.dto.impl.DataTransferObject;
 import com.howard.www.hospital.queue.operation.service.IOperationConsultingRoomSerivce;
+import com.howard.www.hospital.queue.operation.service.IOperationDoctorAttributeService;
 
 
 public class HospitalQueueApplicationStartup implements ApplicationListener<ContextRefreshedEvent>{
@@ -20,6 +21,7 @@ public class HospitalQueueApplicationStartup implements ApplicationListener<Cont
 		cApplicationContext = event.getApplicationContext();
 		try {
 			obtainIOperationConsultingRoomSerivce().obtainConsultingRoomInfo(new DataTransferObject());
+			obtainIOperationDoctorAttributeService().obtainDoctorAttributeInfo(new DataTransferObject());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -28,5 +30,9 @@ public class HospitalQueueApplicationStartup implements ApplicationListener<Cont
 
 	private IOperationConsultingRoomSerivce obtainIOperationConsultingRoomSerivce()throws Exception{
 		return (IOperationConsultingRoomSerivce) cApplicationContext.getBean("operationConsultingRoomSerivce");
+	}
+	
+	private IOperationDoctorAttributeService obtainIOperationDoctorAttributeService()throws Exception{
+		return (IOperationDoctorAttributeService) cApplicationContext.getBean("operationDoctorAttributeService");
 	}
 }

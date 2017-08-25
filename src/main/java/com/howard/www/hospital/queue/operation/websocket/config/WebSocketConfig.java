@@ -9,15 +9,10 @@ import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.config.annotation.AbstractWebSocketMessageBrokerConfigurer;
-import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
-import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
-import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketTransportRegistration;
 import org.springframework.web.socket.handler.WebSocketHandlerDecoratorFactory;
-
-import com.howard.www.hospital.queue.operation.websocket.handler.HospitalQueueWebSocketHandler;
 import com.howard.www.hospital.queue.operation.websocket.handler.WebSocketSessionCapturingHandlerDecorator;
 import com.howard.www.hospital.queue.operation.websocket.interceptors.HttpSessionIdHandshakeInterceptor;
 import com.howard.www.hospital.queue.operation.websocket.interceptors.SessionKeepAliveChannelInterceptor;
@@ -32,9 +27,8 @@ import com.howard.www.hospital.queue.operation.websocket.interceptors.SessionKee
  * @Copyright: 2017 https://github.com/majieHoward Inc. All rights reserved.
  */
 @Configuration
-@EnableWebSocket
 @EnableWebSocketMessageBroker
-public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer implements WebSocketConfigurer {
+public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer{
 	protected final Logger log = LoggerFactory.getLogger(WebSocketConfig.class);
 
 	/**
@@ -71,38 +65,22 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer im
 		 * *,表示当前服务端通话任何域名发起请求
 		 */
 
-		registry.addEndpoint("/hospitalQueue").setAllowedOrigins("*").withSockJS()
-				.setInterceptors(httpSessionIdHandshakeInterceptor());
+		registry.addEndpoint("/hospitalQueue").setAllowedOrigins("*").withSockJS().setInterceptors(httpSessionIdHandshakeInterceptor());
 	}
-
 	
 	@Override
 	public void configureClientInboundChannel(ChannelRegistration registration) {
 		registration.setInterceptors(sessionKeepAliveChannelInterceptor());
 	}
 
-
 	@Bean
 	public HttpSessionIdHandshakeInterceptor httpSessionIdHandshakeInterceptor() {
 		return new HttpSessionIdHandshakeInterceptor();
 	}
-
+	
 	@Bean
 	public SessionKeepAliveChannelInterceptor sessionKeepAliveChannelInterceptor() {
 		return new SessionKeepAliveChannelInterceptor();
-	}
-	
-	@Autowired
-	private WebSocketHandler subProtocolWebSocketHandler;
-
-	@Override
-	public void configureWebSocketTransport(WebSocketTransportRegistration registration) {
-		registration.addDecoratorFactory(new WebSocketHandlerDecoratorFactory() {
-			@Override
-			public WebSocketHandler decorate(WebSocketHandler webSocketHandler) {
-				return new WebSocketSessionCapturingHandlerDecorator(webSocketHandler);
-			}
-		});
 	}
 	
 	@Override
@@ -126,15 +104,4 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer im
 		registry.setUserDestinationPrefix("/screenDevice/");
 	}
 
-	@Override
-	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		// TODO Auto-generated method stub
-		log.info("registerWebSocketHandlers(WebSocketHandlerRegistry registry)");
-		registry.addHandler(hospitalQueueWebSocketHandler(), "/hospitalQueue");
-	}
-
-	@Bean
-	public WebSocketHandler hospitalQueueWebSocketHandler() {
-		return new HospitalQueueWebSocketHandler();
-	}
 }

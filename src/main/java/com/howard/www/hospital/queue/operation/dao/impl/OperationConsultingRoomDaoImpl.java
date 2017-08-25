@@ -8,6 +8,15 @@ import com.howard.www.hospital.queue.operation.dao.IOperationConsultingRoomDao;
 
 import net.sf.json.JSONArray;
 @Repository("operationConsultingRoomDao")
+/**
+ * 
+ * @ClassName:  OperationConsultingRoomDaoImpl   
+ * @Description:TODO   
+ * @author: mayijie
+ * @date:   2017年8月25日 下午2:54:52   
+ *     
+ * @Copyright: 2017 https://github.com/majieHoward Inc. All rights reserved.
+ */
 public class OperationConsultingRoomDaoImpl extends BaseDaoImpl implements IOperationConsultingRoomDao {
 
 	@Override
@@ -16,11 +25,14 @@ public class OperationConsultingRoomDaoImpl extends BaseDaoImpl implements IOper
 		return obtainQuery()
 				.evaluetePrimitiveSqlResource(
 						"select "
-						+ "substr(t.room_name,0,INSTR(t.room_name,'（')-1) zsm,"
-						+ "substr(t.room_name,INSTR(t.room_name,'（'),INSTR(t.room_name,'）')-INSTR(t.room_name,'（')+1) lc,"
-						+ "t.* "
-						+ "from room_dict t "
-						+ "order by lc,zsm")
+						+ "room.ROOM_CODE AS RC,"
+						+ "room.ROOM_NAME AS RN,"
+						+ "room.DEPT_CODE AS DC,"
+						+ "room.ROOM_TYPE AS RT,"
+						+ "room.SIMPLE_NAME AS SN,"
+						+ "room.INPUT_CODE AS IC "
+						+ "from "
+						+ "room_dict room ")
 				.evaluateJsonNamedParameterJdbcTemplate("systemJdbcTemplate")
 				.evaluateIDataTransferObject(queryParameters).forJsonArray();
 	}

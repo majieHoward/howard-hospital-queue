@@ -42,6 +42,7 @@ public class ExternalProvidedHisController {
 		/**
 		 * 医生登陆门诊医生站实现医生签到,退出医生工作站实现医生签退
 		 */
+		obtainIExternalProvidedHisService().registerDoctorOnlineStatus(requiredParameter);
 		return FrameworkStringUtils.asString(JSONObject.fromObject(requiredParameter));
 	}
 	/**

@@ -1,11 +1,16 @@
 package com.howard.www.hospital.queue.operation.domain;
 
 import java.io.Serializable;
+
+import com.howard.www.core.base.util.FrameworkStringUtils;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
+import net.sf.json.JSONObject;
 
 /**
  * 
@@ -19,21 +24,47 @@ import lombok.ToString;
 @Data
 @Builder
 @ToString
+@NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class DoctorAttributeEntity  implements Serializable {
-	/**   
-	 * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么)   
-	 */  
+public class DoctorAttributeEntity implements Serializable {
+	/**
+	 * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么)
+	 */
 	private static final long serialVersionUID = 1L;
-	//医生工号
+	// 医生工号
 	private String doctorJobNumber;
-	//医生简介
+	// 医生简介
 	private String doctorIntroduction;
-	//医生姓名
+	// 医生姓名
 	private String doctorName;
-	//医生头像照片以base64位存储
-	
-	//是否可用'10A' '10X'
+	// 医生头像照片以base64位存储
+
+	private String groupName;
+	// eg.主治医师
+	private String positionalTitle;
+
+	private String deptCode;
+	// 是否可用'10A' '10X'
 	private String available;
-	
+
+	public void structureDoctorAttributeEntityFromJSON(JSONObject doctorObject) throws Exception {
+		if(doctorObject==null){
+			throw new RuntimeException("structureDoctorAttributeEntityFromJSON方法传入的JSONObject对象为空");
+		}
+		/**
+		 * SELECT
+		 * ***doctor.ID AS I,
+		 * ***doctor.NAME AS N,
+		 * ***doctor.GROUP_NAME AS GN,
+		 * ***doctor.TITLE AS T,
+		 * ***doctor.DEPT_CODE AS DC
+		 * FROM
+		 * v_outp_doctor doctor
+		 */
+		this.setDoctorIntroduction(FrameworkStringUtils.asString(doctorObject.get("I")));
+		this.setDoctorName(FrameworkStringUtils.asString(doctorObject.get("N")));
+		this.setGroupName(FrameworkStringUtils.asString(doctorObject.get("GN")));
+		this.setPositionalTitle(FrameworkStringUtils.asString(doctorObject.get("T")));
+		this.setDeptCode(FrameworkStringUtils.asString(doctorObject.get("DC")));
+	}
 }

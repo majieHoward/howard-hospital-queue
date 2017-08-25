@@ -1,11 +1,9 @@
 package com.howard.www.global.exception;
 
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.howard.www.core.base.util.FrameworkStringUtils;
 import com.howard.www.hospital.queue.operation.domain.BackInteractivenfoEntity;
 
@@ -18,6 +16,7 @@ public class SystemGlobalExceptionHandler {
 		BackInteractivenfoEntity backInteractivenfoEntity = new BackInteractivenfoEntity();
 		backInteractivenfoEntity.setIsSuccess("error");
 		backInteractivenfoEntity.setInteractiveMessage(e.getMessage());
+		backInteractivenfoEntity.setReturnErrorEncoding(e.getMessage());
 		backInteractivenfoEntity.setRequestAddress(FrameworkStringUtils.asString(request.getRequestURL().toString()));
 		return backInteractivenfoEntity;
 	}

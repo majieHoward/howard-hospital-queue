@@ -1,6 +1,7 @@
 package com.howard.www.hospital.queue.operation.domain;
 
 import java.io.Serializable;
+import java.util.Vector;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -59,4 +60,8 @@ public class ScreenDeviceEntity implements Serializable {
 	private ScreenDeviceSpecificationEntity specification;
 	// 是否可用'10A' '10X'
 	private String available;
+	
+	private Vector<ConsultingRoomEntity> consultingRoomItems;
+	
+	private Vector<String> consultingRoomCodeItems;
 }

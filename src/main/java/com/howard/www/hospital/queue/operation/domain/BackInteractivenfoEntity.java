@@ -4,48 +4,42 @@ import java.io.Serializable;
 
 import com.howard.www.core.base.util.FrameworkStringUtils;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import net.sf.json.JSONObject;
 
-
+@Data
+@Builder
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class BackInteractivenfoEntity implements Serializable{
     /**   
 	 * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么)   
 	 */  
 	private static final long serialVersionUID = 1L;
-	public String isSuccess;
-    public String interactiveMessage;
-    public String requestAddress;
-    public Object interactiveData;
+	private String isSuccess;
+    private String interactiveMessage;
+    private String returnErrorEncoding;
+    private String requestAddress;
+    private Object interactiveData;
+    
 	public String getIsSuccess() {
 		if(FrameworkStringUtils.isEmpty(isSuccess)){
 			this.isSuccess="success";
 		}
 		return isSuccess;
 	}
-	public void setIsSuccess(String isSuccess) {
-		this.isSuccess = isSuccess;
-	}
-	public String getInteractiveMessage() {
-		return interactiveMessage;
-	}
-	public void setInteractiveMessage(String interactiveMessage) {
-		this.interactiveMessage = interactiveMessage;
-	}
+	
 	public Object getInteractiveData() {
 		if(interactiveData==null){
 			this.interactiveData=new JSONObject();
 		}
 		return interactiveData;
 	}
-	public void setInteractiveData(Object interactiveData) {
-		this.interactiveData = interactiveData;
-	}
-	public String getRequestAddress() {
-		return requestAddress;
-	}
-	public void setRequestAddress(String requestAddress) {
-		this.requestAddress = requestAddress;
-	}
 	
-    
 }
