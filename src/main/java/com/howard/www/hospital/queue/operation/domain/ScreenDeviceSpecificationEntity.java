@@ -32,7 +32,6 @@ public class ScreenDeviceSpecificationEntity implements Serializable{
 	//eg.屏幕规格描述
 	private String screenSerialDescribe;
 	//eg.P5632
-	private PageDisplayEntity pageDisplay;
 	//是否可用'10A' '10X'
   	private String available;
 }

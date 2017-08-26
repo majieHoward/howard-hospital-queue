@@ -46,6 +46,10 @@ public class DoctorAttributeEntity implements Serializable {
 	private String deptCode;
 	// 是否可用'10A' '10X'
 	private String available;
+	
+	public DoctorAttributeEntity(JSONObject doctorObject) throws Exception{
+		structureDoctorAttributeEntityFromJSON(doctorObject);
+	}
 
 	public void structureDoctorAttributeEntityFromJSON(JSONObject doctorObject) throws Exception {
 		if(doctorObject==null){
@@ -57,14 +61,18 @@ public class DoctorAttributeEntity implements Serializable {
 		 * ***doctor.NAME AS N,
 		 * ***doctor.GROUP_NAME AS GN,
 		 * ***doctor.TITLE AS T,
-		 * ***doctor.DEPT_CODE AS DC
-		 * FROM
-		 * v_outp_doctor doctor
+		 * ***doctor.DEPT_CODE AS DC 
+		 * ***resume.doctor_resume AS DR
+		 * "FROM "
+		 * "v_outp_doctor doctor "
+		 * "LEFT JOIN hhq_doctor_resume resume "
+		 * "on doctor.ID = resume.doctor_id"
 		 */
-		this.setDoctorIntroduction(FrameworkStringUtils.asString(doctorObject.get("I")));
+		this.setDoctorJobNumber(FrameworkStringUtils.asString(doctorObject.get("I")));
 		this.setDoctorName(FrameworkStringUtils.asString(doctorObject.get("N")));
 		this.setGroupName(FrameworkStringUtils.asString(doctorObject.get("GN")));
 		this.setPositionalTitle(FrameworkStringUtils.asString(doctorObject.get("T")));
 		this.setDeptCode(FrameworkStringUtils.asString(doctorObject.get("DC")));
+	    this.setDoctorIntroduction(FrameworkStringUtils.asString(doctorObject.get("DR")));
 	}
 }

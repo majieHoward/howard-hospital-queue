@@ -26,9 +26,12 @@ public class OperationDoctorAttributeDaoImpl extends BaseDaoImpl implements IOpe
 						+ "doctor.NAME AS N,"
 						+ "doctor.GROUP_NAME AS GN,"
 						+ "doctor.TITLE AS T,"
-						+ "doctor.DEPT_CODE AS DC "
+						+ "doctor.DEPT_CODE AS DC,"
+						+ "resume.doctor_resume AS DR "
 						+ "FROM "
-						+ "v_outp_doctor doctor")
+						+ "v_outp_doctor doctor "
+						+ "LEFT JOIN hhq_doctor_resume resume "
+						+ "on doctor.ID = resume.doctor_id")
 				.evaluateJsonNamedParameterJdbcTemplate("systemJdbcTemplate")
 				.evaluateIDataTransferObject(queryParameters).forJsonArray();
 	}

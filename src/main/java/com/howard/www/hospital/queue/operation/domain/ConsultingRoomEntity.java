@@ -57,9 +57,20 @@ public class ConsultingRoomEntity implements Serializable {
 	// 是否可用'10A' '10X'
 	private String available;
 
-	private Vector<ScreenDeviceEntity> screenDeviceItems;
-
+	private Vector<String> internetProtocolItems=new Vector<String>();
+	
 	private Vector<String> screenDeviceIdentityItems;
+	
+	public void pustScreenDeviceInternetProtocolToRoom(String internetProtocol){
+		if(!"".equals(FrameworkStringUtils.asString(internetProtocol))){
+			internetProtocolItems.add(internetProtocol);
+		}
+		
+	}
+	
+	public ConsultingRoomEntity(JSONObject consultingRoomObject) throws Exception{
+		structureConsultingRoomEntityFromJSON(consultingRoomObject);
+	}
 
 	public void structureConsultingRoomEntityFromJSON(JSONObject consultingRoomObject) throws Exception {
 		if(consultingRoomObject==null){

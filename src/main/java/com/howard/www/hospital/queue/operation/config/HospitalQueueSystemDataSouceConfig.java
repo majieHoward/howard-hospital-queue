@@ -18,7 +18,7 @@ public class HospitalQueueSystemDataSouceConfig {
 	@Primary
 	public DruidDataSource initDruidDataSource() throws Exception {
 		DruidDataSource systemDataSource = new DruidDataSource();
-		systemDataSource.setUrl("jdbc:mysql://127.0.0.1:3306/jeecmsv7f");
+		systemDataSource.setUrl("jdbc:mysql://127.0.0.1:3306/hospitalqueue?characterEncoding=UTF-8");
 		systemDataSource.setUsername("root");
 		systemDataSource.setPassword("majie");
 		/* <property name="filters" value="stat" /> */

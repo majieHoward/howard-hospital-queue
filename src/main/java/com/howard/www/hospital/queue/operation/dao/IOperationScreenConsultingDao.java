@@ -4,6 +4,6 @@ import com.howard.www.core.data.transfer.dto.IDataTransferObject;
 
 import net.sf.json.JSONArray;
 
-public interface IOperationScreenDeviceDao {
-	public JSONArray obtainScreenDeviceInfo(IDataTransferObject queryParameters) throws Exception;
+public interface IOperationScreenConsultingDao {
+	public JSONArray obtainScreenConsultingInfo(IDataTransferObject queryParameters) throws Exception;
 }

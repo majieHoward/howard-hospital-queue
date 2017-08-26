@@ -7,7 +7,7 @@ import com.howard.www.core.data.transfer.dto.IDataTransferObject;
 import com.howard.www.hospital.queue.operation.dao.IOperationConsultingRoomDao;
 
 import net.sf.json.JSONArray;
-@Repository("operationConsultingRoomDao")
+
 /**
  * 
  * @ClassName:  OperationConsultingRoomDaoImpl   
@@ -17,6 +17,7 @@ import net.sf.json.JSONArray;
  *     
  * @Copyright: 2017 https://github.com/majieHoward Inc. All rights reserved.
  */
+@Repository("operationConsultingRoomDao")
 public class OperationConsultingRoomDaoImpl extends BaseDaoImpl implements IOperationConsultingRoomDao {
 
 	@Override

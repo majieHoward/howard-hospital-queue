@@ -3,11 +3,14 @@ package com.howard.www.hospital.queue.operation.domain;
 import java.io.Serializable;
 import java.util.Vector;
 
+import com.howard.www.core.base.util.FrameworkStringUtils;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
+import net.sf.json.JSONObject;
 
 /**
  * 
@@ -57,11 +60,70 @@ public class ScreenDeviceEntity implements Serializable {
 	 **/
 	private String androidId;
 	// eg.A1524
-	private ScreenDeviceSpecificationEntity specification;
+	private String screenSpecification;
 	// 是否可用'10A' '10X'
 	private String available;
 	
-	private Vector<ConsultingRoomEntity> consultingRoomItems;
+	private Vector<String> consultingRoomCodeItems=new Vector<String>();
 	
-	private Vector<String> consultingRoomCodeItems;
+	//eg.屏幕规格编号A1524
+	private String screenSerialEncoding;
+	//eg.屏幕规格描述
+	private String screenSerialDescribe;
+	//eg.P5632
+	private String pageIdentity;
+	//eg.http://171.217.95.100:9999/index.howard
+	private String pageUrlAddress;
+	
+	public ScreenDeviceEntity(JSONObject object) throws Exception{
+		structureScreenDeviceEntityFromJSON(object);
+	} 
+	
+	public void pustRoomCodeToScreenDevice(String roomCode){
+		if(!"".equals(FrameworkStringUtils.asString(roomCode))){
+			consultingRoomCodeItems.add(roomCode);
+		}
+		
+	}
+	
+	public void structureScreenDeviceEntityFromJSON(JSONObject object)throws Exception{
+		if(object==null){
+			throw new RuntimeException("structureScreenDeviceEntityFromJSON方法传入的JSONObject对象为空");
+		}
+		/**
+		 * SELECT
+		 * ***device.internet_protocol AS IP,
+		 * ***device.screen_device_identity AS SDI,
+		 * ***device.serial_number AS SN,
+		 * ***device.available AS DA,
+		 * ***device.screen_device_specification AS SDS,
+		 * ***device.android_id AS AI,
+		 * ***specification.screen_serial_encoding AS SSE,
+		 * ***specification.page_identity AS PI,
+		 * ***specification.screen_serial_describe AS SSD,
+		 * ***specification.available AS SA,
+		 * ***page.page_identity AS PI,
+		 * ***page.page_name AS PN,
+		 * ***page.page_describe AS PS,
+		 * ***page.page_url_address AS PUA,
+		 * ***page.available AS PA
+	     * FROM
+	     * ***hhq_screen_device AS device
+		 * ***INNER JOIN hhq_screen_specification AS specification ON specification.screen_serial_encoding = device.screen_device_specification
+		 * ***INNER JOIN hhq_page_display AS page ON specification.page_identity = page.page_identity
+		 * WHERE
+		 * ***device.available = '10A'
+		 * ***AND specification.available = '10A'
+		 * ***AND page.available = '10A'
+		 */
+		this.setInternetProtocol(FrameworkStringUtils.asString(object.get("IP")));
+		this.setScreenDeviceIdentity(FrameworkStringUtils.asString(object.get("SDI")));
+		this.setSerialNumber(FrameworkStringUtils.asString(object.get("SN")));
+		this.setScreenSpecification(FrameworkStringUtils.asString(object.get("SDS")));
+		this.setAndroidId(FrameworkStringUtils.asString(object.get("AI")));
+		this.setScreenSerialEncoding(FrameworkStringUtils.asString(object.get("SSE")));
+		this.setScreenSerialDescribe(FrameworkStringUtils.asString(object.get("SSD")));
+		this.setPageIdentity(FrameworkStringUtils.asString(object.get("PI")));
+		this.setPageUrlAddress(FrameworkStringUtils.asString(object.get("PUA")));
+	}
 }

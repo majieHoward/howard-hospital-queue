@@ -9,6 +9,8 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import com.howard.www.core.data.transfer.dto.impl.DataTransferObject;
 import com.howard.www.hospital.queue.operation.service.IOperationConsultingRoomSerivce;
 import com.howard.www.hospital.queue.operation.service.IOperationDoctorAttributeService;
+import com.howard.www.hospital.queue.operation.service.IOperationScreenConsultingService;
+import com.howard.www.hospital.queue.operation.service.IOperationScreenDeviceService;
 
 
 public class HospitalQueueApplicationStartup implements ApplicationListener<ContextRefreshedEvent>{
@@ -20,8 +22,16 @@ public class HospitalQueueApplicationStartup implements ApplicationListener<Cont
 		log.info("Interface to be implemented by application event listeners. Based on the standard java.util.EventListener interface for the Observer design pattern.");
 		cApplicationContext = event.getApplicationContext();
 		try {
-			obtainIOperationConsultingRoomSerivce().obtainConsultingRoomInfo(new DataTransferObject());
-			obtainIOperationDoctorAttributeService().obtainDoctorAttributeInfo(new DataTransferObject());
+			//初始化诊室列表
+			obtainIOperationConsultingRoomSerivce().initializingServiceBaseData(new DataTransferObject());
+			//初始化医生列表(包括医生简介)
+			obtainIOperationDoctorAttributeService().initializingServiceBaseData(new DataTransferObject());
+			//初始化设备列表(包含设备类型对应的页面关系)
+			obtainIOperationScreenDeviceService().initializingServiceBaseData(new DataTransferObject());
+			//构造诊室和设备的对照关系
+			obtainIOperationScreenConsultingService().initializingServiceBaseData(new DataTransferObject());
+			//其他的关系可以暂时不初始化
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -34,5 +44,13 @@ public class HospitalQueueApplicationStartup implements ApplicationListener<Cont
 	
 	private IOperationDoctorAttributeService obtainIOperationDoctorAttributeService()throws Exception{
 		return (IOperationDoctorAttributeService) cApplicationContext.getBean("operationDoctorAttributeService");
+	}
+	
+	private IOperationScreenDeviceService obtainIOperationScreenDeviceService()throws Exception{
+		return (IOperationScreenDeviceService) cApplicationContext.getBean("operationScreenDeviceService");
+	}
+	
+	private IOperationScreenConsultingService obtainIOperationScreenConsultingService()throws Exception{
+		return (IOperationScreenConsultingService) cApplicationContext.getBean("operationScreenConsultingService");
 	}
 }
