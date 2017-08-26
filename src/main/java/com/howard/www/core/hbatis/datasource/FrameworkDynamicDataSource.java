@@ -1,7 +1,8 @@
 package com.howard.www.core.hbatis.datasource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
-
 import com.howard.www.core.base.util.FrameworkStringUtils;
 /**
  * 
@@ -18,6 +19,7 @@ public class FrameworkDynamicDataSource extends AbstractRoutingDataSource {
      */
     private static final ThreadLocal<String> DYNAMIC_DATASOURCE_ITEMS = new ThreadLocal<String>();  
 
+    private static final Logger logger = LoggerFactory.getLogger(FrameworkDynamicDataSource.class);
     private String DEFAULT_DATA_SOURCE="systemDataSource";
     /**
      * 返回实际要使用的数据源的key也即在前面配置的数据源bean的ID
@@ -33,7 +35,7 @@ public class FrameworkDynamicDataSource extends AbstractRoutingDataSource {
         	dynamicDataSource = DEFAULT_DATA_SOURCE; 
             DYNAMIC_DATASOURCE_ITEMS.set(dynamicDataSource);  
         }   
-        System.out.println("DYNAMIC_DATASOURCE_ITEMS:"+DYNAMIC_DATASOURCE_ITEMS);
+        logger.info("DYNAMIC_DATASOURCE_ITEMS:"+DYNAMIC_DATASOURCE_ITEMS);
         return dynamicDataSource;  
 	}
 	/**

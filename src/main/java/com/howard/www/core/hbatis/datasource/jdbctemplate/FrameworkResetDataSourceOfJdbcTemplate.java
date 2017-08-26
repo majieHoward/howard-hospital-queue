@@ -2,6 +2,8 @@ package com.howard.www.core.hbatis.datasource.jdbctemplate;
 
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -26,6 +28,9 @@ public class FrameworkResetDataSourceOfJdbcTemplate implements ApplicationContex
 	private JdbcTemplate systemJdbcTemplate;
 
 	private ApplicationContext hApplicationContext;
+	
+	protected final Logger log = LoggerFactory.getLogger(FrameworkResetDataSourceOfJdbcTemplate.class);
+
 
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		this.hApplicationContext = applicationContext;
@@ -37,7 +42,7 @@ public class FrameworkResetDataSourceOfJdbcTemplate implements ApplicationContex
 		if (!FrameworkStringUtils.isEmpty(nameOfdataSource)) {
 			dynamicDruidDataSource=(DruidDataSource) hApplicationContext.getBean(nameOfdataSource);
 			systemJdbcTemplate.setDataSource(dynamicDruidDataSource);
-			System.out.println(dynamicDruidDataSource.getUrl());
+			log.info(dynamicDruidDataSource.getUrl());
 		}
 		
 		return systemJdbcTemplate;
