@@ -6,6 +6,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
+import com.howard.www.core.base.util.FrameworkStringUtils;
 import com.howard.www.hospital.queue.operation.websocket.domain.MessageOfRequestEntity;
 
 /**
@@ -24,6 +25,7 @@ public class HospitalQueueWebsocketController {
 	
 	@MessageMapping("/messageForwarding.websocket")
 	public void messageForwarding(MessageOfRequestEntity entiy){
-		messagingTemplate.convertAndSend("/callTheName/public", "已经成功接收"); 
+		
+		messagingTemplate.convertAndSend("/callTheName/public", FrameworkStringUtils.asString(entiy.getName())); 
 	}
 }

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="utf-8"></meta>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+		<meta name="description" content=""></meta>
+		<meta name="author" content=""></meta>
+		<title>hospital queue</title>
+		<!-- Bootstrap core CSS -->
+		<link href="/css/bootstrap.css" rel="stylesheet"></link>
+		<!-- Add custom CSS here -->
+		<link href="/css/sb-admin.css" rel="stylesheet"></link>
+		<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css"></link>
+		<link href="/css/bootstrap-table.min.css" rel="stylesheet"></link>
+    </head>
+    <body>
+	<!-- /.navbar-collapse -->
+	<header>
+		<nav class="navbar navbar-inverse navbar-fixed-top" id="pageLogo" name="pageLogo">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#"><img src="/img/logo.png" alt="logo"></img>
+						<span>成都中医药大学附属医院/四川省中医院</span>
+					</a>	
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav">
+						<a href="#" class="btn btn-trial">11:30</a>
+					</ul>
+				</div>
+			</div>
+		</nav>
+    </header>	
+	<section class="hospitalqueue" id="mainHospitalqueueV" name="mainHospitalqueueV">
+	<div id="wrapper">
+        <!-- .row -->
+		<div class="row">
+          <div class="col-lg-12">
+            <div class="alert alert-info alert-dismissable">
+				请016号患者刘丽娜到内分泌科就诊
+            </div>
+          </div>
+        </div>
+        <!-- /.row -->
+        <div class="row row-self-shiftup">
+          <div class="col-lg-12">
+            <div class="table-responsive">
+			 <table class="table-striped " data-toggle="table" id="consultingRoom" name="consultingRoom">
+              
+                <thead>
+                  <tr>
+                    <th class="self-text-center">科室</th>
+                    <th class="self-text-center">医生</th>
+                    <th class="self-text-center">正在就诊患者</th>
+					<th class="self-text-center">正在就诊患者</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="active">
+                    <td>内分泌科</td>
+                    <td>王诗雅</td>
+                    <td>刘丽娜(016号)</td>
+                    <td>孙海军(017号)</td>
+                  </tr>
+                  <tr class="success">
+                    <td>心脏内科</td>
+                    <td>樊艳华</td>
+                    <td>韩晓曼(006号)</td>
+                    <td>曹云飞(007号)</td>
+                  </tr>
+                  <tr class="warning">
+                    <td>呼吸内科</td>
+                    <td>林江涛</td>
+                    <td>苏明明(010号)</td>
+                    <td>徐福军(011号)</td>
+                  </tr>
+                  <tr class="danger">
+                    <td>神经内科</td>
+                    <td>谭昭</td>
+                    <td>左小楠(020号)</td>
+                    <td>刘西压(021号)</td>
+                  </tr>
+                  <tr>
+                    <td>血液科</td>
+                    <td>金敏绮</td>
+                    <td>张海滨(008号)</td>
+                    <td>陈旭曦(009号)</td>
+                  </tr>
+                  <tr>
+                    <td>风湿免疫科</td>
+                    <td>王国春</td>
+                    <td>欧阳鹏飞(035号)</td>
+                    <td>赵春生(036号)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div><!-- /.row -->
+    </div><!-- /#page-wrapper -->
+	</section>
+		<footer class="container-fluid navbar-fixed-bottom" >
+		    <div class="row">
+				<div class="alert alert-footer alert-success alert-dismissable row-self-shiftup alert-success-self self-text-center">
+					<p class="text-cente">请其他患者在大厅候诊区耐心等待！</p>
+				</div>
+		    </div>
+		</footer>
+	</body>
+	<script type="text/javascript" src="/cordova/plugin/howard.cordova.plugin.BDTTSClient.js"></script>
+	<script type="text/javascript" src="/cordova/plugin/howard.cordova.plugin.TTSClient.js"></script>
+	<script type="text/javascript" src="/cordova/plugin/howard.cordova.plugin.Device.js"></script>
+	<script type="text/javascript" src="/cordova/plugin/howard.cordova.plugin.NetWorkInterfacePlugin.js"></script>
+	<script type="text/javascript" src="/cordova/cordova.js"></script>
+	<script src="/js/sockjs.min.js"></script>
+    <script src="/js/stomp.js"></script>
+	<!-- JavaScript -->
+    <script src="/js/jquery-1.10.2.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <!-- Page Specific Plugins -->
+    <script src="/js/bootstrap-table.min.js"></script>
+	<script type="text/javascript">
+//ready事件：
+//ready事件在DOM结构绘制完成之后就绘执行。
+//这样能确保就算有大量的媒体文件没加载出来，JS代码一样可以执行。
+//load事件：
+//load事件必须等到网页中所有内容全部加载完毕之后才被执行。
+//如果一个网页中有大量的图片的话，则就会出现这种情况：
+//网页文档已经呈现出来，但由于网页数据还没有完全加载完毕，
+//导致load事件不能够即时被触发。
+    var stompClient = null;
+    function setConnected(connected) {
+       
+    }
+    //$(function(){});
+	$(document).ready( function (){
+		disconnect();
+		
+	    var pageLogoHeight=$('#pageLogo').height();
+		$('#mainHospitalqueueV').css("padding-top",pageLogoHeight+"px");
+		$("#mainHospitalqueueV").css("vertical-align","middle");
+		//设置bootstrapTable起始的高度
+		var windowHeight=$(window).height()-170;
+		var trHeight=windowHeight/7;
+		$("#mainHospitalqueueV").find("tr").each(function(){
+			$(this).css("height",trHeight+"px");
+		});
+		$("#mainHospitalqueueV").find("th").each(function(){
+		    //    vertical-align: middle;
+			$(this).css("vertical-align","middle");
+		});
+		$('#consultingRoom').bootstrapTable({height:$(window).height()-170}); 
+   });
+	$(window).load(function() {
+		 
+		connect();
+	});
+	function disconnect() {
+        if (stompClient != null) {
+            stompClient.disconnect();
+        }
+        setConnected(false);
+        console.log('Disconnected');
+    }
+	function connect() {
+    	//var sockjs = new SockJS(url, _reserved, options);
+    	//sockjs.min.js:27 Uncaught Error: Only basic urls are supported in SockJS
+        //建立一个基于Web Socket的连接到STOMP代理
+    	var socket = new SockJS('/hospitalQueue');
+        stompClient = Stomp.over(socket);
+        //client.connect(login, passcode, connectCallback);
+        //client.connect(login, passcode, connectCallback, errorCallback);
+        //client.connect(login, passcode, connectCallback, errorCallback, host);
+        //传递参数
+        var connectionParameter={
+        	"screenDevice": "SD987JH"
+        }
+        
+        stompClient.connect(connectionParameter, function (frame) {
+            setConnected(true);
+            console.log('Connected:' + frame);
+            stompClient.subscribe('/callTheName/public', function (response) {
+            	// and acknowledge it
+                response.ack();
+            	console.log(response.body);
+            	 var success = function() {  };
+                 var error = function(message) {
+                 console.log(message);
+                 alert("Oopsie! " + message);
+                 };
+                 TTSClientPlugin.speak(response.body,success,error);
+            })
+        });
+        //当无法连接到服务器(测试时模拟了服务器DOWN机)
+        socket.onclose = function() {
+    	    console.log('execute socket.onclose connection closed');
+    	};
+    }
+ </script>
+</html>
