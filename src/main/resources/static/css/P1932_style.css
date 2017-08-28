@@ -1,0 +1,286 @@
+/* 
+Author: Start Bootstrap - http://startbootstrap.com
+'SB Admin' HTML Template by Start Bootstrap
+
+All Start Bootstrap themes are licensed under Apache 2.0. 
+For more info and more free Bootstrap 3 HTML themes, visit http://startbootstrap.com!
+*/
+
+/* ATTN: This is mobile first CSS - to update 786px and up screen width use the media query near the bottom of the document! */
+
+/* Global Styles */
+/*任何浏览器的默认字体大小都是16px*/
+html {font-size: 62.5%;/*10 ÷ 16 × 100% = 62.5%*/}
+body {font-size: 1.4rem;/*1.4 × 10px = 14px */}
+h1 { font-size: 2.4rem;/*2.4 × 10px = 24px*/}
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    padding: 8px;
+    line-height: 1.428571429;
+    vertical-align: middle;
+    border-top: 1px solid #dddddd;
+}
+.bootstrap-table .table>thead>tr>th {
+    vertical-align: middle;
+    border-bottom: 1px solid #ddd;
+}
+
+#wrapper {
+  padding-left: 0;
+}
+
+#page-wrapper {
+  width: 100%;
+  /*padding: 5px 15px;*/
+  padding: 0px 0px;
+}
+
+.container-fluid {
+    padding-right: 0px;
+    padding-left: 0px;
+   
+}
+
+/*edit by mayijie from bootstrap*/
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+/*edit by mayijie from bootstrap*/
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+/*edit by mayijie from bootstrap 头部logo区域颜色以及边线颜色*/
+/*.navbar-inverse {
+    background-color: #222222;
+    border-color: #080808;
+}*/
+/*add by mayijie from bootstrap 头部logo区域颜色以及边线颜色 at 2017.08.26*/
+.navbar-inverse {
+    background-color: #0b8f9b;
+    border-color: #0b8f9b;
+}
+
+.alert {
+    border: 0px solid transparent;
+	border-radius: 0px;
+}
+.alert-success-self {
+    color: #ffffff;
+    background-color: #000000;
+}
+.row-self-shiftup {
+    margin-top: -20px;
+}
+.self-text-center{
+    text-align: center;
+}
+/*edit by mayijie from bootstrap 修改字的颜色*/
+.navbar-inverse .navbar-nav > li > a {
+    color: #ffffff;
+}
+/* Nav Messages */
+
+.messages-dropdown .dropdown-menu .message-preview .avatar,
+.messages-dropdown .dropdown-menu .message-preview .name,
+.messages-dropdown .dropdown-menu .message-preview .message,
+.messages-dropdown .dropdown-menu .message-preview .time {
+  display: block;
+}
+
+.messages-dropdown .dropdown-menu .message-preview .avatar {
+  float: left;
+  margin-right: 15px;
+}
+
+.messages-dropdown .dropdown-menu .message-preview .name {
+  font-weight: bold;
+}
+
+.messages-dropdown .dropdown-menu .message-preview .message {
+  font-size: 1.2rem;
+}
+
+.messages-dropdown .dropdown-menu .message-preview .time {
+  font-size: 1.2rem;
+}
+/*edit by mayijie at 2017.08.26 修改footer中的文字显示设置字体*/
+.alert-footer{
+	margin-bottom: 0px;
+	font-size: 2rem;
+}   
+
+.btn-trial {
+    font-size: 2rem;
+    float: right;
+    text-transform: uppercase;
+    font-family: 'Raleway-Bold';
+    color: #ffffff;
+    margin: 18px 0;
+    border-radius: 50px;
+    background-color: #000000;
+    position: relative;
+    transition: 0.4s;
+}
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 2rem;
+    line-height: 1.6;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.navbar-brand>img {
+    height: 100%;
+    /**padding: 15px;**/
+    width: auto;
+    width: 4rem;
+}
+.navbar-brand>img {
+    display: block;
+}
+img {
+    vertical-align: middle;
+}
+
+img {
+    border: 0;
+}
+
+.navbar-header {
+    float: left;
+}
+ .navbar-brand {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+	font-size: 3rem;
+}
+
+/* Nav Announcements */
+
+.announcement-heading {
+  font-size: 5rem;
+  margin: 0;
+}
+
+.announcement-text {
+  margin: 0;
+}
+
+/* Table Headers */
+
+table.tablesorter thead {
+  cursor: pointer;
+}
+
+table.tablesorter thead tr th:hover {
+  background-color: #f5f5f5;
+}
+
+/* Flot Chart Containers */
+
+.flot-chart {
+  display: block;
+  height: 400px;
+}
+
+.flot-chart-content {
+  width: 100%;
+  height: 100%;
+}
+.navbar-inverse .navbar-brand {
+    color: #ffffff;
+}
+/* Edit Below to Customize Widths > 768px */
+@media (min-width:768px) {
+
+  /* Wrappers */
+
+  #wrapper {
+	padding-left: 0px;
+  }
+
+  #page-wrapper {
+	/*padding: 15px 25px;*/
+	padding: 0px 0px;
+  }
+
+  /* Side Nav */
+
+  .side-nav {
+	margin-left: -225px;
+	left: 225px;
+	width: 225px;
+	position: fixed;
+	top: 50px;
+	height: 100%;
+	border-radius: 0;
+	border: none;
+	background-color: #222222;
+	overflow-y: auto;
+  }
+
+  /* Bootstrap Default Overrides - Customized Dropdowns for the Side Nav */
+
+  .side-nav>li.dropdown>ul.dropdown-menu {
+	position: relative;
+	min-width: 225px;
+	margin: 0;
+	padding: 0;
+	border: none;
+	border-radius: 0;
+	background-color: transparent;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+  }
+
+  .side-nav>li.dropdown>ul.dropdown-menu>li>a {
+	color: #999999;
+	padding: 15px 15px 15px 25px;
+  }
+
+  .side-nav>li.dropdown>ul.dropdown-menu>li>a:hover,
+  .side-nav>li.dropdown>ul.dropdown-menu>li>a.active,
+  .side-nav>li.dropdown>ul.dropdown-menu>li>a:focus {
+	color: #fff;
+	background-color: #080808;
+  }
+
+  .side-nav>li>a {
+	width: 225px;
+  }
+
+  .navbar-inverse .navbar-nav>li>a:hover,
+  .navbar-inverse .navbar-nav>li>a:focus {
+	background-color: #080808;
+  }
+
+  /* Nav Messages */
+
+  .messages-dropdown .dropdown-menu {
+	min-width: 300px;
+  }
+
+  .messages-dropdown .dropdown-menu li a {
+	white-space: normal;
+  }
+}
