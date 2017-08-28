@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.howard.www.core.base.util.FrameworkStringUtils;
 import com.howard.www.core.data.transfer.dto.IDataTransferObject;
 import com.howard.www.hospital.queue.operation.service.IExternalProvidedHisService;
+import com.howard.www.hospital.queue.operation.service.IOperationSubscribeMessageService;
 
 import net.sf.json.JSONObject;
 
@@ -19,6 +20,9 @@ public class ExternalProvidedHisServiceImpl implements IExternalProvidedHisServi
 	@Autowired
 	private ApplicationContext cApplicationContext;
 
+	public IOperationSubscribeMessageService obtainIOperationSubscribeMessageService()throws Exception{
+		return (IOperationSubscribeMessageService) cApplicationContext.getBean("operationSubscribeMessageService");
+	}
 	
 	@Override
 	public JSONObject callAPatientToSeeADoctor(IDataTransferObject paramDto) throws Exception {
@@ -51,8 +55,8 @@ public class ExternalProvidedHisServiceImpl implements IExternalProvidedHisServi
 		/**
 		 * Verification relation 验证医生患者以及患者和患者编码之间对应关系正确
 		 */
-		
-		messagingTemplate.convertAndSend("/callTheName/public", "已经成功接收");
+		String roomCode = FrameworkStringUtils.asString(paramDto.obtainMapOfRequiredParameter().get("roomCode"));
+		obtainIOperationSubscribeMessageService().sendToCorrespondingScreenIpInConsulting("/subscribe", roomCode, roomCode+"对应的屏幕接受到消息");
 		return null;
 	}
 

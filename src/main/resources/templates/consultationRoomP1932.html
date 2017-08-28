@@ -173,7 +173,7 @@
         //client.connect(login, passcode, connectCallback, errorCallback, host);
         //传递参数
         var connectionParameter={
-        	"screenDevice": "SD989JH"
+        	"screenDevice": "SD987JH"
         }
         
         stompClient.connect(connectionParameter, function (frame) {
@@ -190,7 +190,7 @@
                  };
                  TTSClientPlugin.speak(response.body,success,error);
             });
-            stompClient.subscribe('/screenDevice/171.19.231.2/subscribe', function (response) {
+            stompClient.subscribe('/screenDevice/171.19.231.4/subscribe', function (response) {
             	// and acknowledge it
                 response.ack();
             	console.log(response.body);

@@ -64,6 +64,7 @@ public class HospitalQueueSystemWebMvcConfig extends WebMvcConfigurationSupport 
 		log.info("Assists with the registration of simple automated controllers pre-configured with status code and/or a view.");
 		registry.addViewController("/hospital/queue/operation/consultation/room.exhibition").setViewName("/consultationRoom");
 		registry.addViewController("/hospital/queue/operation/consultation/room.P1933.exhibition").setViewName("/consultationRoomP1933");
+		registry.addViewController("/hospital/queue/operation/consultation/room.P1932.exhibition").setViewName("/consultationRoomP1932");
 		super.addViewControllers(registry);
 	}
 

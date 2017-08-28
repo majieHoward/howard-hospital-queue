@@ -9,39 +9,44 @@ import com.howard.www.hospital.queue.operation.service.IOperationConsultingRoomS
 import com.howard.www.hospital.queue.operation.service.IOperationDoctorAttributeService;
 import com.howard.www.hospital.queue.operation.service.IOperationScreenConsultingService;
 import com.howard.www.hospital.queue.operation.service.IOperationScreenDeviceService;
+import com.howard.www.hospital.queue.operation.service.IOperationSubscribeMessageService;
 import com.howard.www.hospital.queue.operation.service.impl.OperationConsultingRoomSerivceImpl;
 import com.howard.www.hospital.queue.operation.service.impl.OperationDoctorAttributeServiceImpl;
 import com.howard.www.hospital.queue.operation.service.impl.OperationScreenConsultingServiceImpl;
 import com.howard.www.hospital.queue.operation.service.impl.OperationScreenDeviceServiceImpl;
+import com.howard.www.hospital.queue.operation.service.impl.OperationSubscribeMessageServiceImpl;
 
 @Configuration
 public class HospitalQueueBasicDataInitialization {
 	protected final Logger log = LoggerFactory.getLogger(HospitalQueueBasicDataInitialization.class);
+	
 	@Bean(name = "operationConsultingRoomSerivce")
 	public IOperationConsultingRoomSerivce constructionConsultingRoomSerivce() throws Exception {
-		IOperationConsultingRoomSerivce consultingRoomSerivce = new OperationConsultingRoomSerivceImpl();
 		log.info("initialize bean name is operationConsultingRoomSerivce");
-		return consultingRoomSerivce;
+		return new OperationConsultingRoomSerivceImpl();
 	}
 	
 	@Bean(name = "operationDoctorAttributeService")
 	public IOperationDoctorAttributeService constructionDoctorAttributeService()throws Exception{
-		IOperationDoctorAttributeService doctorAttributeService=new OperationDoctorAttributeServiceImpl();
 		log.info("initialize bean name is operationDoctorAttributeService");
-		return doctorAttributeService;
+		return new OperationDoctorAttributeServiceImpl();
 	}
 	
 	@Bean(name = "operationScreenDeviceService")
 	public IOperationScreenDeviceService constructionScreenDeviceService()throws Exception{
-		IOperationScreenDeviceService screenDeviceService=new OperationScreenDeviceServiceImpl();
 		log.info("initialize bean name is operationScreenDeviceService");
-		return screenDeviceService;
+		return new OperationScreenDeviceServiceImpl();
 	}
 	
 	@Bean(name = "operationScreenConsultingService")
 	public IOperationScreenConsultingService constructionScreenConsultingService()throws Exception{
-		IOperationScreenConsultingService screenConsultingService=new OperationScreenConsultingServiceImpl();
 		log.info("initialize bean name is operationScreenConsultingService");
-		return screenConsultingService;
+		return new OperationScreenConsultingServiceImpl();
 	}
+	
+	@Bean(name = "operationSubscribeMessageService")
+	public IOperationSubscribeMessageService constructionSubscribeMessageService()throws Exception{
+		log.info("initialize bean name is operationScreenConsultingService");
+		return new OperationSubscribeMessageServiceImpl();
+	} 
 }

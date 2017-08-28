@@ -1,6 +1,7 @@
 package com.howard.www.hospital.queue.operation.service.impl;
 
 import java.util.List;
+import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -127,4 +128,24 @@ public class OperationConsultingRoomSerivceImpl implements IOperationConsultingR
 	private IOperationScreenDeviceService obtainIOperationScreenDeviceService()throws Exception{
 		return (IOperationScreenDeviceService) cApplicationContext.getBean("operationScreenDeviceService");
 	}
+
+	@Override
+	public Vector<String> obtainCorrespondingScreenIpVectorInTheConsultingRoom(String roomCode) throws Exception {
+		// TODO Auto-generated method stub
+		ConsultingRoomEntity consultingRoomEntity=obtainConsultingRoomEnityByRoomCodeFromMap(roomCode);
+		if(consultingRoomEntity!=null){
+			return consultingRoomEntity.getInternetProtocolItems();
+		}
+		return null;
+	}
+
+	@Override
+	public Vector<String> obtainCorrespondingScreenIdentityVectorInTheConsultingRoom(String roomCode) throws Exception {
+		// TODO Auto-generated method stub
+		ConsultingRoomEntity consultingRoomEntity=obtainConsultingRoomEnityByRoomCodeFromMap(roomCode);
+		if(consultingRoomEntity!=null){
+			return consultingRoomEntity.getScreenDeviceIdentityItems();
+		}
+		return null;
+	}	
 }

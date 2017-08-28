@@ -26,6 +26,6 @@ public class HospitalQueueWebsocketController {
 	@MessageMapping("/messageForwarding.websocket")
 	public void messageForwarding(MessageOfRequestEntity entiy){
 		
-		messagingTemplate.convertAndSend("/callTheName/public", FrameworkStringUtils.asString(entiy.getName())); 
+		messagingTemplate.convertAndSend(FrameworkStringUtils.asString(entiy.getDevice()), FrameworkStringUtils.asString(entiy.getName())); 
 	}
 }
