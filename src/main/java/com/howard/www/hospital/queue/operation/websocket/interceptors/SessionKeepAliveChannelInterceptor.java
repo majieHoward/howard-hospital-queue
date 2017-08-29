@@ -160,6 +160,23 @@ public class SessionKeepAliveChannelInterceptor extends ChannelInterceptorAdapte
 		 * ***"payload":[]
 		 * }
 		 */
+		/**
+		 * {
+		 * ***"headers":{
+		 * ******"simpMessageType":"MESSAGE",
+		 * ******"stompCommand":"SEND",
+		 * ******"nativeHeaders":{
+		 * *********"destination":["/app/messageForwarding.websocket"],
+		 * *********"content-length":["71"]
+		 * ******},
+		 * ******"simpSessionAttributes":{},
+		 * ******"simpHeartbeat":[0,0],
+		 * ******"simpSessionId":"odxi4gxx"
+		 * ******,"simpDestination":"/app/messageForwarding.websocket"
+		 * ***},
+		 * ***"payload":[]
+		 * }
+		 */
 		logger.info("在发送调用后立即调用。");
 		logger.info(FrameworkStringUtils.asString(JSONObject.fromObject(message)));
 		super.postSend(message, channel, sent);
