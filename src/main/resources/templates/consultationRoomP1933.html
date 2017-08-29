@@ -1,157 +1,148 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-		<meta charset="utf-8"></meta>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-		<meta name="description" content=""></meta>
-		<meta name="author" content=""></meta>
-		<title>hospital queue</title>
-		<!-- Bootstrap core CSS -->
-		<link href="/css/bootstrap.css" rel="stylesheet"></link>
-		<!-- Add custom CSS here -->
-		<link href="/css/sb-admin.css" rel="stylesheet"></link>
-		<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css"></link>
-		<link href="/css/bootstrap-table.min.css" rel="stylesheet"></link>
-    </head>
-    <body>
-	<!-- /.navbar-collapse -->
-	<header>
-		<nav class="navbar navbar-inverse navbar-fixed-top" id="pageLogo" name="pageLogo">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#"><img src="/img/logo.png" alt="logo"></img>
-						<span>成都中医药大学附属医院/四川省中医院</span>
-					</a>	
-				</div>
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav">
-						<a href="#" class="btn btn-trial">11:30</a>
-					</ul>
-				</div>
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>医生简介</title>
+<link href="/css/bootstrap.css" rel="stylesheet" type='text/css'></link>
+<!-- Custom Theme files -->
+<link href="/css/P1933_style.css" rel='stylesheet' type='text/css'></link>
+<!-- Custom Theme files -->
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+<!-- start menu -->
+</head>
+<body>
+	<!-- header -->
+	<div id="headerContent" name="headerContent" class="col-sm-3 col-md-2 sidebar">
+			<div class="sidebar_top">
+				<h1 id="doctorName" name="doctorName">汪亚强</h1> 
+				<img id="doctorPhoto" name="doctorPhoto" src="/img/avt.png" alt=""></img>
 			</div>
-		</nav>
-    </header>	
-	<section class="hospitalqueue" id="mainHospitalqueueV" name="mainHospitalqueueV">
-	<div id="wrapper">
-        <!-- .row -->
-		<div class="row">
-          <div class="col-lg-12">
-            <div class="alert alert-info alert-dismissable">
-				请016号患者刘丽娜到内分泌科就诊
-            </div>
-          </div>
-        </div>
-        <!-- /.row -->
-        <div class="row row-self-shiftup">
-          <div class="col-lg-12">
-            <div class="table-responsive">
-			 <table class="table-striped " data-toggle="table" id="consultingRoom" name="consultingRoom">
-              
-                <thead>
-                  <tr>
-                    <th class="self-text-center">科室</th>
-                    <th class="self-text-center">医生</th>
-                    <th class="self-text-center">正在就诊患者</th>
-					<th class="self-text-center">正在就诊患者</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="active">
-                    <td>内分泌科</td>
-                    <td>王诗雅</td>
-                    <td>刘丽娜(016号)</td>
-                    <td>孙海军(017号)</td>
-                  </tr>
-                  <tr class="success">
-                    <td>心脏内科</td>
-                    <td>樊艳华</td>
-                    <td>韩晓曼(006号)</td>
-                    <td>曹云飞(007号)</td>
-                  </tr>
-                  <tr class="warning">
-                    <td>呼吸内科</td>
-                    <td>林江涛</td>
-                    <td>苏明明(010号)</td>
-                    <td>徐福军(011号)</td>
-                  </tr>
-                  <tr class="danger">
-                    <td>神经内科</td>
-                    <td>谭昭</td>
-                    <td>左小楠(020号)</td>
-                    <td>刘西压(021号)</td>
-                  </tr>
-                  <tr>
-                    <td>血液科</td>
-                    <td>金敏绮</td>
-                    <td>张海滨(008号)</td>
-                    <td>陈旭曦(009号)</td>
-                  </tr>
-                  <tr>
-                    <td>风湿免疫科</td>
-                    <td>王国春</td>
-                    <td>欧阳鹏飞(035号)</td>
-                    <td>赵春生(036号)</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div><!-- /.row -->
-    </div><!-- /#page-wrapper -->
-	</section>
-		<footer class="container-fluid navbar-fixed-bottom" >
+			<div class="details">
+				<h3>职称职务</h3>
+				<p id="doctorTitle" name="doctorTitle">副主任医师</p>  	 
+				<address>
+					<h3>正在就诊</h3>
+					<span id="seeingADoctor" name="seeingADoctor">Lorem ipsum,</span>
+				</address>
+			</div>
+			<div class="clearfix"></div>
+	</div>		
+	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+		 <div class="content">
+			 <div class="skills">
+				 <h3 class="clr2" id="introduce" name="introduce">医生简介</h3>
+				 <div class="skill_info"  id="doctorSkills" name="doctorSkills">
+					 <!--医生简介-->
+					 <p id="doctorIntroduction" name="doctorIntroduction">擅长治疗老年关节周围与关节内骨折、退行性骨关节炎、创伤性关节炎、痛风性关节炎、类风湿性关节炎等。
+					 </p>
+				 </div>
+				 
+			 </div>
+			
+		 </div>
+	</div>
+	<footer class="container-fluid navbar-fixed-bottom container-fluid-myself" id="waitingAreaFooter" name="waitingAreaFooter">
 		    <div class="row">
-				<div class="alert alert-footer alert-success alert-dismissable row-self-shiftup alert-success-self self-text-center">
-					<p class="text-cente">请其他患者在大厅候诊区耐心等待！</p>
+				<div class="alert-footer alert-success alert-dismissable row-self-shiftup alert-success-self self-text-center">
+					<p class="text-cente" id="waitingArea" name="waitingArea">请其他患者在诊室外耐心等待</p>
 				</div>
 		    </div>
-		</footer>
-	</body>
-	<script type="text/javascript" src="/cordova/plugin/howard.cordova.plugin.BDTTSClient.js"></script>
-	<script type="text/javascript" src="/cordova/plugin/howard.cordova.plugin.TTSClient.js"></script>
-	<script type="text/javascript" src="/cordova/plugin/howard.cordova.plugin.Device.js"></script>
-	<script type="text/javascript" src="/cordova/plugin/howard.cordova.plugin.NetWorkInterfacePlugin.js"></script>
-	<script type="text/javascript" src="/cordova/cordova.js"></script>
-	<script src="/js/sockjs.min.js"></script>
-    <script src="/js/stomp.js"></script>
-	<!-- JavaScript -->
-    <script src="/js/jquery-1.10.2.js"></script>
-    <script src="/js/bootstrap.js"></script>
-    <!-- Page Specific Plugins -->
-    <script src="/js/bootstrap-table.min.js"></script>
-	<script type="text/javascript">
-//ready事件：
-//ready事件在DOM结构绘制完成之后就绘执行。
-//这样能确保就算有大量的媒体文件没加载出来，JS代码一样可以执行。
-//load事件：
-//load事件必须等到网页中所有内容全部加载完毕之后才被执行。
-//如果一个网页中有大量的图片的话，则就会出现这种情况：
-//网页文档已经呈现出来，但由于网页数据还没有完全加载完毕，
-//导致load事件不能够即时被触发。
-    var stompClient = null;
+	</footer>
+</body>
+<script type="text/javascript" src="/cordova/plugin/howard.cordova.plugin.BDTTSClient.js"></script>
+<script type="text/javascript" src="/cordova/plugin/howard.cordova.plugin.TTSClient.js"></script>
+<script type="text/javascript" src="/cordova/plugin/howard.cordova.plugin.Device.js"></script>
+<script type="text/javascript" src="/cordova/plugin/howard.cordova.plugin.NetWorkInterfacePlugin.js"></script>
+<script type="text/javascript" src="/cordova/cordova.js"></script>
+<script src="/js/sockjs.min.js"></script>
+<script src="/js/stomp.js"></script>
+<!-- jQuery (necessary JavaScript plugins) -->
+<script src="/js/jquery-1.10.2.js"></script>
+<script>
+<!--网页可见区域宽:document.body.clientWidth-->
+<!--网页可见区域高:document.body.clientHeight-->
+<!--网页可见区域宽:document.body.offsetWidth (包括边线的宽)-->
+<!--网页可见区域高:document.body.offsetHeight (包括边线的高)-->
+<!--网页正文全文宽:document.body.scrollWidth-->
+<!--网页正文全文高:document.body.scrollHeight-->
+<!--网页被卷去的高:document.body.scrollTop-->
+<!--网页被卷去的左:document.body.scrollLeft-->
+<!--网页正文部分上:window.screenTop-->
+<!--网页正文部分左:window.screenLeft-->
+<!--屏幕分辨率的高:window.screen.height-->
+<!--屏幕分辨率的宽:window.screen.width-->
+<!--屏幕可用工作区高度:window.screen.availHeight-->
+<!--屏幕可用工作区宽度:window.screen.availWidth-->
+ var stompClient = null;
     function setConnected(connected) {
        
     }
-    //$(function(){});
-	$(document).ready( function (){
-		disconnect();
-		
-	    var pageLogoHeight=$('#pageLogo').height();
-		$('#mainHospitalqueueV').css("padding-top",pageLogoHeight+"px");
-		$("#mainHospitalqueueV").css("vertical-align","middle");
-		//设置bootstrapTable起始的高度
-		var windowHeight=$(window).height()-170;
-		var trHeight=windowHeight/7;
-		$("#mainHospitalqueueV").find("tr").each(function(){
-			$(this).css("height",trHeight+"px");
-		});
-		$("#mainHospitalqueueV").find("th").each(function(){
-		    //    vertical-align: middle;
-			$(this).css("vertical-align","middle");
-		});
-		$('#consultingRoom').bootstrapTable({height:$(window).height()-170}); 
-   });
-	$(window).load(function() {
+$(document).ready( function (){
+disconnect();
+    /**屏幕的高度 660**/
+	var screenHeight=document.documentElement?document.documentElement.clientHeight:document.body.clientHeight;
+	/**屏幕的宽度 732**/
+	var screenWidth=document.documentElement?document.documentElement.clientWidth:document.body.clientWidth;
+	var headerContentHeight=$("#headerContent").outerHeight();
+	var headerContentWidth=$("#headerContent").outerWidth();
+    /**screenHeight==headerContentHeight**/
+	var introduceHeight=$("#introduce").outerHeight();
+	var introduceWidth=$("#introduce").outerWidth();
+	console.log("screenHeight:"+screenHeight);
+	console.log("screenWidth:"+screenWidth);
+	console.log("headerContentHeight:"+headerContentHeight);
+	console.log("headerContentWidth:"+headerContentWidth);
+	console.log("introduceHeight:"+introduceHeight);
+	console.log("introduceWidth:"+introduceWidth);
+	var waitingAreaWidth=15*screenWidth/600;
+	$("#waitingArea").css("padding",waitingAreaWidth+"px");
+	var waitingAreaFontSize=2*screenWidth/600;
+	$("#waitingArea").css("font-size",waitingAreaFontSize+"rem");	
+	var waitingAreaFooterHeight=$("#waitingAreaFooter").outerHeight();
+	/****/
+	var doctorIntroductionHeight=screenHeight-headerContentHeight-introduceHeight-waitingAreaFooterHeight;
+	console.log(doctorIntroductionHeight);
+	if(doctorIntroductionHeight>0){
+		$('#doctorSkills').css("padding-top",20+"px");
+		$('#doctorSkills').css("padding-left",10+"px");
+		$('#doctorSkills').css("padding-right",10+"px");
+		//text() - 设置或返回所选元素的文本内容
+		//html() - 设置或返回所选元素的内容（包括 HTML 标记）
+		//val() - 设置或返回表单字段的值
+		var doctorIntroductionValue=$('#doctorIntroduction').text();
+		console.log(doctorIntroductionValue);
+		var doctorIntroductionLength=stringValueLength(doctorIntroductionValue)+2;
+		console.log("doctorIntroductionLength"+":"+doctorIntroductionLength);
+		var row=doctorIntroductionLength/5;
+		console.log("每行的字数:"+row);
+		var fontSize=(screenWidth-20)/row;
+		console.log("每个字的大小:"+fontSize);
+		$('#doctorSkills').css("font-size",fontSize+"px");
+		//设置首行缩进
+		$('#doctorSkills').css("text-indent",fontSize*2+"px");
+		//$('#doctorSkills').css("line-height",fontSize+"rem");
+	}
+	/**screenHeight:660**/
+    /**screenWidth:412**/
+	/**headerContentHeight:189**/
+	/**headerContentWidth:412**/
+	/**introduceHeight:31**/
+	/**introduceWidth:412**/
+});
+
+function stringValueLength(parameter){
+    return parameter.length;
+}
+
+function evaluateDoctorName(){
+	$("#doctorName").html("");
+}
+
+function evaluateDoctorIntroduction(){
+    $("#doctorIntroduction").html("");
+}
+$(window).load(function() {
 		 
 		connect();
 	});
@@ -173,7 +164,7 @@
         //client.connect(login, passcode, connectCallback, errorCallback, host);
         //传递参数
         var connectionParameter={
-        	"screenDevice": "SD989JH"
+        	"screenDevice": "SD988JH"
         }
         
         stompClient.connect(connectionParameter, function (frame) {
@@ -190,7 +181,7 @@
                  };
                  TTSClientPlugin.speak(response.body,success,error);
             });
-            stompClient.subscribe('/screenDevice/171.19.231.2/subscribe', function (response) {
+            stompClient.subscribe('/screenDevice/171.19.231.4/subscribe', function (response) {
             	// and acknowledge it
                 response.ack();
             	console.log(response.body);
@@ -207,5 +198,5 @@
     	    console.log('execute socket.onclose connection closed');
     	};
     }
- </script>
+</script>
 </html>

@@ -9,7 +9,7 @@
 		<!-- Bootstrap core CSS -->
 		<link href="/css/bootstrap.css" rel="stylesheet"></link>
 		<!-- Add custom CSS here -->
-		<link href="/css/sb-admin.css" rel="stylesheet"></link>
+		<link href="/css/P1932_style.css" rel="stylesheet"></link>
 		<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css"></link>
 		<link href="/css/bootstrap-table.min.css" rel="stylesheet"></link>
     </head>
@@ -19,30 +19,27 @@
 		<nav class="navbar navbar-inverse navbar-fixed-top" id="pageLogo" name="pageLogo">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="#"><img src="/img/logo.png" alt="logo"></img>
-						<span>成都中医药大学附属医院/四川省中医院</span>
+					<a class="navbar-brand" href="#">
+						<img src="/img/logo.png" alt="logo" id="hospitalLogoImg" name="hospitalLogoImg"></img>
+						<span id="hospitalName" name="hospitalName">成都中医药大学附属医院/四川省中医院</span>
 					</a>	
 				</div>
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav">
-						<a href="#" class="btn btn-trial">11:30</a>
-					</ul>
-				</div>
+				
 			</div>
 		</nav>
     </header>	
 	<section class="hospitalqueue" id="mainHospitalqueueV" name="mainHospitalqueueV">
 	<div id="wrapper">
         <!-- .row -->
-		<div class="row">
-          <div class="col-lg-12">
-            <div class="alert alert-info alert-dismissable">
+		
+          <div class="col-lg-12" id="callContents" name="callContents">
+            <div class="alert alert-info alert-dismissable" id="callMessage" name="callMessage">
 				请016号患者刘丽娜到内分泌科就诊
             </div>
           </div>
-        </div>
+        
         <!-- /.row -->
-        <div class="row row-self-shiftup">
+        <div class="row row-self-shiftup" id="consultingRoomList" name="consultingRoomList">
           <div class="col-lg-12">
             <div class="table-responsive">
 			 <table class="table-striped " data-toggle="table" id="consultingRoom" name="consultingRoom">
@@ -99,13 +96,13 @@
         </div><!-- /.row -->
     </div><!-- /#page-wrapper -->
 	</section>
-		<footer class="container-fluid navbar-fixed-bottom" >
-		    <div class="row">
-				<div class="alert alert-footer alert-success alert-dismissable row-self-shiftup alert-success-self self-text-center">
-					<p class="text-cente">请其他患者在大厅候诊区耐心等待！</p>
-				</div>
-		    </div>
-		</footer>
+	<footer class="container-fluid navbar-fixed-bottom" >
+		<div class="row">
+			<div class="alert-footer alert-success alert-dismissable row-self-shiftup alert-success-self self-text-center" id="waitingAreaFooter" name="waitingAreaFooter">
+				<span class="text-cente" id="waitingArea" name="waitingArea">请其他患者在大厅候诊区耐心等待！</span>
+			</div>
+		</div>
+	</footer>
 	</body>
 	<script type="text/javascript" src="/cordova/plugin/howard.cordova.plugin.BDTTSClient.js"></script>
 	<script type="text/javascript" src="/cordova/plugin/howard.cordova.plugin.TTSClient.js"></script>
@@ -128,6 +125,19 @@
 //如果一个网页中有大量的图片的话，则就会出现这种情况：
 //网页文档已经呈现出来，但由于网页数据还没有完全加载完毕，
 //导致load事件不能够即时被触发。
+<!--网页可见区域宽:document.body.clientWidth-->
+<!--网页可见区域高:document.body.clientHeight-->
+<!--网页可见区域宽:document.body.offsetWidth (包括边线的宽)-->
+<!--网页可见区域高:document.body.offsetHeight (包括边线的高)-->
+<!--网页正文全文宽:document.body.scrollWidth-->
+<!--网页正文全文高:document.body.scrollHeight-->
+<!--网页被卷去的高:document.body.scrollTop-->
+<!--网页被卷去的左:document.body.scrollLeft-->
+<!--网页正文部分上:window.screenTop-->
+<!--网页正文部分左:window.screenLeft-->
+<!--屏幕分辨率的高:window.screen.height-->
+<!--屏幕分辨率的宽:window.screen.width-->
+<!--屏幕可用工作区高度:window.screen.availHeight-->
     var stompClient = null;
     function setConnected(connected) {
        
@@ -136,11 +146,40 @@
 	$(document).ready( function (){
 		disconnect();
 		
-	    var pageLogoHeight=$('#pageLogo').height();
+	   /**屏幕的宽度 1024**/
+		var screenWidth=document.documentElement?document.documentElement.clientWidth:document.body.clientWidth;
+		/**屏幕的高度 768**/
+		var screenHeight=document.documentElement?document.documentElement.clientHeight:document.body.clientHeight;
+		console.log("screenHeight:"+screenHeight);
+	    console.log("screenWidth:"+screenWidth);
+		
+		var logoImglength=48*screenWidth/1024;
+		
+		$("#hospitalLogoImg").css("height",logoImglength+"px");
+		$("#hospitalLogoImg").css("width",logoImglength+"px");
+		var hospitalNameFontSize= 4*screenWidth/1024;
+		$("#hospitalName").css("font-size",hospitalNameFontSize+"rem");
+		
+		var waitingAreaWidth=15*screenWidth/1024;
+		$("#waitingArea").css("padding",waitingAreaWidth+"px");
+		var waitingAreaFontSize=2*screenWidth/1024;
+		$("#waitingArea").css("font-size",waitingAreaFontSize+"rem");
+	
+	    var waitingAreaFooterHeight=$("#waitingAreaFooter").outerHeight();
+		/**padding: 10px;**/
+		/**margin-bottom: 20px;**/
+        /**font-size:2rem;**/
+		$("#callMessage").css("padding",10*screenHeight/1024+"px");
+		$("#callMessage").css("margin-bottom",20*screenHeight/1024+"px");
+		$("#consultingRoomList").css("margin-top",-20*screenHeight/1024+"px");
+		$("#callMessage").css("font-size",2*screenWidth/1024+"rem");
+	    var pageLogoHeight=$('#pageLogo').outerHeight();
+		
 		$('#mainHospitalqueueV').css("padding-top",pageLogoHeight+"px");
 		$("#mainHospitalqueueV").css("vertical-align","middle");
 		//设置bootstrapTable起始的高度
-		var windowHeight=$(window).height()-170;
+		var callContentsHeight=$("#callContents").outerHeight();
+		var windowHeight=screenHeight-callContentsHeight-pageLogoHeight-waitingAreaFooterHeight;
 		var trHeight=windowHeight/7;
 		$("#mainHospitalqueueV").find("tr").each(function(){
 			$(this).css("height",trHeight+"px");
@@ -149,7 +188,7 @@
 		    //    vertical-align: middle;
 			$(this).css("vertical-align","middle");
 		});
-		$('#consultingRoom').bootstrapTable({height:$(window).height()-170}); 
+		$('#consultingRoom').bootstrapTable({height:windowHeight}); 
    });
 	$(window).load(function() {
 		 
@@ -190,7 +229,7 @@
                  };
                  TTSClientPlugin.speak(response.body,success,error);
             });
-            stompClient.subscribe('/screenDevice/171.19.231.4/subscribe', function (response) {
+            stompClient.subscribe('/screenDevice/171.19.231.2/subscribe', function (response) {
             	// and acknowledge it
                 response.ack();
             	console.log(response.body);
