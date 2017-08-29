@@ -12,7 +12,7 @@ import com.howard.www.core.hbatis.datasource.jdbctemplate.FrameworkResetDataSour
 
 @Configuration
 @EnableTransactionManagement
-public class HospitalQueueSystemDataSouceConfig {
+public class HospitalQueueSystemDataSourceConfig {
 	
 	@Bean(name = "systemDataSource")
 	@Primary
@@ -55,8 +55,7 @@ public class HospitalQueueSystemDataSouceConfig {
 	
 	@Bean(name = "systemJdbcTemplate")
 	public NamedParameterJdbcTemplate initDruidJdbcTemplate(@Qualifier("systemDataSource") DruidDataSource druidDataSource) throws Exception {
-		NamedParameterJdbcTemplate druidJdbcTemplate = new NamedParameterJdbcTemplate(druidDataSource);
-		return druidJdbcTemplate;
+		return  new NamedParameterJdbcTemplate(druidDataSource);
 	}
 
 	@Bean(name = "systemResetDataSource")
