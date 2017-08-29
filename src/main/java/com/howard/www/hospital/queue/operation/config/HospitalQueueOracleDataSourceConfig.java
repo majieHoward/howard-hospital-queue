@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.alibaba.druid.pool.DruidDataSource;
 
-@Configuration
-@EnableTransactionManagement
+//@Configuration
+//@EnableTransactionManagement
 public class HospitalQueueOracleDataSourceConfig {
 	@Bean(name = "hospitalQueueOracleDataSource")
 	public DruidDataSource initHospitalQueueOracleDruidDataSource() throws Exception {

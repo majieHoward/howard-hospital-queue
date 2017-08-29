@@ -1,12 +1,17 @@
 package com.howard.www.hospital.queue.operation.config;
 
+import java.nio.charset.Charset;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
@@ -68,8 +73,50 @@ public class HospitalQueueSystemWebMvcConfig extends WebMvcConfigurationSupport 
 		super.addViewControllers(registry);
 	}
 
-
-
+	@Bean
+	public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter () {
+		MappingJackson2HttpMessageConverter converter=new MappingJackson2HttpMessageConverter();
+		converter.setDefaultCharset(Charset.forName("UTF-8"));
+		return converter;
+	}
+	
+	@Bean
+    public StringHttpMessageConverter stringHttpMessageConverter() {
+		/**
+		 * Content-Type:text/html;charset=UTF-8
+		 */
+		/**
+		 * HttpMessageConverter即消息转换器机制
+		 * public ServletInputStream getInputStream() throws IOException; 
+		 * public ServletOutputStream getOutputStream() throws IOException;
+		 */
+		/**
+		 * HttpMessageConverter接口提供了 5 个方法:
+		 * canRead:判断该转换器是否能将请求内容转换成 Java 对象
+		 * canWrite:判断该转换器是否可以将 Java 对象转换成返回内容
+		 * getSupportedMediaTypes:获得该转换器支持的 MediaType 类型
+		 * read:读取请求内容并转换成 Java 对象
+		 * write:将 Java 对象转换后写入返回内容
+		 */
+        StringHttpMessageConverter converter = new StringHttpMessageConverter(
+                Charset.forName("UTF-8"));
+        return converter;
+    }
+	
+	@Override
+	protected void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+		// TODO Auto-generated method stub
+		configurer.favorPathExtension(false);
+		super.configureContentNegotiation(configurer);
+	}
+	@Override
+	protected void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+		// TODO Auto-generated method stub
+		converters.add(stringHttpMessageConverter());
+		converters.add(mappingJackson2HttpMessageConverter ());
+		super.configureMessageConverters(converters);
+		  
+	}
 	/**
 	 * 
 	 * <p>
@@ -102,4 +149,15 @@ public class HospitalQueueSystemWebMvcConfig extends WebMvcConfigurationSupport 
     public HospitalQueueApplicationStartup applicationStartListener(){
         return new HospitalQueueApplicationStartup();
     }
+	
+	/**
+	 * ByteArrayHttpMessageConverter	数据与字节数组的相互转换	\/\	application/octet-stream
+	 * StringHttpMessageConverter	数据与 String 类型的相互转换	text/\*	text/plain
+	 * FormHttpMessageConverter	表单与 MultiValueMap的相互转换	application/x-www-form-urlencoded	application/x-www-form-urlencoded
+	 * SourceHttpMessageConverter	数据与 javax.xml.transform.Source 的相互转换	text/xml 和 application/xml	text/xml 和 application/xml
+	 * MarshallingHttpMessageConverter	使用 Spring 的 Marshaller/Unmarshaller 转换 XML 数据	text/xml 和 application/xml	text/xml 和 application/xml
+	 * MappingJackson2HttpMessageConverter	使用 Jackson 的 ObjectMapper 转换 Json 数据	application/json	application/json
+	 * MappingJackson2XmlHttpMessageConverter	使用 Jackson 的 XmlMapper 转换 XML 数据	application/xml	application/xml
+	 * BufferedImageHttpMessageConverter	数据与 java.awt.image.BufferedImage 的相互转换	Java I/O API 支持的所有类型	Java I/O API 支持的所有类型
+	 */
 }

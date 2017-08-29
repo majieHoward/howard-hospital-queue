@@ -2,9 +2,7 @@ package com.howard.www.hospital.queue.operation.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Repository;
-
 import com.howard.www.core.base.util.FrameworkStringUtils;
 import com.howard.www.core.data.transfer.dto.IDataTransferObject;
 import com.howard.www.hospital.queue.operation.service.IExternalProvidedHisService;
@@ -14,8 +12,6 @@ import net.sf.json.JSONObject;
 
 @Repository("externalProvidedHisService")
 public class ExternalProvidedHisServiceImpl implements IExternalProvidedHisService {
-	@Autowired
-	private SimpMessagingTemplate messagingTemplate;
 
 	@Autowired
 	private ApplicationContext cApplicationContext;
