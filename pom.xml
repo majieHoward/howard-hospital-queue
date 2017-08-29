@@ -154,11 +154,12 @@
 			<version>1.10.2</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.oracle/ojdbc6 -->
+		<!-- add by howard at 2017.08.29 -->
+		<!-- mvn install:install-file -Dfile=D:/ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=6.0 -Dpackaging=jar -DgeneratePom=true  -->
 		<dependency>
-		    <groupId>com.oracle</groupId>
-		    <artifactId>ojdbc6</artifactId>
-		    <version>12.1.0.1-atlassian-hosted</version>
-		    <scope>test</scope>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0</version>
 		</dependency>
 	</dependencies>
 
