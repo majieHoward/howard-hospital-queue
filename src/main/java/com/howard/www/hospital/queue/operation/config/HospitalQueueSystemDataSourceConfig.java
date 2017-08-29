@@ -18,9 +18,9 @@ public class HospitalQueueSystemDataSourceConfig {
 	@Primary
 	public DruidDataSource initDruidDataSource() throws Exception {
 		DruidDataSource systemDataSource = new DruidDataSource();
-		systemDataSource.setUrl("jdbc:mysql://127.0.0.1:3306/hospitalqueue?characterEncoding=UTF-8");
-		systemDataSource.setUsername("root");
-		systemDataSource.setPassword("majie");
+		systemDataSource.setUrl(HospitalQueueDataSourceToConfigure.businessMysqlDataSourceUrl);
+		systemDataSource.setUsername(HospitalQueueDataSourceToConfigure.businessMysqlDataSourceUserName);
+		systemDataSource.setPassword(HospitalQueueDataSourceToConfigure.businessOracleDataSourcePassword);
 		/* <property name="filters" value="stat" /> */
 		systemDataSource.setFilters("stat");
 		/* <property name="maxActive" value="20" /> */
@@ -36,7 +36,7 @@ public class HospitalQueueSystemDataSourceConfig {
 		/* <property name="minEvictableIdleTimeMillis" value="3600000" /> */
 		systemDataSource.setMinEvictableIdleTimeMillis(3600000);
 		/* <property name="validationQuery" value="SELECT 'x'" /> */
-		systemDataSource.setValidationQuery("SELECT 'x'");
+		systemDataSource.setValidationQuery(HospitalQueueDataSourceToConfigure.businessMysqlValidationQuery);
 		/* <property name="testWhileIdle" value="true" /> */
 		systemDataSource.setTestWhileIdle(true);
 		/* <property name="testOnBorrow" value="false" /> */

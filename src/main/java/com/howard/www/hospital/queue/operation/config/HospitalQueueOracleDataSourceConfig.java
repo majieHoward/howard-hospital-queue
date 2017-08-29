@@ -11,48 +11,48 @@ import com.alibaba.druid.pool.DruidDataSource;
 @Configuration
 @EnableTransactionManagement
 public class HospitalQueueOracleDataSourceConfig {
-	@Bean(name = "hospitalQueueOracleDataSouce")
+	@Bean(name = "hospitalQueueOracleDataSource")
 	public DruidDataSource initHospitalQueueOracleDruidDataSource() throws Exception {
-		DruidDataSource hospitalQueueOracleDataSouce = new DruidDataSource();
-		hospitalQueueOracleDataSouce.setUrl("jdbc:oracle:thin:@133.37.117.61:1521:comm");
-		hospitalQueueOracleDataSouce.setUsername("comm");
-		hospitalQueueOracleDataSouce.setPassword("123qaz");
+		DruidDataSource hospitalQueueOracleDataSource = new DruidDataSource();
+		hospitalQueueOracleDataSource.setUrl(HospitalQueueDataSourceToConfigure.businessOracleDataSourceUrl);
+		hospitalQueueOracleDataSource.setUsername(HospitalQueueDataSourceToConfigure.businessOracleDataSourceUserName);
+		hospitalQueueOracleDataSource.setPassword(HospitalQueueDataSourceToConfigure.businessOracleDataSourcePassword);
 		/* <property name="filters" value="stat" /> */
-		hospitalQueueOracleDataSouce.setFilters("stat");
+		hospitalQueueOracleDataSource.setFilters("stat");
 		/* <property name="maxActive" value="20" /> */
-		hospitalQueueOracleDataSouce.setMaxActive(20);
+		hospitalQueueOracleDataSource.setMaxActive(20);
 		/* <property name="initialSize" value="1" /> */
-		hospitalQueueOracleDataSouce.setInitialSize(1);
+		hospitalQueueOracleDataSource.setInitialSize(1);
 		/* <property name="maxWait" value="60000" /> */
-		hospitalQueueOracleDataSouce.setMaxWait(60000);
+		hospitalQueueOracleDataSource.setMaxWait(60000);
 		/* <property name="minIdle" value="1" /> */
-		hospitalQueueOracleDataSouce.setMinIdle(1);
+		hospitalQueueOracleDataSource.setMinIdle(1);
 		/* <property name="timeBetweenEvictionRunsMillis" value="3600000" /> */
-		hospitalQueueOracleDataSouce.setTimeBetweenEvictionRunsMillis(3600000);
+		hospitalQueueOracleDataSource.setTimeBetweenEvictionRunsMillis(3600000);
 		/* <property name="minEvictableIdleTimeMillis" value="3600000" /> */
-		hospitalQueueOracleDataSouce.setMinEvictableIdleTimeMillis(3600000);
+		hospitalQueueOracleDataSource.setMinEvictableIdleTimeMillis(3600000);
 		/* <property name="validationQuery" value="SELECT 'x'" /> */
-		hospitalQueueOracleDataSouce.setValidationQuery("SELECT 1 FROM DUAL");
+		hospitalQueueOracleDataSource.setValidationQuery(HospitalQueueDataSourceToConfigure.businessOracleValidationQuery);
 		/* <property name="testWhileIdle" value="true" /> */
-		hospitalQueueOracleDataSouce.setTestWhileIdle(true);
+		hospitalQueueOracleDataSource.setTestWhileIdle(true);
 		/* <property name="testOnBorrow" value="false" /> */
-		hospitalQueueOracleDataSouce.setTestOnBorrow(false);
+		hospitalQueueOracleDataSource.setTestOnBorrow(false);
 		/* <property name="testOnReturn" value="false" /> */
-		hospitalQueueOracleDataSouce.setTestOnReturn(false);
+		hospitalQueueOracleDataSource.setTestOnReturn(false);
 		/* <property name="poolPreparedStatements" value="true" /> */
-		hospitalQueueOracleDataSouce.setPoolPreparedStatements(true);
+		hospitalQueueOracleDataSource.setPoolPreparedStatements(true);
 		/*
 		 * <property name="maxPoolPreparedStatementPerConnectionSize" value="50"
 		 * />
 		 */
-		hospitalQueueOracleDataSouce.setMaxPoolPreparedStatementPerConnectionSize(50);
-		return hospitalQueueOracleDataSouce;
+		hospitalQueueOracleDataSource.setMaxPoolPreparedStatementPerConnectionSize(50);
+		return hospitalQueueOracleDataSource;
 	}
 
 	@Bean(name = "HospitalQueueOracleJdbcTemplate")
 	public NamedParameterJdbcTemplate initHospitalQueueOracleDruidJdbcTemplate(
-			@Qualifier("hospitalQueueOracleDataSouce") DruidDataSource hospitalQueueOracleDataSouce) throws Exception {
-		return new NamedParameterJdbcTemplate(hospitalQueueOracleDataSouce);
+			@Qualifier("hospitalQueueOracleDataSource") DruidDataSource hospitalQueueOracleDataSource) throws Exception {
+		return new NamedParameterJdbcTemplate(hospitalQueueOracleDataSource);
 	}
 
 }
