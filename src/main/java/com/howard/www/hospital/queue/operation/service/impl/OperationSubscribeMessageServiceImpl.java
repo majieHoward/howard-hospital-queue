@@ -47,6 +47,11 @@ public class OperationSubscribeMessageServiceImpl implements IOperationSubscribe
 	public void sendToCorrespondingScreenIpInConsulting(String destination,String roomCode, Object messageBody) throws Exception {
 		// TODO Auto-generated method stub
 		Vector<String> ipItems=obtainIOperationConsultingRoomSerivce().obtainCorrespondingScreenIpVectorInTheConsultingRoom(roomCode);
+		if(ipItems==null||ipItems.size()<=0){
+			/**
+			 * 没有找到对应播放语音的屏幕设备
+			 */
+		}
 		massMessageToCorrespondingScreenIdentityInConsulting(ipItems,destination,messageBody);
 	}
 

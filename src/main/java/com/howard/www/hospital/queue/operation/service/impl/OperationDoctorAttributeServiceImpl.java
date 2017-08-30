@@ -51,15 +51,43 @@ public class OperationDoctorAttributeServiceImpl implements IOperationDoctorAttr
 			}
 		}
 	}
-	
-	private IOperationDoctorAttributeDao obtainIOperationDoctorAttributeDao() throws Exception {
-		return (IOperationDoctorAttributeDao) cApplicationContext.getBean("operationDoctorAttributeDao");
-	}
 
 	@Override
 	public void initializingServiceBaseData(IDataTransferObject queryParameters) throws Exception {
 		// TODO Auto-generated method stub
 		List<JSONObject> doctorAttributeItems = obtainDoctorAttributeInfo(queryParameters);
 		analyticStructure(doctorAttributeItems);
+	}
+
+	@Override
+	public boolean existDoctorAttributeEntityByDoctorJobNumber(String doctorJobNumber) throws Exception {
+		// TODO Auto-generated method stub
+		if("".equals(FrameworkStringUtils.asString(doctorJobNumber))){
+			throw new RuntimeException("40002");
+			//throw new RuntimeException("缺少医生工号(doctorJobNumber)");
+		}
+		// TODO Auto-generated method stub
+		if(obtainDoctorAttributeEntityByDoctorJobNumberFromMap(doctorJobNumber)!=null){
+			logger.info("获取到doctorJobNumber为"+doctorJobNumber+"DoctorAttributeEntity对象");
+			return true;
+		}else{
+			logger.info("没有获取到doctorJobNumber为"+doctorJobNumber+"DoctorAttributeEntity对象");
+		}
+		return false;
+	}
+
+	@Override
+	public DoctorAttributeEntity obtainDoctorAttributeEntityByDoctorJobNumberFromMap(String doctorJobNumber)
+			throws Exception {
+		if("".equals(FrameworkStringUtils.asString(doctorJobNumber))){
+			throw new RuntimeException("40003");
+			//throw new RuntimeException("无效的医生工号(doctorJobNumber),请开发者检查doctorJobNumber的正确性，避免异常字符，注意大小写");
+		}else{
+			return this.doctorAttributeMap.get(doctorJobNumber);
+		}
+	}
+	
+	private IOperationDoctorAttributeDao obtainIOperationDoctorAttributeDao() throws Exception {
+		return (IOperationDoctorAttributeDao) cApplicationContext.getBean("operationDoctorAttributeDao");
 	}
 }

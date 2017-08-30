@@ -9,6 +9,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import net.sf.json.JSONObject;
 
@@ -24,6 +25,7 @@ import net.sf.json.JSONObject;
 @Data
 @Builder
 @ToString
+@NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ScreenDeviceEntity implements Serializable {
 	/**

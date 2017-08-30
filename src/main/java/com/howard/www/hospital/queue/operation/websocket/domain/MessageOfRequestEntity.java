@@ -1,4 +1,12 @@
 package com.howard.www.hospital.queue.operation.websocket.domain;
+
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 /**
  * 
  * @ClassName:  MessageOfRequestEntity   
@@ -8,23 +16,15 @@ package com.howard.www.hospital.queue.operation.websocket.domain;
  *     
  * @Copyright: 2017 https://github.com/majieHoward Inc. All rights reserved.
  */
+@Data
+@Builder
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class MessageOfRequestEntity {
 	/**
 	 * 
 	 */
 	private String name;
 	private String device;
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getDevice() {
-		return device;
-	}
-	public void setDevice(String device) {
-		this.device = device;
-	}
-	
 }

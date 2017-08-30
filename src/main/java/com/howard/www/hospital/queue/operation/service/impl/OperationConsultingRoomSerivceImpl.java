@@ -53,11 +53,11 @@ public class OperationConsultingRoomSerivceImpl implements IOperationConsultingR
 		 */
 		if("".equals(FrameworkStringUtils.asString(roomCode))){
 			logger.info("obtainConsultingRoomEnityByRoomCodeFromMap方法传入roomCode参数为空");
-			
+			throw new RuntimeException("40004");
+			//throw new RuntimeException("缺少诊断室编码(roomCode)");
 		}else{
 			return consultingRoomMap.get(roomCode);
 		}
-		return null;
 	}
 
 	private void analyticStructure(List<JSONObject> consultingRoomItems) throws Exception {
@@ -89,6 +89,10 @@ public class OperationConsultingRoomSerivceImpl implements IOperationConsultingR
 
 	@Override
 	public boolean existConsultingRoomEnityByRoomCode(String roomCode) throws Exception {
+		if("".equals(FrameworkStringUtils.asString(roomCode))){
+			throw new RuntimeException("40004");
+			//throw new RuntimeException("缺少诊断室编码(roomCode)");
+		}
 		// TODO Auto-generated method stub
 		if(obtainConsultingRoomEnityByRoomCodeFromMap(roomCode)!=null){
 			logger.info("获取到roomCode为"+roomCode+"ConsultingRoomEntity对象");
