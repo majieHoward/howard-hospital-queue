@@ -26,6 +26,15 @@ public class ExternalProvidedHisServiceImpl implements IExternalProvidedHisServi
 		return (IOperationSubscribeMessageService) cApplicationContext.getBean("operationSubscribeMessageService");
 	}
 	
+	/**
+	 * 
+	 * @Title: callAPatientParameterVerification   
+	 * @Description: TODO 为callAPatientToSeeADoctor(IDataTransferObject paramDto)方法验证参数
+	 * @param: @param paramDto
+	 * @param: @throws Exception      
+	 * @return: void      
+	 * @throws
+	 */
 	private void callAPatientParameterVerification(IDataTransferObject paramDto) throws Exception{
 		//呼叫内容
 		String callContents=FrameworkStringUtils
@@ -77,6 +86,15 @@ public class ExternalProvidedHisServiceImpl implements IExternalProvidedHisServi
 		return null;
 	}
 
+	/**
+	 * 
+	 * @Title: registerDoctorParameterVerification   
+	 * @Description: TODO 为registerDoctorOnlineStatus(IDataTransferObject paramDto)方法验证参数
+	 * @param: @param paramDto
+	 * @param: @throws Exception      
+	 * @return: void      
+	 * @throws
+	 */
 	private void registerDoctorParameterVerification(IDataTransferObject paramDto) throws Exception{
 		//通用验证
 		universalVerification(paramDto);
@@ -103,6 +121,15 @@ public class ExternalProvidedHisServiceImpl implements IExternalProvidedHisServi
 		return null;
 	}
 
+	/**
+	 * 
+	 * @Title: universalVerification   
+	 * @Description: TODO  判断doctorJobNumber和roomCode是否存在和有效
+	 * @param: @param paramDto
+	 * @param: @throws Exception      
+	 * @return: void      
+	 * @throws
+	 */
 	private void universalVerification(IDataTransferObject paramDto)throws Exception{
 		/**
 		 * 判断接口传参是否满足要求
@@ -128,6 +155,15 @@ public class ExternalProvidedHisServiceImpl implements IExternalProvidedHisServi
 		
 	}
 	
+	/**
+	 * 
+	 * @Title: judgmentDoctorJobNumberExistence   
+	 * @Description: TODO 验证是否存在doctorJobNumber为传入doctorJobNumber的DoctorAttributeEntity对象 
+	 * @param: @param doctorJobNumber
+	 * @param: @throws Exception      
+	 * @return: void      
+	 * @throws
+	 */
 	private void judgmentDoctorJobNumberExistence(String doctorJobNumber) throws Exception{
 		if(false==obtainIOperationDoctorAttributeService().existDoctorAttributeEntityByDoctorJobNumber(doctorJobNumber)){
 			throw new RuntimeException("40003");
@@ -135,6 +171,15 @@ public class ExternalProvidedHisServiceImpl implements IExternalProvidedHisServi
 		}
 	}
 	
+	/**
+	 * 
+	 * @Title: judgmentRoomCodeExistence   
+	 * @Description: TODO 验证是否存在roomCode为传入roomCode的ConsultingRoomEntity对象   
+	 * @param: @param roomCode
+	 * @param: @throws Exception      
+	 * @return: void      
+	 * @throws
+	 */
 	private void judgmentRoomCodeExistence(String roomCode) throws Exception{
 		if(false==obtainIOperationConsultingRoomSerivce().existConsultingRoomEnityByRoomCode(roomCode)){
 			throw new RuntimeException("40005");
