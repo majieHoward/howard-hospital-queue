@@ -61,6 +61,8 @@ public class ConsultingRoomEntity implements Serializable {
 	
 	private Vector<String> screenDeviceIdentityItems;
 	
+	private Object scheduling;
+	
 	public void pustScreenDeviceInternetProtocolToRoom(String internetProtocol){
 		if(!"".equals(FrameworkStringUtils.asString(internetProtocol))){
 			internetProtocolItems.add(internetProtocol);

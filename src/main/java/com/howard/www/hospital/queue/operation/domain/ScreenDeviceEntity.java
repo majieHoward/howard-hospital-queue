@@ -77,6 +77,8 @@ public class ScreenDeviceEntity implements Serializable {
 	//eg.http://171.217.95.100:9999/index.howard
 	private String pageUrlAddress="";
 	
+	private Object scheduling;
+
 	public ScreenDeviceEntity(JSONObject object) throws Exception{
 		structureScreenDeviceEntityFromJSON(object);
 	} 

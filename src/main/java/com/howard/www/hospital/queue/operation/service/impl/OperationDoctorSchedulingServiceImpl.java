@@ -73,14 +73,14 @@ public class OperationDoctorSchedulingServiceImpl implements IOperationDoctorSch
 			throws Exception {
 		if (currentDoctorSchedulingEntity != null) {
 			String roomCode = FrameworkStringUtils.asString(currentDoctorSchedulingEntity.getRoomCode());
-			String visitTimeDescCode = FrameworkStringUtils.asString(currentDoctorSchedulingEntity.getRoomCode());
+			String visitTimeDescCode = FrameworkStringUtils.asString(currentDoctorSchedulingEntity.getVisitTimeDescCode());
 			ConcurrentHashMap<String, CurrentDoctorSchedulingEntity> schedulingMap;
 			if (!"".equals(roomCode)) {
 				schedulingMap = obtainTimeIntervalSchedulingByRoomCode(roomCode);
 				if (schedulingMap == null) {
 					schedulingMap = new ConcurrentHashMap<String, CurrentDoctorSchedulingEntity>();
-					doctorSchedulingMap.put(visitTimeDescCode, schedulingMap);
-					logger.info("将visitTimeDescCode为:" + visitTimeDescCode
+					doctorSchedulingMap.put(roomCode, schedulingMap);
+					logger.info("将roomCode为:" + roomCode
 							+ "的ConcurrentHashMap<String, ConcurrentHashMap<String, CurrentDoctorSchedulingEntity>>对象放入到doctorSchedulingMap中");
 				}
 				schedulingMap.put(visitTimeDescCode, currentDoctorSchedulingEntity);
@@ -119,6 +119,9 @@ public class OperationDoctorSchedulingServiceImpl implements IOperationDoctorSch
 	@Override
 	public DoctorAttributeEntity obtainAtCertainTimesDoctorByRoomCodeAndTime(String roomCode, String time)
 			throws Exception {
+		if("".equals(roomCode)||"".equals(time)){
+		    	throw new RuntimeException("");
+		}
 		// TODO Auto-generated method stub
 		CurrentDoctorSchedulingEntity currentDoctorSchedulingEntity = obtainAtCertainTimesSchedulingByRoomCodeAndTime(
 				roomCode, time);
@@ -141,9 +144,17 @@ public class OperationDoctorSchedulingServiceImpl implements IOperationDoctorSch
 				.asString(queryParameters.obtainMapOfRequiredParameter().get("time"));
 	    if("".equals(roomCode)||"".equals(time)){
 	    	throw new RuntimeException("");
-	    }else{
-	    	return JSONObject.fromObject(obtainAtCertainTimesDoctorByRoomCodeAndTime(roomCode,time));
 	    }
+	    return obtainAtCertainTimesDoctor(roomCode,time);
+	}
+
+	@Override
+	public JSONObject obtainAtCertainTimesDoctor(String roomCode, String time) throws Exception {
+		// TODO Auto-generated method stub
+		if("".equals(roomCode)||"".equals(time)){
+	    	throw new RuntimeException("");
+	    }
+	    return JSONObject.fromObject(obtainAtCertainTimesDoctorByRoomCodeAndTime(roomCode,time));
 	}
 
 }

@@ -20,4 +20,6 @@ public interface IOperationDoctorSchedulingService extends IOperationBasicDataSe
 	public DoctorAttributeEntity obtainAtCertainTimesDoctorByRoomCodeAndTime(String roomCode,String time)throws Exception;
 
     public JSONObject obtainAtCertainTimesDoctor(IDataTransferObject queryParameters)throws Exception;
+    
+    public JSONObject obtainAtCertainTimesDoctor(String roomCode,String time)throws Exception;
 }
