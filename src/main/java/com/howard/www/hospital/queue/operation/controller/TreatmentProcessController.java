@@ -13,7 +13,7 @@ import com.howard.www.hospital.queue.operation.service.IOperationBusinessProcess
 import com.howard.www.hospital.queue.operation.service.IOperationDoctorSchedulingService;
 
 @RestController
-public class BusinessProcessController {
+public class TreatmentProcessController {
 	protected final Logger log = LoggerFactory.getLogger(ExternalProvidedHisController.class);
 	@Autowired
 	private ApplicationContext cApplicationContext;
@@ -42,7 +42,7 @@ public class BusinessProcessController {
 	 * @return: String      
 	 * @throws
 	 */
-	@RequestMapping("/business/hospital/queue/diagnosis.area.items.information.obtain")
+	@RequestMapping("/treatment/hospital/queue/diagnosis.area.items.information.obtain")
 	public String obtainDiagnosisAreaItemsInformation(IDataTransferObject requiredParameter) throws Exception {
 		return FrameworkStringUtils.asString(
 				obtainIOperationBusinessProcessService().obtainDiagnosisAreaItemsInformation(requiredParameter));
@@ -58,7 +58,7 @@ public class BusinessProcessController {
 	 * @return: String      
 	 * @throws
 	 */
-	@RequestMapping("/business/hospital/queue/at.certain.times.doctor.obtain")
+	@RequestMapping("/treatment/hospital/queue/at.certain.times.doctor.obtain")
 	public String obtainAtCertainTimesDoctor(IDataTransferObject requiredParameter) throws Exception {
 		return FrameworkStringUtils
 				.asString(obtainIOperationDoctorSchedulingService().obtainAtCertainTimesDoctor(requiredParameter));
