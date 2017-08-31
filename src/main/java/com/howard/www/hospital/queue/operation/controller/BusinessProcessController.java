@@ -20,20 +20,27 @@ public class BusinessProcessController {
 
 	/**
 	 * 
-	 * @Title: obtainMedicalInformation @Description: TODO @param: @param
-	 * requiredParameter @param: @return @param: @throws Exception @return:
-	 * String @throws
+	 * @Title: obtainMedicalInformation   
+	 * @Description: TODO(这里用一句话描述这个方法的作用)   
+	 * @param: @param requiredParameter
+	 * @param: @return
+	 * @param: @throws Exception      
+	 * @return: String      
+	 * @throws
 	 */
 	public String obtainMedicalInformation(IDataTransferObject requiredParameter) throws Exception {
 		return null;
 	}
-
+	
 	/**
 	 * 
-	 * @Title: obtainDiagnosisAreaItemsInformation @Description: TODO
-	 * 获取诊区的所有诊室的信息(包括诊室和所安排的医生) @param: @param
-	 * requiredParameter @param: @return @param: @throws Exception @return:
-	 * String @throws
+	 * @Title: obtainDiagnosisAreaItemsInformation   
+	 * @Description: TODO获取诊区的所有诊室的信息(包括诊室和所安排的医生)   
+	 * @param: @param requiredParameter
+	 * @param: @return
+	 * @param: @throws Exception      
+	 * @return: String      
+	 * @throws
 	 */
 	@RequestMapping("/business/hospital/queue/diagnosis.area.items.information.obtain")
 	public String obtainDiagnosisAreaItemsInformation(IDataTransferObject requiredParameter) throws Exception {
@@ -41,6 +48,16 @@ public class BusinessProcessController {
 				obtainIOperationBusinessProcessService().obtainDiagnosisAreaItemsInformation(requiredParameter));
 	}
 
+	/**
+	 * 
+	 * @Title: obtainAtCertainTimesDoctor   
+	 * @Description: TODO 获取某个诊室当前坐诊的医生详细信息  
+	 * @param: @param requiredParameter
+	 * @param: @return
+	 * @param: @throws Exception      
+	 * @return: String      
+	 * @throws
+	 */
 	@RequestMapping("/business/hospital/queue/at.certain.times.doctor.obtain")
 	public String obtainAtCertainTimesDoctor(IDataTransferObject requiredParameter) throws Exception {
 		return FrameworkStringUtils
