@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.howard.www.core.base.util.FrameworkStringUtils;
 import com.howard.www.core.data.transfer.dto.IDataTransferObject;
-import com.howard.www.hospital.queue.operation.service.IOperationBusinessProcessService;
+import com.howard.www.hospital.queue.operation.service.IOperationTreatmentProcessService;
 import com.howard.www.hospital.queue.operation.service.IOperationDoctorSchedulingService;
 
 @RestController
@@ -42,7 +42,7 @@ public class TreatmentProcessController {
 	 * @return: String      
 	 * @throws
 	 */
-	@RequestMapping("/treatment/hospital/queue/diagnosis.area.items.information.obtain")
+	@RequestMapping("/treatment/hospital/queue/obtain.diagnosis.area.items.information.process")
 	public String obtainDiagnosisAreaItemsInformation(IDataTransferObject requiredParameter) throws Exception {
 		return FrameworkStringUtils.asString(
 				obtainIOperationBusinessProcessService().obtainDiagnosisAreaItemsInformation(requiredParameter));
@@ -58,7 +58,7 @@ public class TreatmentProcessController {
 	 * @return: String      
 	 * @throws
 	 */
-	@RequestMapping("/treatment/hospital/queue/at.certain.times.doctor.obtain")
+	@RequestMapping("/treatment/hospital/queue/obtain.at.certain.times.doctor.process")
 	public String obtainAtCertainTimesDoctor(IDataTransferObject requiredParameter) throws Exception {
 		return FrameworkStringUtils
 				.asString(obtainIOperationDoctorSchedulingService().obtainAtCertainTimesDoctor(requiredParameter));
@@ -68,7 +68,7 @@ public class TreatmentProcessController {
 		return (IOperationDoctorSchedulingService) cApplicationContext.getBean("operationDoctorSchedulingService");
 	}
 
-	private IOperationBusinessProcessService obtainIOperationBusinessProcessService() throws Exception {
-		return (IOperationBusinessProcessService) cApplicationContext.getBean("operationBusinessProcessService");
+	private IOperationTreatmentProcessService obtainIOperationBusinessProcessService() throws Exception {
+		return (IOperationTreatmentProcessService) cApplicationContext.getBean("operationTreatmentProcessService");
 	}
 }
