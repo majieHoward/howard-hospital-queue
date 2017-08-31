@@ -7,11 +7,13 @@ import org.springframework.context.annotation.Configuration;
 
 import com.howard.www.hospital.queue.operation.service.IOperationConsultingRoomSerivce;
 import com.howard.www.hospital.queue.operation.service.IOperationDoctorAttributeService;
+import com.howard.www.hospital.queue.operation.service.IOperationDoctorSchedulingService;
 import com.howard.www.hospital.queue.operation.service.IOperationScreenConsultingService;
 import com.howard.www.hospital.queue.operation.service.IOperationScreenDeviceService;
 import com.howard.www.hospital.queue.operation.service.IOperationSubscribeMessageService;
 import com.howard.www.hospital.queue.operation.service.impl.OperationConsultingRoomSerivceImpl;
 import com.howard.www.hospital.queue.operation.service.impl.OperationDoctorAttributeServiceImpl;
+import com.howard.www.hospital.queue.operation.service.impl.OperationDoctorSchedulingServiceImpl;
 import com.howard.www.hospital.queue.operation.service.impl.OperationScreenConsultingServiceImpl;
 import com.howard.www.hospital.queue.operation.service.impl.OperationScreenDeviceServiceImpl;
 import com.howard.www.hospital.queue.operation.service.impl.OperationSubscribeMessageServiceImpl;
@@ -48,5 +50,11 @@ public class HospitalQueueBasicDataInitialization {
 	public IOperationSubscribeMessageService constructionSubscribeMessageService()throws Exception{
 		log.info("initialize bean name is operationScreenConsultingService");
 		return new OperationSubscribeMessageServiceImpl();
+	} 
+	
+	@Bean(name = "operationDoctorSchedulingService")
+	public IOperationDoctorSchedulingService constructionDoctorSchedulingService()throws Exception{
+		log.info("initialize bean name is operationDoctorSchedulingService");
+		return new OperationDoctorSchedulingServiceImpl();
 	} 
 }

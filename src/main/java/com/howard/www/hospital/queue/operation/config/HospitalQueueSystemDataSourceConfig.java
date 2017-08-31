@@ -20,7 +20,7 @@ public class HospitalQueueSystemDataSourceConfig {
 		DruidDataSource systemDataSource = new DruidDataSource();
 		systemDataSource.setUrl(HospitalQueueDataSourceToConfigure.businessMysqlDataSourceUrl);
 		systemDataSource.setUsername(HospitalQueueDataSourceToConfigure.businessMysqlDataSourceUserName);
-		systemDataSource.setPassword(HospitalQueueDataSourceToConfigure.businessOracleDataSourcePassword);
+		systemDataSource.setPassword(HospitalQueueDataSourceToConfigure.businessMysqlDataSourcePassword);
 		/* <property name="filters" value="stat" /> */
 		systemDataSource.setFilters("stat");
 		/* <property name="maxActive" value="20" /> */

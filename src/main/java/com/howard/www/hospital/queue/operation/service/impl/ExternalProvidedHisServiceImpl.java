@@ -71,7 +71,7 @@ public class ExternalProvidedHisServiceImpl implements IExternalProvidedHisServi
 		TextFormatMessageOfResponseEntity messageBody=new TextFormatMessageOfResponseEntity();
 		messageBody.setContent(FrameworkStringUtils
 				.asString(paramDto.obtainMapOfRequiredParameter().get("callContents")));
-		messageBody.setFromUserName("subscribe");
+		messageBody.setFromUserName(FrameworkStringUtils.asString(paramDto.obtainMapOfRequiredParameter().get("roomCode")));
 		logger.info(FrameworkStringUtils.asString(JSONObject.fromObject(messageBody)));
 		/**
 		 * {

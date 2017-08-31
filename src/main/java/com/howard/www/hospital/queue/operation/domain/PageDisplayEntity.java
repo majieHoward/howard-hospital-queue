@@ -28,14 +28,14 @@ public class PageDisplayEntity implements Serializable{
 	 */  
 	private static final long serialVersionUID = 1L;
 	//eg.P5632
-	private String pageIdentity;
+	private String pageIdentity="";
 	//eg.诊室外的叫号屏幕主页
-	private String pageName;
+	private String pageName="";
 	//eg.诊室外的叫号屏幕主页
-	private String pageDescribe;
+	private String pageDescribe="";
 	//eg.http://171.217.95.100:9999/index.howard
-	private String pageUrlAddress;
+	private String pageUrlAddress="";
 	//是否可用'10A' '10X'
-  	private String available;
+  	private String available="";
 	
 }

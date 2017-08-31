@@ -33,27 +33,27 @@ public class ConsultingRoomEntity implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	// eg.儿科1诊断室
-	private String designation;
+	private String designation="";
 	// eg.1楼
-	private String floorNumber;
+	private String floorNumber="";
 	// eg.300
-	private String roomCode;
+	private String roomCode="";
 	// eg.儿科1诊断室（1楼）
-	private String roomName;
+	private String roomName="";
 	// eg.11201
-	private String deptCode;
+	private String deptCode="";
 
-	private String roomType;
+	private String roomType="";
 
-	private String simpleName;
+	private String simpleName="";
 	// eg.EKZDSDLD
-	private String inputCode;
+	private String inputCode="";
 	// eg.171.217.95.14 (诊室对应的屏幕信息)
-	private ScreenDeviceEntity screenDevice;
+	//private ScreenDeviceEntity screenDevice;
 	// eg.171.217.95.14(作为KEY)
-	private String internetProtocol;
+	private String internetProtocol="";
 	// eg.351521004992889(作为KEY)
-	private String screenDeviceIdentity;
+	private String screenDeviceIdentity="";
 	// 是否可用'10A' '10X'
 	private String available;
 

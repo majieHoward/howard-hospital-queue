@@ -32,20 +32,20 @@ public class DoctorAttributeEntity implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	// 医生工号
-	private String doctorJobNumber;
+	private String doctorJobNumber="";
 	// 医生简介
-	private String doctorIntroduction;
+	private String doctorIntroduction="";
 	// 医生姓名
-	private String doctorName;
+	private String doctorName="";
 	// 医生头像照片以base64位存储
 
-	private String groupName;
+	private String groupName="";
 	// eg.主治医师
-	private String positionalTitle;
+	private String positionalTitle="";
 
-	private String deptCode;
+	private String deptCode="";
 	// 是否可用'10A' '10X'
-	private String available;
+	private String available="";
 	
 	public DoctorAttributeEntity(JSONObject doctorObject) throws Exception{
 		structureDoctorAttributeEntityFromJSON(doctorObject);

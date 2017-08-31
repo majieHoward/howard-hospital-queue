@@ -28,10 +28,10 @@ public class ScreenDeviceSpecificationEntity implements Serializable{
 	 */  
 	private static final long serialVersionUID = 1L;
 	//eg.屏幕规格编号A1524
-	private String screenSerialEncoding;
+	private String screenSerialEncoding="";
 	//eg.屏幕规格描述
-	private String screenSerialDescribe;
+	private String screenSerialDescribe="";
 	//eg.P5632
 	//是否可用'10A' '10X'
-  	private String available;
+  	private String available="";
 }

@@ -22,10 +22,10 @@ public class BackInteractivenfoEntity implements Serializable{
 	 * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么)   
 	 */  
 	private static final long serialVersionUID = 1L;
-	private String isSuccess;
-    private String interactiveMessage;
-    private String returnErrorEncoding;
-    private String requestAddress;
+	private String isSuccess="";
+    private String interactiveMessage="";
+    private String returnErrorEncoding="";
+    private String requestAddress="";
     private Object interactiveData;
     
 	public String getIsSuccess() {

@@ -43,9 +43,9 @@ public class ScreenDeviceEntity implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	// eg.171.217.95.14
-	private String internetProtocol;
+	private String internetProtocol="";
 	// eg.351521004992889
-	private String screenDeviceIdentity;
+	private String screenDeviceIdentity="";
 	/**
 	 * Serial Number在一些没有电话功能的设备会提供，某些手机上也可能提供(所以就是经常会返回Unknown)
 	 */
@@ -53,29 +53,29 @@ public class ScreenDeviceEntity implements Serializable {
 	 * 序列号SerialNumber 从Android 2.3开始，通过android.os.Build.SERIAL方法可获取到一个序列号
 	 * 没有电话功能的设备也都需要上给出此唯一的序列号 在某些设备上此方法会返回垃圾数据
 	 */
-	private String serialNumber;
+	private String serialNumber="";
 	/**
 	 * ANDROID_ID 是设备首次启动时由系统随机生成的一串64位的十六进制数字.
 	 * 设备刷机wipe数据或恢复出厂设置时ANDROID_ID值会被重置. 现在网上已有修改设备ANDROID_ID值的APP应用.
 	 * 某些厂商定制的系统可能会导致不同的设备产生相同的ANDROID_ID. 某些厂商定制的系统可能导致设备返回ANDROID_ID值为空.
 	 * CDMA设备，ANDROID_ID和DeviceId返回的值相同.
 	 **/
-	private String androidId;
+	private String androidId="";
 	// eg.A1524
-	private String screenSpecification;
+	private String screenSpecification="";
 	// 是否可用'10A' '10X'
-	private String available;
+	private String available="";
 	
 	private Vector<String> consultingRoomCodeItems=new Vector<String>();
 	
 	//eg.屏幕规格编号A1524
-	private String screenSerialEncoding;
+	private String screenSerialEncoding="";
 	//eg.屏幕规格描述
-	private String screenSerialDescribe;
+	private String screenSerialDescribe="";
 	//eg.P5632
-	private String pageIdentity;
+	private String pageIdentity="";
 	//eg.http://171.217.95.100:9999/index.howard
-	private String pageUrlAddress;
+	private String pageUrlAddress="";
 	
 	public ScreenDeviceEntity(JSONObject object) throws Exception{
 		structureScreenDeviceEntityFromJSON(object);

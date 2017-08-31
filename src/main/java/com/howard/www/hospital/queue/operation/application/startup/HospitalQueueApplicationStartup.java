@@ -9,6 +9,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import com.howard.www.core.data.transfer.dto.impl.DataTransferObject;
 import com.howard.www.hospital.queue.operation.service.IOperationConsultingRoomSerivce;
 import com.howard.www.hospital.queue.operation.service.IOperationDoctorAttributeService;
+import com.howard.www.hospital.queue.operation.service.IOperationDoctorSchedulingService;
 import com.howard.www.hospital.queue.operation.service.IOperationScreenConsultingService;
 import com.howard.www.hospital.queue.operation.service.IOperationScreenDeviceService;
 
@@ -23,15 +24,16 @@ public class HospitalQueueApplicationStartup implements ApplicationListener<Cont
 		cApplicationContext = event.getApplicationContext();
 		try {
 			//初始化诊室列表
-			//obtainIOperationConsultingRoomSerivce().initializingServiceBaseData(new DataTransferObject());
+			obtainIOperationConsultingRoomSerivce().initializingServiceBaseData(new DataTransferObject());
 			//初始化医生列表(包括医生简介)
-			//obtainIOperationDoctorAttributeService().initializingServiceBaseData(new DataTransferObject());
+			obtainIOperationDoctorAttributeService().initializingServiceBaseData(new DataTransferObject());
 			//初始化设备列表(包含设备类型对应的页面关系)
-			//obtainIOperationScreenDeviceService().initializingServiceBaseData(new DataTransferObject());
+			obtainIOperationScreenDeviceService().initializingServiceBaseData(new DataTransferObject());
 			//构造诊室和设备的对照关系
-			//obtainIOperationScreenConsultingService().initializingServiceBaseData(new DataTransferObject());
+			obtainIOperationScreenConsultingService().initializingServiceBaseData(new DataTransferObject());
 			//其他的关系可以暂时不初始化
-			
+			//构造当天诊室和医生的对照关系
+			obtainIOperationDoctorSchedulingService().initializingServiceBaseData(new DataTransferObject());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -52,5 +54,9 @@ public class HospitalQueueApplicationStartup implements ApplicationListener<Cont
 	
 	private IOperationScreenConsultingService obtainIOperationScreenConsultingService()throws Exception{
 		return (IOperationScreenConsultingService) cApplicationContext.getBean("operationScreenConsultingService");
+	}
+	
+	private IOperationDoctorSchedulingService obtainIOperationDoctorSchedulingService()throws Exception{
+		return (IOperationDoctorSchedulingService) cApplicationContext.getBean("operationDoctorSchedulingService");
 	}
 }
