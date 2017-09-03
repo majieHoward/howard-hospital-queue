@@ -38,6 +38,18 @@ public class OperationScreenConsultingServiceImpl implements IOperationScreenCon
 	private void analyticStructure(List<JSONObject> screenConsultingItems)throws Exception{
 		if (screenConsultingItems != null && screenConsultingItems.size() > 0) {
 			for (JSONObject screenConsultingItem : screenConsultingItems) {
+				/**
+				 * {
+				 * ***"IP":"171.19.231.4",
+				 * ***"SDI":"351521004992890",
+				 * ***"SN":"EQBAN7UCU4S8VK6D",
+				 * ***"RC":"304","RN":"针灸康复科8诊断室（5楼）",
+				 * ***"SA":"10A",
+				 * ***"RA":"10A",
+				 * ***"SDS":"A1578",
+				 * ***"AI":null
+				 * }
+				 */
 				structureSreenRoomContrast(screenConsultingItem);
 			}
 		}
@@ -48,7 +60,14 @@ public class OperationScreenConsultingServiceImpl implements IOperationScreenCon
 			String internetProtocol=FrameworkStringUtils.asString(screenConsultingItem.get("IP"));
 			String roomCode=FrameworkStringUtils.asString(screenConsultingItem.get("RC"));
 			if(!"".equals(internetProtocol)&&!"".equals(roomCode)){
+				/**
+				 * 在304对应的ConsultingRoomEntity上添加(Vector push)InternetProtocol为
+				 * 171.19.231.4的ScreenDeviceEntity映射关系
+				 */
 				obtainIOperationConsultingRoomSerivce().structureSreenRoomContrast(roomCode, internetProtocol);
+				/**
+				 * 在171.19.231.4对应的SreenDevice上添加(Vector push)ROOMCODE为304的ConsultingRoom映射关系
+				 */
 				obtainIOperationScreenDeviceService().structureSreenRoomContrast(roomCode, internetProtocol);
 			}else{
 				

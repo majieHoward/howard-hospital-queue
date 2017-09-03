@@ -68,6 +68,16 @@ public class DoctorAttributeEntity implements Serializable {
 		 * "LEFT JOIN hhq_doctor_resume resume "
 		 * "on doctor.ID = resume.doctor_id"
 		 */
+		/**
+	     * {
+	     * ***"I":"5736",
+	     * ***"N":"武平",
+	     * ***"GN":"针灸康复科病区",
+	     * ***"T":"主任医师",
+	     * ***"DC":"1110201",
+	     * ***"DR":null
+	     * }
+	     */
 		this.setDoctorJobNumber(FrameworkStringUtils.asString(doctorObject.get("I")));
 		this.setDoctorName(FrameworkStringUtils.asString(doctorObject.get("N")));
 		this.setGroupName(FrameworkStringUtils.asString(doctorObject.get("GN")));

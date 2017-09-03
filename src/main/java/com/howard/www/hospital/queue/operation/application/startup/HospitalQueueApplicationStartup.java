@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-
 import com.howard.www.core.data.transfer.dto.impl.DataTransferObject;
 import com.howard.www.hospital.queue.operation.service.IOperationConsultingRoomSerivce;
 import com.howard.www.hospital.queue.operation.service.IOperationDoctorAttributeService;
@@ -13,7 +12,16 @@ import com.howard.www.hospital.queue.operation.service.IOperationDoctorSchedulin
 import com.howard.www.hospital.queue.operation.service.IOperationScreenConsultingService;
 import com.howard.www.hospital.queue.operation.service.IOperationScreenDeviceService;
 
-
+/**
+ * 
+ * @ClassName:  HospitalQueueApplicationStartup   
+ * @Description:TODO 当容器初始化完成之后,需要处理一些操作,比如一些数据的加载初始化缓存特定任务的注册等等
+ * 在spring中InitializingBean接口也提供了类似的功能,只不过它进行操作的时机是在所有bean都被实例化之后才进行调用   
+ * @author: mayijie
+ * @date:   2017年9月4日 上午12:53:01   
+ *     
+ * @Copyright: 2017 https://github.com/majieHoward Inc. All rights reserved.
+ */
 public class HospitalQueueApplicationStartup implements ApplicationListener<ContextRefreshedEvent>{
 	protected final Logger log = LoggerFactory.getLogger(HospitalQueueApplicationStartup.class);
 	private ApplicationContext cApplicationContext;
@@ -23,17 +31,33 @@ public class HospitalQueueApplicationStartup implements ApplicationListener<Cont
 		log.info("Interface to be implemented by application event listeners. Based on the standard java.util.EventListener interface for the Observer design pattern.");
 		cApplicationContext = event.getApplicationContext();
 		try {
-			//初始化诊室列表
-			//obtainIOperationConsultingRoomSerivce().initializingServiceBaseData(new DataTransferObject());
-			//初始化医生列表(包括医生简介)
-			//obtainIOperationDoctorAttributeService().initializingServiceBaseData(new DataTransferObject());
-			//初始化设备列表(包含设备类型对应的页面关系)
-			//obtainIOperationScreenDeviceService().initializingServiceBaseData(new DataTransferObject());
-			//构造诊室和设备的对照关系
-			//obtainIOperationScreenConsultingService().initializingServiceBaseData(new DataTransferObject());
-			//其他的关系可以暂时不初始化
-			//构造当天诊室和医生的对照关系
-			//obtainIOperationDoctorSchedulingService().initializingServiceBaseData(new DataTransferObject());
+			/**
+			 * 初始化诊室列表
+			 */
+			obtainIOperationConsultingRoomSerivce().initializingServiceBaseData(new DataTransferObject());
+			/**
+			 * 初始化医生列表(包括医生简介)
+			 */
+			obtainIOperationDoctorAttributeService().initializingServiceBaseData(new DataTransferObject());
+			/**
+			 * 初始化设备列表(包含设备类型对应的页面关系)
+			 */
+			obtainIOperationScreenDeviceService().initializingServiceBaseData(new DataTransferObject());
+			/**
+			 * 构造诊室和设备的对照关系
+			 * 在ROOM_CODE对应的ConsultingRoomEntity上添加(Vector push)InternetProtocol为IP的ScreenDeviceEntity映射关系
+			 * 在IP对应的SreenDevice上添加(Vector push)ROOMCODE对应的ConsultingRoom映射关系
+			 */
+			obtainIOperationScreenConsultingService().initializingServiceBaseData(new DataTransferObject());
+			/**
+			 * 构造当天诊室和医生的对照关系
+			 * 将visitTimeDescCode为:visitTimeDescCode的ConcurrentHashMap<String, CurrentDoctorSchedulingEntity>对象放入到schedulingMap中
+			 * 将roomCode为:ROOM_CODE的ConcurrentHashMap<String, ConcurrentHashMap<String, CurrentDoctorSchedulingEntity>>对象放入到doctorSchedulingMap中
+			 */
+			obtainIOperationDoctorSchedulingService().initializingServiceBaseData(new DataTransferObject());
+		    /**
+		     * 其他的关系可以暂时不初始化
+		     */
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

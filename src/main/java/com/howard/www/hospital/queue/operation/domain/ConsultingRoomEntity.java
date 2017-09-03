@@ -88,6 +88,16 @@ public class ConsultingRoomEntity implements Serializable {
 		 * ***room.INPUT_CODE AS IC
 		 * ***from room_dict room 
 		 */
+		/**
+		 * {
+		 * ***"RC":"275",
+		 * ***"RN":"针灸康复科1诊断室（5楼）",
+		 * ***"DC":"11101",
+		 * ***"RT":null,
+		 * ***"SN":null,
+		 * ***"IC":"ZJKFKZDS"
+		 * }
+		 */
 		this.setRoomCode(FrameworkStringUtils.asString(consultingRoomObject.get("RC")));
 		this.setRoomName(FrameworkStringUtils.asString(consultingRoomObject.get("RN")));
 		this.setDeptCode(FrameworkStringUtils.asString(consultingRoomObject.get("DC")));

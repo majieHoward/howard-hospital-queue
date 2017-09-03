@@ -95,6 +95,24 @@ public class ScreenDeviceEntity implements Serializable {
 			throw new RuntimeException("structureScreenDeviceEntityFromJSON方法传入的JSONObject对象为空");
 		}
 		/**
+		 * {
+		 * ***"IP":"171.19.231.2",
+		 * ***"SDI":"351521004992889",
+		 * ***"SN":"BAHBBDB652502811",
+		 * ***"DA":"10A",
+		 * ***"SDS":"A1524",
+		 * ***"AI":null,
+		 * ***"SSE":"A1524",
+		 * ***"PI":"P1932",
+		 * ***"SSD":"风湿免疫科门诊屏",
+		 * ***"SA":"10A",
+		 * ***"PN":"interrogationSpot.P1932",
+		 * ***"PS":"编号为P1932诊区外大屏展示页面模板",
+		 * ***"PUA":"/hospital/queue/operation/interrogation/spot.P1932.exhibition",
+		 * ***"PA":"10A"
+		 * }
+		 */
+		/**
 		 * SELECT
 		 * ***device.internet_protocol AS IP,
 		 * ***device.screen_device_identity AS SDI,

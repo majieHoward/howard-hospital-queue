@@ -47,6 +47,14 @@ public class CurrentDoctorSchedulingEntity implements Serializable{
 			throw new RuntimeException("structureCurrentDoctorSchedulingEntityFromJSON方法传入的JSONObject对象为空");
 		}
     	/**
+		 * {
+		 * ***"D":"4020",
+		 * ***"RC":"198",
+		 * ***"VTD":"下午",
+		 * ***"VD":"20170830000000"
+		 * }
+		 */
+    	/**
     	 * SELECT
 			* ***t.doctor AS D,
 			* ***t.room_code AS RC,

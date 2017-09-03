@@ -33,6 +33,16 @@ public class OperationDoctorAttributeServiceImpl implements IOperationDoctorAttr
 		if (doctorAttributeItems != null && doctorAttributeItems.size() > 0) {
 			DoctorAttributeEntity doctorAttributeEntity=null;
 			for(JSONObject doctorAttributeItem:doctorAttributeItems){
+			    /**
+			     * {
+			     * ***"I":"5736",
+			     * ***"N":"武平",
+			     * ***"GN":"针灸康复科病区",
+			     * ***"T":"主任医师",
+			     * ***"DC":"1110201",
+			     * ***"DR":null
+			     * }
+			     */
 				doctorAttributeEntity=new DoctorAttributeEntity(doctorAttributeItem);
 				/**
 				 * doctorAttributeMap的Key为doctorJobNumber,value为DoctorAttributeEntity对象

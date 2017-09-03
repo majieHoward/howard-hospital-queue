@@ -13,16 +13,25 @@ import com.howard.www.hospital.queue.operation.dao.IOperationConsultingRoomDao;
 import com.howard.www.hospital.queue.operation.domain.ConsultingRoomEntity;
 import com.howard.www.hospital.queue.operation.service.IOperationConsultingRoomSerivce;
 import com.howard.www.hospital.queue.operation.service.IOperationScreenDeviceService;
-
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-
+/**
+ * 
+ * @ClassName:  OperationConsultingRoomSerivceImpl   
+ * @Description:TODO(这里用一句话描述这个类的作用)   
+ * @author: mayijie
+ * @date:   2017年9月4日 上午12:18:58   
+ *     
+ * @Copyright: 2017 https://github.com/majieHoward Inc. All rights reserved.
+ */
 public class OperationConsultingRoomSerivceImpl implements IOperationConsultingRoomSerivce {
 	private static final Logger logger = LoggerFactory.getLogger(OperationConsultingRoomSerivceImpl.class);
 
 	@Autowired
 	private ApplicationContext cApplicationContext;
-
+	/**
+	 * consultingRoomMap的Key为room_code,value为ConsultingRoomEntity对象
+	 */
 	private ConcurrentHashMap<String, ConsultingRoomEntity> consultingRoomMap = new ConcurrentHashMap<String, ConsultingRoomEntity>();
 
 	@Override
@@ -64,6 +73,16 @@ public class OperationConsultingRoomSerivceImpl implements IOperationConsultingR
 		if (consultingRoomItems != null && consultingRoomItems.size() > 0) {
 			ConsultingRoomEntity consultingRoomEntity=null;
 			for(JSONObject consultingRoomItem:consultingRoomItems){
+				/**
+				 * {
+				 * ***"RC":"275",
+				 * ***"RN":"针灸康复科1诊断室（5楼）",
+				 * ***"DC":"11101",
+				 * ***"RT":null,
+				 * ***"SN":null,
+				 * ***"IC":"ZJKFKZDS"
+				 * }
+				 */
 				consultingRoomEntity=new ConsultingRoomEntity(consultingRoomItem);
 				/**
 				 * consultingRoomMap的Key为room_code,value为ConsultingRoomEntity对象
@@ -103,20 +122,46 @@ public class OperationConsultingRoomSerivceImpl implements IOperationConsultingR
 		return false;
 	}
 
+	/**
+	 * 
+	 * <p>Title: structureSreenRoomContrast</p>   
+	 * <p>Description: 在ROOM_CODE对应的ConsultingRoomEntity上添加(Vector push)InternetProtocol为IP的ScreenDeviceEntity映射关系</p>   
+	 * @param roomCode
+	 * @param internetProtocol
+	 * @throws Exception   
+	 * @see com.howard.www.hospital.queue.operation.service.IOperationConsultingRoomSerivce#structureSreenRoomContrast(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void structureSreenRoomContrast(String roomCode, String internetProtocol) throws Exception {
 		// TODO Auto-generated method stub
 		/**
 		 * 添加诊室和屏设备的关系
 		 */
+		/**
+		 * {
+		 * ***"IP":"171.19.231.4",
+		 * ***"SDI":"351521004992890",
+		 * ***"SN":"EQBAN7UCU4S8VK6D",
+		 * ***"RC":"304","RN":"针灸康复科8诊断室（5楼）",
+		 * ***"SA":"10A",
+		 * ***"RA":"10A",
+		 * ***"SDS":"A1578",
+		 * ***"AI":null
+		 * }
+		 */
 		if(!"".equals(FrameworkStringUtils.asString(roomCode))
 				&&
 				!"".equals(FrameworkStringUtils.asString(internetProtocol))){
 			ConsultingRoomEntity consultingRoomEntity=consultingRoomMap.get(roomCode);
 			if(consultingRoomEntity!=null){
+				/**
+				 * 在304对应的ConsultingRoomEntity上添加(Vector push)InternetProtocol为
+				 * 171.19.231.4的ScreenDeviceEntity映射关系
+				 */
 				if(obtainIOperationScreenDeviceService().existScreenDeviceByIP(internetProtocol)==true){
 					consultingRoomEntity.pustScreenDeviceInternetProtocolToRoom(internetProtocol);
-					logger.info("在"+roomCode+"对应的ConsultingRoomEntity上添加了InternetProtocol为"+internetProtocol+"ScreenDeviceEntity映射关系");
+					logger.info("在"+roomCode+"对应的ConsultingRoomEntity上添加(Vector push)InternetProtocol为"
+					+internetProtocol+"的ScreenDeviceEntity映射关系");
 				}else{
 					
 				}

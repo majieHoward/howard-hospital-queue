@@ -28,7 +28,9 @@ import net.sf.json.JSONObject;
 public class OperationDoctorSchedulingServiceImpl implements IOperationDoctorSchedulingService {
 
 	private static final Logger logger = LoggerFactory.getLogger(OperationDoctorSchedulingServiceImpl.class);
-
+	/**
+	 * doctorSchedulingMap key为ROOM_CODE
+	 */
 	private ConcurrentHashMap<String, ConcurrentHashMap<String, CurrentDoctorSchedulingEntity>> doctorSchedulingMap = new ConcurrentHashMap<String, ConcurrentHashMap<String, CurrentDoctorSchedulingEntity>>();
 	@Autowired
 	private ApplicationContext cApplicationContext;
@@ -60,6 +62,14 @@ public class OperationDoctorSchedulingServiceImpl implements IOperationDoctorSch
 		if (doctorSchedulingItems != null && doctorSchedulingItems.size() > 0) {
 			CurrentDoctorSchedulingEntity currentDoctorSchedulingEntity = null;
 			for (JSONObject doctorSchedulingItem : doctorSchedulingItems) {
+				/**
+				 * {
+				 * ***"D":"4020",
+				 * ***"RC":"198",
+				 * ***"VTD":"下午",
+				 * ***"VD":"20170830000000"
+				 * }
+				 */
 				currentDoctorSchedulingEntity = new CurrentDoctorSchedulingEntity(doctorSchedulingItem);
 				/**
 				 * consultingRoomMap的Key为room_code,value为ConsultingRoomEntity对象
@@ -74,15 +84,24 @@ public class OperationDoctorSchedulingServiceImpl implements IOperationDoctorSch
 		if (currentDoctorSchedulingEntity != null) {
 			String roomCode = FrameworkStringUtils.asString(currentDoctorSchedulingEntity.getRoomCode());
 			String visitTimeDescCode = FrameworkStringUtils.asString(currentDoctorSchedulingEntity.getVisitTimeDescCode());
+			/**
+			 * schedulingMap key为visitTimeDescCode
+			 */
 			ConcurrentHashMap<String, CurrentDoctorSchedulingEntity> schedulingMap;
 			if (!"".equals(roomCode)) {
 				schedulingMap = obtainTimeIntervalSchedulingByRoomCode(roomCode);
 				if (schedulingMap == null) {
 					schedulingMap = new ConcurrentHashMap<String, CurrentDoctorSchedulingEntity>();
+					/**
+					 * 将roomCode为:204的ConcurrentHashMap<String, ConcurrentHashMap<String, CurrentDoctorSchedulingEntity>>对象放入到doctorSchedulingMap中
+					 */
 					doctorSchedulingMap.put(roomCode, schedulingMap);
 					logger.info("将roomCode为:" + roomCode
 							+ "的ConcurrentHashMap<String, ConcurrentHashMap<String, CurrentDoctorSchedulingEntity>>对象放入到doctorSchedulingMap中");
 				}
+				/**
+				 * 将visitTimeDescCode为:1的ConcurrentHashMap<String, CurrentDoctorSchedulingEntity>对象放入到schedulingMap中
+				 */
 				schedulingMap.put(visitTimeDescCode, currentDoctorSchedulingEntity);
 				logger.info("将visitTimeDescCode为:" + visitTimeDescCode
 						+ "的ConcurrentHashMap<String, CurrentDoctorSchedulingEntity>对象放入到schedulingMap中");
