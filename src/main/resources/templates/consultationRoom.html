@@ -2,9 +2,6 @@
 <head>
     <meta charset="UTF-8"/>
     <title>广播式WebSocket</title>
-    <script src="/js/sockjs.min.js"></script>
-    <script src="/js/stomp.js"></script>
-    <script src="/js/jquery-3.1.1.js"></script>
 </head>
 <body onload="disconnect()">
 <!-- 
@@ -28,60 +25,9 @@ noscript 标签在不支持JavaScript 的浏览器中显示替代的内容。
         <p id="response"></p>
     </div>
 </div>
-<script type="text/javascript">
-    var stompClient = null;
-    function setConnected(connected) {
-        document.getElementById("connect").disabled = connected;
-        document.getElementById("disconnect").disabled = !connected;
-        document.getElementById("conversationDiv").style.visibility = connected ? 'visible' : 'hidden';
-        $("#response").html();
-    }
-    function connect() {
-    	//var sockjs = new SockJS(url, _reserved, options);
-    	//sockjs.min.js:27 Uncaught Error: Only basic urls are supported in SockJS
-        //建立一个基于Web Socket的连接到STOMP代理
-    	var socket = new SockJS('/hospitalQueue');
-        stompClient = Stomp.over(socket);
-        //client.connect(login, passcode, connectCallback);
-        //client.connect(login, passcode, connectCallback, errorCallback);
-        //client.connect(login, passcode, connectCallback, errorCallback, host);
-        //传递参数
-        var connectionParameter={
-        	"screenDevice": "SD987JH"
-        }
-        
-        stompClient.connect(connectionParameter, function (frame) {
-            setConnected(true);
-            console.log('Connected:' + frame);
-            stompClient.subscribe('/callTheName/public', function (response) {
-            	// and acknowledge it
-                response.ack();
-            	console.log(response);
-            })
-        });
-        //当无法连接到服务器(测试时模拟了服务器DOWN机)
-        socket.onclose = function() {
-    	    console.log('execute socket.onclose connection closed');
-    	};
-    }
-    
-    function disconnect() {
-        if (stompClient != null) {
-            stompClient.disconnect();
-        }
-        setConnected(false);
-        console.log('Disconnected');
-    }
-    function sendName() {
-        var name = $('#name').val();
-        console.log('name:' + name);
-        var device = $('#device').val();
-        console.log('device:' + device);
-        stompClient.send("/app/messageForwarding.websocket", {}, JSON.stringify({'name': name,'device':device}));
-    }
-    function showResponse(message) {
-        $("#response").html(message);
-    }
-</script>
 </body>
 </html>
+<script src="/js/sockjs.min.js"></script>
+<script src="/js/stomp.js"></script>
+<script src="/js/jquery-3.1.1.js"></script>
+<script src="/js/consultationRoom.js"></script>
