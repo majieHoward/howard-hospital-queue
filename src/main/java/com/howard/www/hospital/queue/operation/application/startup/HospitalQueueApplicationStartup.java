@@ -24,16 +24,16 @@ public class HospitalQueueApplicationStartup implements ApplicationListener<Cont
 		cApplicationContext = event.getApplicationContext();
 		try {
 			//初始化诊室列表
-			obtainIOperationConsultingRoomSerivce().initializingServiceBaseData(new DataTransferObject());
+			//obtainIOperationConsultingRoomSerivce().initializingServiceBaseData(new DataTransferObject());
 			//初始化医生列表(包括医生简介)
-			obtainIOperationDoctorAttributeService().initializingServiceBaseData(new DataTransferObject());
+			//obtainIOperationDoctorAttributeService().initializingServiceBaseData(new DataTransferObject());
 			//初始化设备列表(包含设备类型对应的页面关系)
-			obtainIOperationScreenDeviceService().initializingServiceBaseData(new DataTransferObject());
+			//obtainIOperationScreenDeviceService().initializingServiceBaseData(new DataTransferObject());
 			//构造诊室和设备的对照关系
-			obtainIOperationScreenConsultingService().initializingServiceBaseData(new DataTransferObject());
+			//obtainIOperationScreenConsultingService().initializingServiceBaseData(new DataTransferObject());
 			//其他的关系可以暂时不初始化
 			//构造当天诊室和医生的对照关系
-			obtainIOperationDoctorSchedulingService().initializingServiceBaseData(new DataTransferObject());
+			//obtainIOperationDoctorSchedulingService().initializingServiceBaseData(new DataTransferObject());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

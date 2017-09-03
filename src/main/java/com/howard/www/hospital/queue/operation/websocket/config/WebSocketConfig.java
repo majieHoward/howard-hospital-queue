@@ -64,7 +64,11 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer{
 		 * "http://","https://"或"*"开头(意味着允许所有来源). 默认情况下,只允许同一个原始请求（空列表） 使用通配符
 		 * *,表示当前服务端通话任何域名发起请求
 		 */
-
+        /**
+         * STOMP即Simple (or Streaming) Text Orientated Messaging Protocol,简单(流)文本定向消息协议,
+         * 它提供了一个可互操作的连接格式,允许STOMP客户端与任意STOMP消息代理（Broker）进行交互.
+         * STOMP协议的前身是TTMP协议(一个简单的基于文本的协议),专为消息中间件设计.
+         */
 		registry.addEndpoint("/hospitalQueue").setAllowedOrigins("*").withSockJS().setInterceptors(httpSessionIdHandshakeInterceptor());
 	}
 	
