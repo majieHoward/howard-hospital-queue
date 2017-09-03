@@ -9,9 +9,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.howard.www.core.data.transfer.dto.IDataTransferObject;
 
+/**
+ * @ClassName:  PharmacyProcessController   
+ * @Description:TODO(向Hospital Information System 药房应用 提供的接口)  
+ * @author: mayijie
+ * @date:   2017年9月3日 下午12:25:09   
+ *     
+ * @Copyright: 2017 https://github.com/majieHoward Inc. All rights reserved.
+ */
 @RestController
-public class PharmacyProcessController {
-	protected final Logger log = LoggerFactory.getLogger(PharmacyProcessController.class);
+public class PharmacyProvidedHisController {
+	protected final Logger log = LoggerFactory.getLogger(PharmacyProvidedHisController.class);
 	@Autowired
 	private ApplicationContext cApplicationContext;
 
@@ -25,7 +33,7 @@ public class PharmacyProcessController {
 	 * @return: String      
 	 * @throws
 	 */
-	@RequestMapping("/pharmacy/hospital/queue/outpatient.tcm.pharmacy.station.process")
+	@RequestMapping("/pharmacy/hospital/queue/outpatient/tcm.pharmacy/station.process.interfaces")
 	public String outpatientTcmPharmacyStation(IDataTransferObject requiredParameter) throws Exception {
 		return null;
 	}
@@ -40,7 +48,7 @@ public class PharmacyProcessController {
 	 * @return: String      
 	 * @throws
 	 */
-	@RequestMapping("/pharmacy/hospital/queue/outpatient.dispensary.station.process")
+	@RequestMapping("/pharmacy/hospital/queue/outpatient/dispensary/station.process.interfaces")
 	public String outpatientDispensaryStation(IDataTransferObject requiredParameter) throws Exception {
 		return null;
 	}
@@ -55,7 +63,7 @@ public class PharmacyProcessController {
 	 * @return: String      
 	 * @throws
 	 */
-	@RequestMapping("/pharmacy/hospital/queue/outpatient.pharmacy.free.fried.station.process")
+	@RequestMapping("/pharmacy/hospital/queue/outpatient/pharmacy.free.fried/station.process.interfaces")
 	public String outpatientPharmacyFreeFriedStation(IDataTransferObject requiredParameter) throws Exception {
 		return null;
 	}
