@@ -5,12 +5,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.howard.www.core.base.util.FrameworkStringUtils;
 import com.howard.www.core.data.transfer.dto.IDataTransferObject;
-import com.howard.www.hospital.queue.operation.service.IOperationTreatmentProcessService;
 import com.howard.www.hospital.queue.operation.service.IOperationDoctorSchedulingService;
+import com.howard.www.hospital.queue.operation.service.IOperationTreatmentProcessService;
 
 @RestController
 public class TreatmentProcessController {
@@ -42,7 +43,7 @@ public class TreatmentProcessController {
 	 * @return: String      
 	 * @throws
 	 */
-	@RequestMapping("/treatment/hospital/queue/obtain.diagnosis.area.items.information.process")
+	@RequestMapping(value="/treatment/hospital/queue/obtain.diagnosis.area.items.information.process")
 	public String obtainDiagnosisAreaItemsInformation(IDataTransferObject requiredParameter) throws Exception {
 		return FrameworkStringUtils.asString(
 				obtainIOperationBusinessProcessService().obtainDiagnosisAreaItemsInformation(requiredParameter));

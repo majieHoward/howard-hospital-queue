@@ -12,10 +12,10 @@ import com.howard.www.core.base.util.FrameworkStringUtils;
 import com.howard.www.core.data.transfer.dto.IDataTransferObject;
 import com.howard.www.hospital.queue.operation.domain.ConsultingRoomEntity;
 import com.howard.www.hospital.queue.operation.domain.ScreenDeviceEntity;
-import com.howard.www.hospital.queue.operation.service.IOperationTreatmentProcessService;
 import com.howard.www.hospital.queue.operation.service.IOperationConsultingRoomSerivce;
 import com.howard.www.hospital.queue.operation.service.IOperationDoctorSchedulingService;
 import com.howard.www.hospital.queue.operation.service.IOperationScreenDeviceService;
+import com.howard.www.hospital.queue.operation.service.IOperationTreatmentProcessService;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -96,5 +96,11 @@ public class OperationTreatmentProcessServiceImpl implements IOperationTreatment
 	
 	private IOperationConsultingRoomSerivce obtainIOperationConsultingRoomSerivce()throws Exception{
 		return (IOperationConsultingRoomSerivce) cApplicationContext.getBean("operationConsultingRoomSerivce");
+	}
+
+	@Override
+	public JSONArray obtainDiagnosisAreaItemsInformationByInternetProtocol(IDataTransferObject queryParameters)
+			throws Exception {
+		return obtainDiagnosisAreaItemsInformation(queryParameters);
 	}
 }
