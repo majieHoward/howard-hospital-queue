@@ -155,6 +155,9 @@ public class HospitalQueueSystemWebMvcConfig extends WebMvcConfigurationSupport 
 				backInteractivenfoEntity.setInteractiveData(JSONArray.fromObject(str));
 				log.info(FrameworkStringUtils.asString(JSONObject.fromObject(backInteractivenfoEntity)));
 				/**
+				 * add by mayijie at 2017.09.06 需要重新计算
+				 * Response Header 的 Content-Length 其实就是计算了buffer的数据长度
+				 * 
 				 * 重新设置 Content-Length import
 				 */
 				outputMessage.getHeaders().setContentLength(FrameworkStringUtils.asString(JSONObject.fromObject(backInteractivenfoEntity)).getBytes().length);
