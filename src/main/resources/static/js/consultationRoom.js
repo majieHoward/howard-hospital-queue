@@ -70,7 +70,6 @@ function connect() {
     };
     
     stompClient.connect(connectionParameter, function (frame) {
-        setConnected(true);
         console.log('Connected:' + frame);
         console.log("execute function socket.onopen 心跳检测启动");
 	    heartCheck.start();

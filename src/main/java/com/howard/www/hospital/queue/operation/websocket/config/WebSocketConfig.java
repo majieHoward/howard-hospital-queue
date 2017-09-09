@@ -69,6 +69,9 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer{
          * 它提供了一个可互操作的连接格式,允许STOMP客户端与任意STOMP消息代理（Broker）进行交互.
          * STOMP协议的前身是TTMP协议(一个简单的基于文本的协议),专为消息中间件设计.
          */
+		/**
+		 * allowed-origins="*" 允许跨域
+		 */
 		registry.addEndpoint("/hospitalQueue").setAllowedOrigins("*").withSockJS().setInterceptors(httpSessionIdHandshakeInterceptor());
 	}
 	

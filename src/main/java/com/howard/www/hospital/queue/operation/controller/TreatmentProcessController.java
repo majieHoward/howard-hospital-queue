@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.howard.www.core.base.util.FrameworkStringUtils;
@@ -45,6 +44,71 @@ public class TreatmentProcessController {
 	 */
 	@RequestMapping(value="/treatment/hospital/queue/obtain.diagnosis.area.items.information.process")
 	public String obtainDiagnosisAreaItemsInformation(IDataTransferObject requiredParameter) throws Exception {
+		/**
+		 * {
+		 * ***"requestAddress": "",
+		 * ***"interactiveData": [
+		 * ******{
+		 * *********"inputCode": "FRMZZD",
+		 * *********"internetProtocolItems": [
+		 * ************"171.19.231.2"
+		 * *********],
+		 * *********"screenDeviceIdentityItems": [],
+		 * *********"available": "",
+		 * *********"roomCode": "302",
+		 * *********"roomName": "发热门诊诊断室（1楼）",
+		 * *********"internetProtocol": "",
+		 * *********"simpleName": null,
+		 * *********"floorNumber": "",
+		 * *********"scheduling": null,
+		 * *********"screenDeviceIdentity": "",
+		 * *********"designation": "",
+		 * *********"deptCode": "12901",
+		 * *********"roomType": null
+		 * ******},
+		 * ******{
+		 * *********"inputCode": "ZJKFK",
+		 * *********"internetProtocolItems": [
+		 * ************"171.19.231.4",
+		 * ************"171.19.231.2"
+		 * *********],
+		 * *********"screenDeviceIdentityItems": [],
+		 * *********"available": "",
+		 * *********"roomCode": "304",
+		 * *********"roomName": "针灸康复科8诊断室（5楼）",
+		 * *********"internetProtocol": "",
+		 * *********"simpleName": null,
+		 * *********"floorNumber": "",
+		 * *********"scheduling": null,
+		 * *********"screenDeviceIdentity": "",
+		 * *********"designation": "",
+		 * *********"deptCode": "11101",
+		 * *********"roomType": null
+		 * ******},
+		 * ******{
+		 * *********"inputCode": "CDMZZS",
+		 * *********"internetProtocolItems": [
+		 * ************"171.19.231.2"
+		 * *********],
+		 * *********"screenDeviceIdentityItems": [],
+		 * *********"available": "",
+		 * *********"roomCode": "300",
+		 * *********"roomName": "肠道门诊诊断室（1楼）",
+		 * *********"internetProtocol": "",
+		 * *********"simpleName": null,
+		 * *********"floorNumber": "",
+		 * *********"scheduling": null,
+		 * *********"screenDeviceIdentity": "",
+		 * *********"designation": "",
+		 * *********"deptCode": "11301",
+		 * *********"roomType": null
+		 * ******}
+		 * ***],
+		 * ***"returnErrorEncoding": "",
+		 * ***"interactiveMessage": "",
+		 * ***"isSuccess": "success"
+		 * }
+		 */
 		return FrameworkStringUtils.asString(
 				obtainIOperationBusinessProcessService().obtainDiagnosisAreaItemsInformation(requiredParameter));
 	}
