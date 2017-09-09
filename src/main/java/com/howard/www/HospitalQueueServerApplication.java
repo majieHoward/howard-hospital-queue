@@ -20,6 +20,7 @@ import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomi
 public class HospitalQueueServerApplication  implements EmbeddedServletContainerCustomizer{
 
 	public static void main(String[] args) {
+		System.setProperty("spring.devtools.restart.enabled","false");
 		SpringApplication.run(HospitalQueueServerApplication.class, args);
 	}
     /**

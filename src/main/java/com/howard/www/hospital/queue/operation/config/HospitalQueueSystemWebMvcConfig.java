@@ -98,6 +98,9 @@ public class HospitalQueueSystemWebMvcConfig extends WebMvcConfigurationSupport 
 				.setViewName("/interrogationSpotP1932");
 		registry.addViewController("/hospital/queue/operation/consultation/room.P1933.exhibition")
 				.setViewName("/consultationRoomP1933");
+		registry.addViewController("/hospital/queue/operation/interrogation/spot.P1934.exhibition")
+		.setViewName("/interrogationSpotP1934");
+		
 		super.addViewControllers(registry);
 	}
 
