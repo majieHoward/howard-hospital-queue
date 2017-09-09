@@ -1,0 +1,199 @@
+html, body{
+  	font-family: "Microsoft YaHei" ! important;
+    /** 根元素<html>中定义了一个基本字体大小为62.5%(也就是10px。设置这个值主要方便计算，如果没有设置，将是以“16px”为基准)
+	**/
+    font-size: 62.5%;/*10 ÷ 16 × 100% = 62.5%*/
+  	background:#f2f4f8;
+  	overflow-x: hidden;
+	line-height: 1;
+}
+/**add by mayijie at 2017.09.04**/
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+#wrapper {
+    width: 100%;
+}
+
+#page-wrapper {
+    background-color: #f2f4f8;
+}
+
+.panel {
+    margin-bottom: 0px;
+	border-radius: 0px;
+}
+
+.panel-body {
+    padding-top: 0px;
+    padding-right: 1rem;
+    padding-bottom: 0px;
+    padding-left: 1rem;
+}
+
+.table {
+    margin-bottom: 0px;
+}
+
+.navbar-header {
+    float: left;
+}
+
+/**add by mayijie at 2017.09.09**/
+.navbar-brand {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+	/*font-size: 3rem;*/
+	height:auto;
+	float: left;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    line-height: 1;
+}
+nav.top1.navbar.navbar-default.navbar-static-top {
+  background-color:#0b8f9b;
+}
+.navbar-default .navbar-brand {
+  color: #fff !important;
+  /*font-size: 30px;*/
+  font-weight: 500;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+  color: #000000;
+} 
+
+.table td, .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+  border-top: none !important;
+}
+
+.table > thead > tr > th {
+  border-bottom: 1px solid #ddd !important;
+}
+/**add by mayijie at 2017.09.08**/
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 0px;
+	padding-right: 0px;
+    line-height: 1;
+}
+
+/**add by mayijie at 2017.09.09**/
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #f2f4f8;
+}
+
+.panel .panel-heading {
+  padding: 20px;
+  overflow: hidden;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border: 0!important;
+  height: 55px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.graphs{
+  background: #f2f4f8;
+  font-family: "Microsoft YaHei" ! important;
+}
+
+.bs-example4 {
+	background: #fff;
+	padding-top: 0em;
+	padding-right: 1em;
+	padding-bottom: 0em;
+	padding-left: 1em;
+}
+
+td.head {
+	color: #000 !important;
+	font-size: 1.2em !important;
+}
+
+.panel-body1{
+	background: #fff;
+	padding-top: 0em;
+    padding-right: 1em;
+    padding-bottom: 0em;
+    padding-left: 1em;
+}
+
+.panel-warning {
+
+}
+
+.panel.panel-warning {
+	border-color: #fdd835;
+}
+
+.panel.panel-warning .panel-heading {
+    color: #fffde7;
+    background-color: #ffc107;
+    border-color: #fdd835;
+}
+
+.panel .panel-heading h2 {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+#style-2::-webkit-scrollbar-track{
+	background-color:#f0f0f0;
+}
+
+#style-2::-webkit-scrollbar{
+	width:5px;
+	background-color: #f5f5f5;
+}
+
+#style-2::-webkit-scrollbar-thumb{
+	background-color:rgb(6, 217, 149);
+}
+
+select[multiple] {
+	/**multiple 属性规定可同时选择多个选项**/
+	padding: 7px 9px !important;
+}
+
+@media (max-width:1366px){
+
+}
+@media (max-width:1280px){
+
+}
+@media (max-width:1024px){	
+
+}
+@media (max-width:768px){	
+	
+}
+@media (max-width:736px){
+
+}
+@media (max-width:480px){
+
+}
+@media (max-width:320px){
+
+}
+
+
+
