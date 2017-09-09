@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.howard.www.core.base.util.FrameworkStringUtils;
 import com.howard.www.core.data.transfer.dto.IDataTransferObject;
 import com.howard.www.hospital.queue.operation.service.IOperationDoctorSchedulingService;
+import com.howard.www.hospital.queue.operation.service.IOperationScreenDeviceService;
 import com.howard.www.hospital.queue.operation.service.IOperationTreatmentProcessService;
 
 @RestController
@@ -32,6 +33,31 @@ public class TreatmentProcessController {
 		return null;
 	}
 	
+	@RequestMapping(value="/treatment/hospital/queue/obtain.home.screen.display.page.process")
+	public String obtainHomeScreenDisplayPage(IDataTransferObject requiredParameter)throws Exception{
+		/**
+		 * {
+		 * "requestAddress":"",
+		 * "interactiveData":{
+		 * "pageIdentity":"P1932",
+		 * "serialNumber":"BAHBBDB652502811",
+		 * "screenSerialEncoding":"A1524",
+		 * "available":"",
+		 * "screenSerialDescribe":"风湿免疫科门诊屏",
+		 * "consultingRoomCodeItems":["302","304","300"],
+		 * "internetProtocol":"171.19.231.2",
+		 * "pageUrlAddress":"/hospital/queue/operation/interrogation/spot.P1932.exhibition",
+		 * "scheduling":null,
+		 * "screenDeviceIdentity":"351521004992889",
+		 * "screenSpecification":"A1524",
+		 * "androidId":null
+		 * },
+		 * "returnErrorEncoding":"",
+		 * "interactiveMessage":"",
+		 * "isSuccess":"success"}
+		 */
+		return FrameworkStringUtils.asString(obtainIOperationScreenDeviceService().obtainHomeScreenDisplayPage(requiredParameter));
+	}
 	/**
 	 * 
 	 * @Title: obtainDiagnosisAreaItemsInformation   
@@ -135,5 +161,9 @@ public class TreatmentProcessController {
 
 	private IOperationTreatmentProcessService obtainIOperationBusinessProcessService() throws Exception {
 		return (IOperationTreatmentProcessService) cApplicationContext.getBean("operationTreatmentProcessService");
+	}
+	
+	private IOperationScreenDeviceService obtainIOperationScreenDeviceService()throws Exception{
+		return (IOperationScreenDeviceService) cApplicationContext.getBean("operationScreenDeviceService");
 	}
 }

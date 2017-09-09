@@ -118,6 +118,15 @@ public class OperationScreenDeviceServiceImpl implements IOperationScreenDeviceS
 	}
 	
 	@Override
+	public JSONObject obtainHomeScreenDisplayPage(IDataTransferObject queryParameters) throws Exception {
+		if(queryParameters!=null){
+			return JSONObject.fromObject(obtainScreenDeviceByIPFromMap(
+					FrameworkStringUtils.asString(queryParameters.obtainMapOfRequiredParameter().get("internetProtocol"))));
+		}
+		return null;
+	}
+	
+	@Override
 	public ScreenDeviceEntity obtainScreenDeviceByIdentityFromMap(String screenDeviceIdentity) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
@@ -166,5 +175,7 @@ public class OperationScreenDeviceServiceImpl implements IOperationScreenDeviceS
 	private IOperationConsultingRoomSerivce obtainIOperationConsultingRoomSerivce()throws Exception{
 		return (IOperationConsultingRoomSerivce) cApplicationContext.getBean("operationConsultingRoomSerivce");
 	}
+
+	
 	
 }

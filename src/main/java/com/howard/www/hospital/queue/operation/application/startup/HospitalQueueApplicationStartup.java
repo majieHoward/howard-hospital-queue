@@ -34,27 +34,27 @@ public class HospitalQueueApplicationStartup implements ApplicationListener<Cont
 			/**
 			 * 初始化诊室列表
 			 */
-			//obtainIOperationConsultingRoomSerivce().initializingServiceBaseData(new DataTransferObject());
+			obtainIOperationConsultingRoomSerivce().initializingServiceBaseData(new DataTransferObject());
 			/**
 			 * 初始化医生列表(包括医生简介)
 			 */
-			//obtainIOperationDoctorAttributeService().initializingServiceBaseData(new DataTransferObject());
+			obtainIOperationDoctorAttributeService().initializingServiceBaseData(new DataTransferObject());
 			/**
 			 * 初始化设备列表(包含设备类型对应的页面关系)
 			 */
-			//obtainIOperationScreenDeviceService().initializingServiceBaseData(new DataTransferObject());
+			obtainIOperationScreenDeviceService().initializingServiceBaseData(new DataTransferObject());
 			/**
 			 * 构造诊室和设备的对照关系
 			 * 在ROOM_CODE对应的ConsultingRoomEntity上添加(Vector push)InternetProtocol为IP的ScreenDeviceEntity映射关系
 			 * 在IP对应的SreenDevice上添加(Vector push)ROOMCODE对应的ConsultingRoom映射关系
 			 */
-			//obtainIOperationScreenConsultingService().initializingServiceBaseData(new DataTransferObject());
+			obtainIOperationScreenConsultingService().initializingServiceBaseData(new DataTransferObject());
 			/**
 			 * 构造当天诊室和医生的对照关系
 			 * 将visitTimeDescCode为:visitTimeDescCode的ConcurrentHashMap<String, CurrentDoctorSchedulingEntity>对象放入到schedulingMap中
 			 * 将roomCode为:ROOM_CODE的ConcurrentHashMap<String, ConcurrentHashMap<String, CurrentDoctorSchedulingEntity>>对象放入到doctorSchedulingMap中
 			 */
-			//obtainIOperationDoctorSchedulingService().initializingServiceBaseData(new DataTransferObject());
+			obtainIOperationDoctorSchedulingService().initializingServiceBaseData(new DataTransferObject());
 		    /**
 		     * 其他的关系可以暂时不初始化
 		     */

@@ -4,11 +4,15 @@ import com.howard.www.core.data.transfer.dto.IDataTransferObject;
 import com.howard.www.hospital.queue.operation.domain.ScreenDeviceEntity;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 public interface IOperationScreenDeviceService extends IOperationBasicDataService{
+	
 	public JSONArray obtainScreenDeviceInfo(IDataTransferObject queryParameters) throws Exception;
 
     public ScreenDeviceEntity obtainScreenDeviceByIPFromMap(String internetProtocol)throws Exception;
+    
+    public JSONObject obtainHomeScreenDisplayPage(IDataTransferObject queryParameters)throws Exception;
     
     public boolean existScreenDeviceByIP(String internetProtocol)throws Exception;
 

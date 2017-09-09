@@ -155,7 +155,7 @@ public class HospitalQueueSystemWebMvcConfig extends WebMvcConfigurationSupport 
 			protected void writeInternal(String str, HttpOutputMessage outputMessage) throws IOException {
 				outputMessage.getHeaders().setContentType(new MediaType("text", "html", Charset.forName("UTF-8")));
 				BackInteractivenfoEntity backInteractivenfoEntity = new BackInteractivenfoEntity();
-				backInteractivenfoEntity.setInteractiveData(JSONArray.fromObject(str));
+				backInteractivenfoEntity.setInteractiveData(str);
 				log.info(FrameworkStringUtils.asString(JSONObject.fromObject(backInteractivenfoEntity)));
 				/**
 				 * add by mayijie at 2017.09.06 需要重新计算
