@@ -20,7 +20,7 @@ $(function() {
 		/**后台服务调用使用的IP和PORT**/
 		applicationServer:"http://127.0.0.1:9999/",
 		/**WebSocket要连接的服务器 var url = "ws://localhost:61614/stomp";**/
-		webSocketServerHost:"http://127.0.0.1:9999",
+		webSocketServerHost:"",
 		/****/
 		serverEndpoint:"/hospitalQueue",
 		/****/

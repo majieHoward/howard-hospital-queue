@@ -72,14 +72,16 @@ function connect() {
     stompClient.connect(connectionParameter, function (frame) {
         console.log('Connected:' + frame);
         console.log("execute function socket.onopen 心跳检测启动");
-	    heartCheck.start();
+	    //heartCheck.start();
 	    stompClient.subscribe('/callTheName/demo', function (response) {
 	    	// and acknowledge it
-	    	 heartCheck.reset();
+	    	 //heartCheck.reset();
 	    	console.log(response);
 	        response.ack();
 	    	
 	    });
+    },function(error){
+    	console.log(error);
     });
     //当无法连接到服务器(测试时模拟了服务器DOWN机)
     socket.onclose = function() {

@@ -36,7 +36,7 @@
 				*/
 			socket = new SockJS(webSocketUrl);
             stompClient = Stomp.over(socket);
-			socket.onclose = disconnectFromTheServer;
+			
 		}
 		
 		var disconnectTheCustomerServiceConnection = function(){
@@ -101,6 +101,8 @@
 			  *断开连接时,调用disconnect方法,这个方法也是异步的,当断开成功后会接收一个额外的回调函数的参数
 			  */
 			 //stompClient.disconnect(disconnectTheCustomerServiceConnection);
+			 /**add by mayijie at 2017.09.09**/
+			 socket.onclose = disconnectFromTheServer;
 		}
 		
 		function clientSubscriptionDestinations(){
@@ -137,6 +139,7 @@
 			if (message) {
 				var quote = $.hosptialQueueJudgmentCrossValue.jsonformatConvertToJSONObject(message);
 				console.log(quote);
+				message.ack();
 			} else {
 			  
 			}
