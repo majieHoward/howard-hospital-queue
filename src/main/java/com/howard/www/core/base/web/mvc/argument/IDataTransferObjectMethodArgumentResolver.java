@@ -1,6 +1,9 @@
 package com.howard.www.core.base.web.mvc.argument;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -19,7 +22,9 @@ import com.howard.www.core.data.transfer.dto.impl.DataTransferObject;
  * @Copyright: 2017 https://github.com/majieHoward Inc. All rights reserved.
  */
 public class IDataTransferObjectMethodArgumentResolver implements HandlerMethodArgumentResolver {
-    /**
+	protected final Logger log = LoggerFactory.getLogger(IDataTransferObjectMethodArgumentResolver.class);
+
+	/**
      * 
      * <p>Title: supportsParameter</p>   
      * <p>Description: 该解析器是否支持给定的方法参数。</p>   
@@ -52,14 +57,12 @@ public class IDataTransferObjectMethodArgumentResolver implements HandlerMethodA
 		 */
 		IDataTransferObject dataTransferObject = new DataTransferObject();
 		HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
-		//得到请求的内容区数据的类型  
-        String contentType = request.getContentType();   
-        System.out.println("========ContentType:" + contentType);  
+		//得到请求的内容区数据的类型    
+        log.info("ContentType:" + request.getContentType());  
         //得到请求的内容区数据的编码方式，如果请求中没有指定则为null  
         //CharacterEncodingFilter这个过滤器设置了编码(UTF-8)  
         //编码只能被指定一次，即如果客户端设置了编码，则过滤器不会再设置  
-        String characterEncoding = request.getCharacterEncoding();  
-        System.out.println("========CharacterEncoding:" + characterEncoding);  
+        log.info("CharacterEncoding:" + request.getCharacterEncoding());  
 		dataTransferObject.evaluateRequestParams(request);
 		return dataTransferObject;
 	}

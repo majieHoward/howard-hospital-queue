@@ -22,6 +22,9 @@ public class HandleCONNECTStompCommandSerivceImpl implements IHandleStompCommand
 	@Override
 	public void executeStompCommand(Message<?> message) throws Exception {
 		// TODO Auto-generated method stub
+		/**
+		 * {"headers":{"simpMessageType":"CONNECT","stompCommand":"CONNECT","nativeHeaders":{"screenDevice":["171.19.231.2"],"accept-version":["1.1,1.0"],"heart-beat":["10000,10000"]},"simpSessionAttributes":{},"simpHeartbeat":[10000,10000],"simpSessionId":"05i6fxdr"},"payload":[]}
+		 */
 		StompHeaderAccessor accessor = MessageHeaderAccessor.getAccessor(message, StompHeaderAccessor.class);
 		String simpSessionId = FrameworkStringUtils.asString(accessor.getSessionId());
 		String screenDevice = FrameworkStringUtils.asString(accessor.getFirstNativeHeader("screenDevice"));

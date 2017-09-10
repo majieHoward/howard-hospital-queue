@@ -17,6 +17,7 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
@@ -26,8 +27,10 @@ import org.springframework.web.servlet.resource.VersionResourceResolver;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.howard.www.core.base.util.FrameworkStringUtils;
 import com.howard.www.core.base.web.mvc.argument.IDataTransferObjectMethodArgumentResolver;
+import com.howard.www.core.base.web.mvc.interceptor.FrameworkContextInterceptor;
 import com.howard.www.hospital.queue.operation.application.startup.HospitalQueueApplicationStartup;
 import com.howard.www.hospital.queue.operation.domain.BackInteractivenfoEntity;
+
 import net.sf.json.JSONObject;
 
 /**
@@ -106,7 +109,7 @@ public class HospitalQueueSystemWebMvcConfig extends WebMvcConfigurationSupport 
 				.setViewName("/interrogationSpotP1937");
 		super.addViewControllers(registry);
 	}
-
+	
 	@Bean
 	public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
 		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter() {
@@ -244,4 +247,22 @@ public class HospitalQueueSystemWebMvcConfig extends WebMvcConfigurationSupport 
 	 * BufferedImageHttpMessageConverter 数据与 java.awt.image.BufferedImage 的相互转换
 	 * Java I/O API 支持的所有类型 Java I/O API 支持的所有类型
 	 */
+	
+	@Bean(name = "frameworkContextInterceptor")
+	public FrameworkContextInterceptor initFrameworkContextInterceptor() throws Exception {
+		return new FrameworkContextInterceptor();
+	}
+
+	@Override
+	protected void addInterceptors(InterceptorRegistry registry) {
+		try {
+			registry.addInterceptor(initFrameworkContextInterceptor());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		super.addInterceptors(registry);
+	}
+
+	
 }
