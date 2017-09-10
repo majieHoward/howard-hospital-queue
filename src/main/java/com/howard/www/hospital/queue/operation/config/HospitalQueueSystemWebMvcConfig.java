@@ -28,8 +28,6 @@ import com.howard.www.core.base.util.FrameworkStringUtils;
 import com.howard.www.core.base.web.mvc.argument.IDataTransferObjectMethodArgumentResolver;
 import com.howard.www.hospital.queue.operation.application.startup.HospitalQueueApplicationStartup;
 import com.howard.www.hospital.queue.operation.domain.BackInteractivenfoEntity;
-
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 /**
@@ -92,15 +90,20 @@ public class HospitalQueueSystemWebMvcConfig extends WebMvcConfigurationSupport 
 		// TODO Auto-generated method stub
 		log.info(
 				"Assists with the registration of simple automated controllers pre-configured with status code and/or a view.");
-		registry.addViewController("/hospital/queue/operation/consultation/room.exhibition")
-				.setViewName("/consultationRoom");
-		registry.addViewController("/hospital/queue/operation/interrogation/spot.P1932.exhibition")
-				.setViewName("/interrogationSpotP1932");
+		registry.addViewController("/hospital/queue/operation/consultation/room.P1931.exhibition")
+				.setViewName("/consultationRoomP1931");
 		registry.addViewController("/hospital/queue/operation/consultation/room.P1933.exhibition")
 				.setViewName("/consultationRoomP1933");
+		registry.addViewController("/hospital/queue/operation/interrogation/spot.P1932.exhibition")
+				.setViewName("/interrogationSpotP1932");
 		registry.addViewController("/hospital/queue/operation/interrogation/spot.P1934.exhibition")
-		.setViewName("/interrogationSpotP1934");
-		
+				.setViewName("/interrogationSpotP1934");
+		registry.addViewController("/hospital/queue/operation/interrogation/spot.P1935.exhibition")
+				.setViewName("/interrogationSpotP1935");
+		registry.addViewController("/hospital/queue/operation/interrogation/spot.P1936.exhibition")
+				.setViewName("/interrogationSpotP1936");
+		registry.addViewController("/hospital/queue/operation/interrogation/spot.P1937.exhibition")
+				.setViewName("/interrogationSpotP1937");
 		super.addViewControllers(registry);
 	}
 
@@ -158,14 +161,16 @@ public class HospitalQueueSystemWebMvcConfig extends WebMvcConfigurationSupport 
 				backInteractivenfoEntity.setInteractiveData(str);
 				log.info(FrameworkStringUtils.asString(JSONObject.fromObject(backInteractivenfoEntity)));
 				/**
-				 * add by mayijie at 2017.09.06 需要重新计算
-				 * Response Header 的 Content-Length 其实就是计算了buffer的数据长度
+				 * add by mayijie at 2017.09.06 需要重新计算 Response Header 的
+				 * Content-Length 其实就是计算了buffer的数据长度
 				 * 
 				 * 重新设置 Content-Length import
 				 */
-				outputMessage.getHeaders().setContentLength(FrameworkStringUtils.asString(JSONObject.fromObject(backInteractivenfoEntity)).getBytes().length);
-				
-				super.writeInternal(FrameworkStringUtils.asString(JSONObject.fromObject(backInteractivenfoEntity)), outputMessage);
+				outputMessage.getHeaders().setContentLength(FrameworkStringUtils
+						.asString(JSONObject.fromObject(backInteractivenfoEntity)).getBytes().length);
+
+				super.writeInternal(FrameworkStringUtils.asString(JSONObject.fromObject(backInteractivenfoEntity)),
+						outputMessage);
 			}
 
 		};
