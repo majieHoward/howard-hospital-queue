@@ -5,7 +5,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
-
+/**
+ * 
+ * @ClassName:  SystemCorsConfig   
+ * @Description:TODO(这里用一句话描述这个类的作用)   
+ * @author: mayijie
+ * @date:   2017年9月12日 下午7:07:27   
+ *     
+ * @Copyright: 2017 https://github.com/majieHoward Inc. All rights reserved.
+ */
 @Configuration
 public class SystemCorsConfig {
 	
