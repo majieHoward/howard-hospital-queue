@@ -60,7 +60,9 @@ public class ConsultingRoomEntity implements Serializable {
 	private Vector<String> internetProtocolItems=new Vector<String>();
 	
 	private Vector<String> screenDeviceIdentityItems;
-	
+	/**
+	 * 坐诊医生安排
+	 */
 	private Object scheduling;
 	
 	public void pustScreenDeviceInternetProtocolToRoom(String internetProtocol){

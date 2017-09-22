@@ -19,7 +19,15 @@ import com.howard.www.hospital.queue.operation.service.IOperationTreatmentProces
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-
+/**
+ * 
+ * @ClassName:  OperationTreatmentProcessServiceImpl   
+ * @Description:TODO 
+ * @author: mayijie
+ * @date:   2017年9月21日 下午12:10:55   
+ *     
+ * @Copyright: 2017 https://github.com/majieHoward Inc. All rights reserved.
+ */
 @Repository("operationTreatmentProcessService")
 public class OperationTreatmentProcessServiceImpl implements IOperationTreatmentProcessService {
 	private static final Logger logger = LoggerFactory.getLogger(OperationTreatmentProcessServiceImpl.class);
@@ -67,9 +75,12 @@ public class OperationTreatmentProcessServiceImpl implements IOperationTreatment
 						/**
 						 * 获取诊室编号roomCode为当前坐诊的医生详细信息  
 						 */
+						/**
+						 * 为诊室安排坐诊医生
+						 */
 						consultingRoomEntity.setScheduling(obtainIOperationDoctorSchedulingService().obtainAtCertainTimesDoctor(roomCode,
 								time));
-						logger.info("获取ROOM_CODE为:"+roomCode+"的诊室信息和当前坐诊的医生详细信息");
+						logger.info("为ROOM_CODE为:"+roomCode+"的诊室安排时间段TIME为"+time+"的坐诊医生");
 						diagnosisAreaItems.add(consultingRoomEntity);
 					}
 					

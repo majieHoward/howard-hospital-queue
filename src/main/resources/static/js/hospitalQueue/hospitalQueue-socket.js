@@ -134,16 +134,91 @@
 			  */
 		}
 		
+		/**add by mayijie at 2017.09.22 Message handling Factory**/
+		var CallAPatient = (function () {
+			// Instance stores a reference to the Singleton
+			var instanceSingleton;
+			function init() {
+				// 单例
+				// 私有方法和变量
+				return {
+					// 共有方法和变量
+					handleMessage: function(messageBody) {
+						$("#"+messageBody.roomCode+"Patient").html(messageBody.patientName);
+					}
+				};
+			};
+			return {
+				// 如果存在获取此单例实例，如果不存在创建一个单例实例
+				obtainInstance: function () {
+					if (!instanceSingleton) {
+						instanceSingleton = init();
+					}
+					return instanceSingleton;
+				}
+			};
+		})();
+		
+		var ArrangeDoctors = (function () {
+			// Instance stores a reference to the Singleton
+			var instanceSingleton;
+			function init() {
+				// 单例
+				// 私有方法和变量
+				return {
+					// 共有方法和变量
+					handleMessage: function(messageBody) {
+						$("#"+messageBody.roomCode+"Doctor").html(messageBody.doctorName);
+					}
+				};
+			};
+			return {
+				// 如果存在获取此单例实例，如果不存在创建一个单例实例
+				obtainInstance: function () {
+					if (!instanceSingleton) {
+						instanceSingleton = init();
+					}
+					return instanceSingleton;
+				}
+			};
+		})();
+		
+		/**抽象工厂**/
+		var AbstractMessageHandlingFactory = (function () {
+		    // Storage for our MessageType types
+		    var types = {};
+		    return {
+		        obtainMessageType: function (msgType,options) {
+		            var MessageType = types[msgType];
+		            return (MessageType ? MessageType.obtainInstance().handleMessage(options) : null);
+		        },
+		        evaluateMessageType: function (msgType, messageType) {
+		            var options = messageType.prototype;
+		            types[msgType] = messageType;
+		            return AbstractMessageHandlingFactory;
+		        }
+		    };
+		})();
+
+		AbstractMessageHandlingFactory.evaluateMessageType("callAPatient",CallAPatient);
+		AbstractMessageHandlingFactory.evaluateMessageType("arrangeDoctors",ArrangeDoctors);
+		
 		var callback = function(message) {
 			// called when the client receives a STOMP message from the server
 			if (message) {
 				var quote = $.hosptialQueueJudgmentCrossValue.jsonformatConvertToJSONObject(message);
-				console.log(quote);
+				/**edit by mayijie at 2017.09.22 通过抽象工厂来实现业务逻辑**/
+				var messageBody=$.hosptialQueueJudgmentCrossValue.jsonformatConvertToJSONObject(quote.body);
+				if(quote&&messageBody&&messageBody.msgType){
+					AbstractMessageHandlingFactory.obtainMessageType(messageBody.msgType,messageBody);
+				}
 				message.ack();
 			} else {
 			  
 			}
 		}
+		
+		
 		
 		function execute(){
 			creatingASTOMPClient();

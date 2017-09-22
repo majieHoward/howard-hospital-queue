@@ -3,11 +3,11 @@ $(function() {
 		hospitalNameHtml:"成都中医药大学附属医院/四川省中医院",
 		hospitalqueuePanelHeadingH2Html:"门诊西药房",
 		applicationServer:"http://127.0.0.1:9999/",
-		internetProtocol:"171.19.231.2",
+		internetProtocol:"171.19.231.4",
 		obtainDiagnosisAreaItemsController:"/treatment/hospital/queue/obtain.diagnosis.area.items.information.process"
 	};
 	var interrogationSpot=$('body').interrogationSpot(interrogationSpotParameter);
-   var parameter={internetProtocol:"171.19.231.2","time":0};
+   var parameter={internetProtocol:"171.19.231.4","time":0};
 	interrogationSpot.obtainDiagnosisAreaItems(parameter);
 	//interrogationSpot.resizeTable();
 });

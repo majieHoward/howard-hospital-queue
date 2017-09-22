@@ -12,7 +12,7 @@ import com.howard.www.hospital.queue.operation.service.IExternalProvidedHisServi
 import com.howard.www.hospital.queue.operation.service.IOperationConsultingRoomSerivce;
 import com.howard.www.hospital.queue.operation.service.IOperationDoctorAttributeService;
 import com.howard.www.hospital.queue.operation.service.IOperationSubscribeMessageService;
-import com.howard.www.hospital.queue.operation.websocket.domain.TextFormatMessageOfResponseEntity;
+import com.howard.www.hospital.queue.operation.websocket.domain.CallAPatientMessageOfResponseEntity;
 import net.sf.json.JSONObject;
 
 @Repository("externalProvidedHisService")
@@ -68,7 +68,10 @@ public class ExternalProvidedHisServiceImpl implements IExternalProvidedHisServi
 	public JSONObject callAPatientToSeeADoctor(IDataTransferObject paramDto) throws Exception {
 		// TODO Auto-generated method stub
 		callAPatientParameterVerification(paramDto);
-		TextFormatMessageOfResponseEntity messageBody=new TextFormatMessageOfResponseEntity();
+		CallAPatientMessageOfResponseEntity messageBody=new CallAPatientMessageOfResponseEntity(paramDto.obtainMapOfRequiredParameter());
+		/**
+		 * 
+		 */
 		messageBody.setContent(FrameworkStringUtils
 				.asString(paramDto.obtainMapOfRequiredParameter().get("callContents")));
 		messageBody.setFromUserName(FrameworkStringUtils.asString(paramDto.obtainMapOfRequiredParameter().get("roomCode")));
@@ -77,7 +80,7 @@ public class ExternalProvidedHisServiceImpl implements IExternalProvidedHisServi
 		 * {
 		 *******"fromUserName": "HospitalQueueSystem",
 		 *******"msgType": "text",
-		 *******"createTime": "1504025065860",
+		 *******"createTime": "1504025065860",dd
 		 *******"toUserName": "",
 		 *******"content": "请彼得到发热门诊诊断室（1楼）就诊史蒂芬请做好准备"
 		 * }
@@ -166,7 +169,7 @@ public class ExternalProvidedHisServiceImpl implements IExternalProvidedHisServi
 	 */
 	private void judgmentDoctorJobNumberExistence(String doctorJobNumber) throws Exception{
 		if(false==obtainIOperationDoctorAttributeService().existDoctorAttributeEntityByDoctorJobNumber(doctorJobNumber)){
-			throw new RuntimeException("40003");
+			//throw new RuntimeException("40003");
 			//throw new RuntimeException("无效的医生工号(doctorJobNumber),请开发者检查doctorJobNumber的正确性，避免异常字符，注意大小写");
 		}
 	}

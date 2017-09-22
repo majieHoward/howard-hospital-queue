@@ -257,10 +257,15 @@
 					totalStringLength=totalStringLength+roomName.extendsHength();
 					
 					tr=listOfVisitsBodyTr("","","",{},$("#listOfVisitsBody"));
-					td=listOfVisitsBodyTd(roomCode,"",roomName,{},tr);
-					td=listOfVisitsBodyTd(doctorJobNumber,"",doctorName,{},tr);
-					td=listOfVisitsBodyTd("","","勒布朗詹姆斯",{},tr);
-					td=listOfVisitsBodyTd("","","勒布朗詹姆斯",{},tr);
+					/**edit by mayijie at 2017.09.22 修改元素的ID**/
+					/**科室中文名称**/
+					td=listOfVisitsBodyTd(roomCode+"Room","",roomName,{},tr);
+					/**医生姓名**/
+					td=listOfVisitsBodyTd(roomCode+"Doctor","",doctorName,{},tr);
+					/**构造患者名称**/
+					td=listOfVisitsBodyTd(roomCode+"Patient","","",{},tr);
+					/**构造患者名称**/
+					td=listOfVisitsBodyTd(roomCode+"Patient","","",{},tr);
 					totalStringLength+=8;
 					totalStringLengthArray.push(totalStringLength);
 					totalStringLength=0;

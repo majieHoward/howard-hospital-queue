@@ -22,5 +22,7 @@ public class MessageOfResponseEntity {
 	private String createTime = FrameworkStringUtils.asString(System.currentTimeMillis());
 	//
 	private String msgType;
+	
+	private String content;
 
 }
