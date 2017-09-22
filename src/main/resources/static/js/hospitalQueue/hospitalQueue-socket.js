@@ -168,7 +168,12 @@
 				return {
 					// 共有方法和变量
 					handleMessage: function(messageBody) {
-						$("#"+messageBody.roomCode+"Doctor").html(messageBody.doctorName);
+						var signInStatus=messageBody.signInStatus;
+						if("20A" == signInStatus){
+							$("#"+messageBody.roomCode+"Doctor").html(messageBody.doctorName);
+						}else if("20X" == signInStatus){
+							$("#"+messageBody.roomCode+"Doctor").html("");
+						}
 					}
 				};
 			};

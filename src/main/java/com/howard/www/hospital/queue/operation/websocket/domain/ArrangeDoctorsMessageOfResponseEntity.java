@@ -37,15 +37,20 @@ public class ArrangeDoctorsMessageOfResponseEntity extends MessageOfResponseEnti
 
 	private String roomCode;
 
-	private String patientName;
-
-	private String patientCode;
-
+	// 医生姓名
+	private String doctorName;
+	
+	private String signInStatus;
+	
 	public ArrangeDoctorsMessageOfResponseEntity(ConcurrentHashMap<String, Object> requiredParameter) {
 		this.setDoctorJobNumber(FrameworkStringUtils.asString(requiredParameter.get("patientName")));
 		this.setRoomCode(FrameworkStringUtils.asString(requiredParameter.get("roomCode")));
-		this.setPatientName(FrameworkStringUtils.asString(requiredParameter.get("patientName")));
-		this.setPatientCode(FrameworkStringUtils.asString(requiredParameter.get("patientCode")));
-		this.setMsgType(FrameworkStringUtils.asString("arrangeDoctors"));
+		this.setDoctorJobNumber(FrameworkStringUtils.asString(requiredParameter.get("doctorJobNumber")));
+		this.setSignInStatus(FrameworkStringUtils.asString(requiredParameter.get("signInStatus")));
+	}
+
+	@Override
+	public String getMsgType() {
+		return FrameworkStringUtils.asString("arrangeDoctors");
 	}
 }

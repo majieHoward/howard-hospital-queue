@@ -12,4 +12,6 @@ public interface IOperationDoctorAttributeService extends IOperationBasicDataSer
 	public boolean existDoctorAttributeEntityByDoctorJobNumber(String doctorJobNumber) throws Exception;
 
 	public DoctorAttributeEntity obtainDoctorAttributeEntityByDoctorJobNumberFromMap(String doctorJobNumber) throws Exception; 
+
+	public String obtainDoctorNameByDoctorJobNumberFromMap(String doctorJobNumber) throws Exception; 
 }

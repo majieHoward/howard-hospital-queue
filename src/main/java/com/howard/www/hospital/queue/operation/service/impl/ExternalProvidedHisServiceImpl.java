@@ -6,15 +6,26 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Repository;
+
 import com.howard.www.core.base.util.FrameworkStringUtils;
 import com.howard.www.core.data.transfer.dto.IDataTransferObject;
 import com.howard.www.hospital.queue.operation.service.IExternalProvidedHisService;
 import com.howard.www.hospital.queue.operation.service.IOperationConsultingRoomSerivce;
 import com.howard.www.hospital.queue.operation.service.IOperationDoctorAttributeService;
 import com.howard.www.hospital.queue.operation.service.IOperationSubscribeMessageService;
+import com.howard.www.hospital.queue.operation.websocket.domain.ArrangeDoctorsMessageOfResponseEntity;
 import com.howard.www.hospital.queue.operation.websocket.domain.CallAPatientMessageOfResponseEntity;
-import net.sf.json.JSONObject;
 
+import net.sf.json.JSONObject;
+/**
+ * 
+ * @ClassName:  ExternalProvidedHisServiceImpl   
+ * @Description:TODO   
+ * @author: mayijie
+ * @date:   2017年9月22日 下午3:51:58   
+ *     
+ * @Copyright: 2017 https://github.com/majieHoward Inc. All rights reserved.
+ */
 @Repository("externalProvidedHisService")
 public class ExternalProvidedHisServiceImpl implements IExternalProvidedHisService {
 	
@@ -64,6 +75,15 @@ public class ExternalProvidedHisServiceImpl implements IExternalProvidedHisServi
 		 */
 	}
 
+	/**
+	 * 
+	 * <p>Title: callAPatientToSeeADoctor</p>   
+	 * <p>Description: </p>   
+	 * @param paramDto
+	 * @return
+	 * @throws Exception   
+	 * @see com.howard.www.hospital.queue.operation.service.IExternalProvidedHisService#callAPatientToSeeADoctor(com.howard.www.core.data.transfer.dto.IDataTransferObject)
+	 */
 	@Override
 	public JSONObject callAPatientToSeeADoctor(IDataTransferObject paramDto) throws Exception {
 		// TODO Auto-generated method stub
@@ -108,7 +128,7 @@ public class ExternalProvidedHisServiceImpl implements IExternalProvidedHisServi
 			throw new RuntimeException("40006");
 			//throw new RuntimeException("缺少签到标识(signInStatus)");
 		}
-		if (!"20A".equals(signInStatus) || !"20X".equals(signInStatus)) {
+		if (!"20A".equals(signInStatus) && !"20X".equals(signInStatus)) {
 			throw new RuntimeException("40007");
 			//throw new RuntimeException("无效的签到标识(signInStatus),检查signInStatus的有效性10A表示医生签到,10X表示医生签退");
 		}
@@ -117,10 +137,27 @@ public class ExternalProvidedHisServiceImpl implements IExternalProvidedHisServi
 		//判断诊断室对应的sreenDevice是否为在线状态
 	}
 	
+	/**
+	 * 
+	 * <p>Title: registerDoctorOnlineStatus</p>   
+	 * <p>Description: </p>   
+	 * @param paramDto
+	 * @return
+	 * @throws Exception   
+	 * @see com.howard.www.hospital.queue.operation.service.IExternalProvidedHisService#registerDoctorOnlineStatus(com.howard.www.core.data.transfer.dto.IDataTransferObject)
+	 */
 	@Override
 	public JSONObject registerDoctorOnlineStatus(IDataTransferObject paramDto) throws Exception {
 		// TODO Auto-generated method stub
 		registerDoctorParameterVerification(paramDto);
+		ArrangeDoctorsMessageOfResponseEntity messageBody=new ArrangeDoctorsMessageOfResponseEntity(
+				paramDto.obtainMapOfRequiredParameter());
+		//根据医生的编号获取医生的姓名
+		messageBody.setDoctorName(obtainIOperationDoctorAttributeService().obtainDoctorNameByDoctorJobNumberFromMap(
+				FrameworkStringUtils.asString(paramDto.obtainMapOfRequiredParameter().get("doctorJobNumber"))));
+		obtainIOperationSubscribeMessageService().sendToCorrespondingScreenIpInConsulting("/subscribe", 
+				FrameworkStringUtils.asString(paramDto.obtainMapOfRequiredParameter().get("roomCode")), 
+				messageBody);		
 		return null;
 	}
 

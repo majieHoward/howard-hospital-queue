@@ -46,6 +46,13 @@ public class CallAPatientMessageOfResponseEntity extends MessageOfResponseEntity
 		this.setRoomCode(FrameworkStringUtils.asString(requiredParameter.get("roomCode")));
 		this.setPatientName(FrameworkStringUtils.asString(requiredParameter.get("patientName")));
 		this.setPatientCode(FrameworkStringUtils.asString(requiredParameter.get("patientCode")));
-		this.setMsgType(FrameworkStringUtils.asString("callAPatient"));
 	}
+
+	@Override
+	public String getMsgType() {
+		// TODO Auto-generated method stub
+		return FrameworkStringUtils.asString("callAPatient");
+	}
+	
+	
 }

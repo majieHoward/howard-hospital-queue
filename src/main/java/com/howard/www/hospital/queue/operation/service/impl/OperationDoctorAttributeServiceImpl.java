@@ -100,4 +100,13 @@ public class OperationDoctorAttributeServiceImpl implements IOperationDoctorAttr
 	private IOperationDoctorAttributeDao obtainIOperationDoctorAttributeDao() throws Exception {
 		return (IOperationDoctorAttributeDao) cApplicationContext.getBean("operationDoctorAttributeDao");
 	}
+
+	@Override
+	public String obtainDoctorNameByDoctorJobNumberFromMap(String doctorJobNumber) throws Exception {
+		// TODO Auto-generated method stub
+		if(existDoctorAttributeEntityByDoctorJobNumber(doctorJobNumber)==true){
+			return obtainDoctorAttributeEntityByDoctorJobNumberFromMap(doctorJobNumber).getDoctorName();
+		}
+		return null;
+	}
 }
