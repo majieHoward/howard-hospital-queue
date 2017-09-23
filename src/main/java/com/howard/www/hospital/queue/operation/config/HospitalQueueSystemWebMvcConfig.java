@@ -93,6 +93,7 @@ public class HospitalQueueSystemWebMvcConfig extends WebMvcConfigurationSupport 
 		// TODO Auto-generated method stub
 		log.info(
 				"Assists with the registration of simple automated controllers pre-configured with status code and/or a view.");
+		//注册页面controller
 		registry.addViewController("/hospital/queue/operation/consultation/room.P1931.exhibition")
 				.setViewName("/consultationRoomP1931");
 		registry.addViewController("/hospital/queue/operation/consultation/room.P1933.exhibition")

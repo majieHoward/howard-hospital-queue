@@ -206,7 +206,7 @@ public class ExternalProvidedHisServiceImpl implements IExternalProvidedHisServi
 	 */
 	private void judgmentDoctorJobNumberExistence(String doctorJobNumber) throws Exception{
 		if(false==obtainIOperationDoctorAttributeService().existDoctorAttributeEntityByDoctorJobNumber(doctorJobNumber)){
-			//throw new RuntimeException("40003");
+			throw new RuntimeException("40003");
 			//throw new RuntimeException("无效的医生工号(doctorJobNumber),请开发者检查doctorJobNumber的正确性，避免异常字符，注意大小写");
 		}
 	}

@@ -50,7 +50,12 @@ public class OperationTreatmentProcessServiceImpl implements IOperationTreatment
 				.asString(queryParameters.obtainMapOfRequiredParameter().get("internetProtocol"));
 		String time = FrameworkStringUtils.asString(queryParameters.obtainMapOfRequiredParameter().get("time"));
 		if ("".equals(internetProtocol)) {
-			throw new RuntimeException("");
+			throw new RuntimeException("40051");
+			//throw new RuntimeException("缺少设备IP地址(internetProtocol)");
+		}
+		if(false==obtainIOperationScreenDeviceService().internetProtocolCheck(internetProtocol)){
+			throw new RuntimeException("40052");
+			//throw new RuntimeException("无效的设备IP地址(internetProtocol)请开发者检查internetProtocol的正确性(例如:127.0.0.1),避免异常字符,注意大小写,中文采用UTF-8编码");
 		}
 		/**
 		 * 通过IP获取屏幕screenDeviceEntity详细信息

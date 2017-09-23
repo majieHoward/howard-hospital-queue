@@ -1,21 +1,35 @@
 package com.howard.www.hospital.queue.operation.service.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import java.util.Vector;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.util.AlternativeJdkIdGenerator;
+import org.springframework.util.IdGenerator;
 
 import com.howard.www.core.base.util.FrameworkStringUtils;
 import com.howard.www.hospital.queue.operation.service.IOperationConsultingRoomSerivce;
 import com.howard.www.hospital.queue.operation.service.IOperationSubscribeMessageService;
 
+
 public class OperationSubscribeMessageServiceImpl implements IOperationSubscribeMessageService {
 
+	private static final Logger logger = LoggerFactory.getLogger(OperationSubscribeMessageServiceImpl.class);
 	@Autowired
 	private SimpMessagingTemplate messagingTemplate;
 
 	@Autowired
 	private ApplicationContext cApplicationContext;
+	
+	private IdGenerator defaultIdGenerator = new AlternativeJdkIdGenerator();
+	
+	private IdGenerator idGenerator = null;
 
 	/**
 	 * 
@@ -96,7 +110,11 @@ public class OperationSubscribeMessageServiceImpl implements IOperationSubscribe
 				||"".equals(FrameworkStringUtils.asString(destination))){
 			throw new RuntimeException("");
 		}else{
-			messagingTemplate.convertAndSendToUser(sreenDevice, destination, messageBody);
+			Map<String, Object> headers=new HashMap<String,Object>();
+			UUID uuid=getIdGenerator().generateId();
+			logger.info("convertAndSendToUser UUID :"+uuid.toString());
+			headers.put("id", uuid);
+			messagingTemplate.convertAndSendToUser(sreenDevice, destination, messageBody,headers);
 		}
 	}
 	
@@ -104,5 +122,8 @@ public class OperationSubscribeMessageServiceImpl implements IOperationSubscribe
 		return (IOperationConsultingRoomSerivce) cApplicationContext.getBean("operationConsultingRoomSerivce");
 	}
 
+	private IdGenerator getIdGenerator() {
+		return (idGenerator != null ? idGenerator : defaultIdGenerator);
+	}
 	
 }

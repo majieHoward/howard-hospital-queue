@@ -211,13 +211,31 @@
 		var callback = function(message) {
 			// called when the client receives a STOMP message from the server
 			if (message) {
+				
 				var quote = $.hosptialQueueJudgmentCrossValue.jsonformatConvertToJSONObject(message);
 				/**edit by mayijie at 2017.09.22 通过抽象工厂来实现业务逻辑**/
 				var messageBody=$.hosptialQueueJudgmentCrossValue.jsonformatConvertToJSONObject(quote.body);
+				var messageHeaders=$.hosptialQueueJudgmentCrossValue.jsonformatConvertToJSONObject(quote.headers);
 				if(quote&&messageBody&&messageBody.msgType){
 					AbstractMessageHandlingFactory.obtainMessageType(messageBody.msgType,messageBody);
 				}
-				message.ack();
+				/**
+				 * Socket ack (acknowledgement)
+				 * 客户端必须使用该message.ack()方法通知服务器它已经确认了该消息
+				 * 
+				 * **/
+				/**
+				 * Client.prototype.ack = function(messageID, subscription, headers) {
+			     *******if (headers == null) {
+			     ***********headers = {};
+			     *******}
+			     *******console.log(headers);
+			     *******headers["message-id"] = messageID;
+			     *******headers.subscription = subscription;
+			     *******return this._transmit("ACK", headers);
+				 * };
+				 */
+				message.ack({uuidOfMessage:messageHeaders.id});
 			} else {
 			  
 			}

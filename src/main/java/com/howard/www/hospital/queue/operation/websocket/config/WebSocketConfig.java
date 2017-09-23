@@ -1,18 +1,26 @@
 package com.howard.www.hospital.queue.operation.websocket.config;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.converter.MessageConverter;
+import org.springframework.messaging.handler.invocation.HandlerMethodArgumentResolver;
+import org.springframework.messaging.handler.invocation.HandlerMethodReturnValueHandler;
 import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.WebSocketHandler;
-import org.springframework.web.socket.config.annotation.AbstractWebSocketMessageBrokerConfigurer;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
+import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
+import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketTransportRegistration;
 import org.springframework.web.socket.handler.WebSocketHandlerDecoratorFactory;
+
+import com.howard.www.hospital.queue.operation.websocket.handler.HospitalQueueWebSocketHandler;
 import com.howard.www.hospital.queue.operation.websocket.handler.WebSocketSessionCapturingHandlerDecorator;
 import com.howard.www.hospital.queue.operation.websocket.interceptors.HttpSessionIdHandshakeInterceptor;
 import com.howard.www.hospital.queue.operation.websocket.interceptors.SessionKeepAliveChannelInterceptor;
@@ -28,9 +36,18 @@ import com.howard.www.hospital.queue.operation.websocket.interceptors.SessionKee
  */
 @Configuration
 @EnableWebSocketMessageBroker
-public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer{
-	protected final Logger log = LoggerFactory.getLogger(WebSocketConfig.class);
+public class WebSocketConfig implements WebSocketMessageBrokerConfigurer,WebSocketConfigurer{
+	protected final Logger logger = LoggerFactory.getLogger(WebSocketConfig.class);
+	  
 
+	@Override
+	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+		// TODO Auto-generated method stub
+        registry.addHandler(hospitalQueueWebSocketHandler(), "/screenDevice").addInterceptors(httpSessionIdHandshakeInterceptor());
+        registry.addHandler(hospitalQueueWebSocketHandler(), "/callTheName").addInterceptors(httpSessionIdHandshakeInterceptor());
+        registry.addHandler(hospitalQueueWebSocketHandler(), "/hospitalQueue").addInterceptors(httpSessionIdHandshakeInterceptor());
+
+	}
 	/**
 	 * 
 	 * <p>
@@ -72,17 +89,25 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer{
 		/**
 		 * allowed-origins="*" 允许跨域
 		 */
+
 		registry.addEndpoint("/hospitalQueue").setAllowedOrigins("*").withSockJS().setInterceptors(httpSessionIdHandshakeInterceptor());
 	}
 	
+	
+
 	@Override
 	public void configureClientInboundChannel(ChannelRegistration registration) {
 		registration.setInterceptors(sessionKeepAliveChannelInterceptor());
 	}
-
+	
 	@Bean
 	public HttpSessionIdHandshakeInterceptor httpSessionIdHandshakeInterceptor() {
 		return new HttpSessionIdHandshakeInterceptor();
+	}
+	
+	@Bean
+	public HospitalQueueWebSocketHandler hospitalQueueWebSocketHandler(){
+		return new HospitalQueueWebSocketHandler();
 	}
 	
 	@Bean
@@ -109,6 +134,50 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer{
 		 * 目的地被转换为"/queue/position-updatesi9oqdfzo". 用于标识这些目的地的默认前缀是"/user/"
 		 */
 		registry.setUserDestinationPrefix("/screenDevice/");
+	}
+	
+	@Override
+	public void configureWebSocketTransport(WebSocketTransportRegistration registration) {
+		
+		registration.addDecoratorFactory(new WebSocketHandlerDecoratorFactory() {
+			@Override
+			public WebSocketHandler decorate(WebSocketHandler webSocketHandler) {
+				logger.info("webSocketHandler class path "+webSocketHandler.getClass().getName());
+				return new WebSocketSessionCapturingHandlerDecorator(webSocketHandler);
+			}
+		});
+	}
+
+
+
+	@Override
+	public void configureClientOutboundChannel(ChannelRegistration registration) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void addReturnValueHandlers(List<HandlerMethodReturnValueHandler> returnValueHandlers) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public boolean configureMessageConverters(List<MessageConverter> messageConverters) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

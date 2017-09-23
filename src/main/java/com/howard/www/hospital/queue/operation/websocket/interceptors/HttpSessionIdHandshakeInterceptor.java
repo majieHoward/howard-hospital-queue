@@ -1,12 +1,20 @@
 package com.howard.www.hospital.queue.operation.websocket.interceptors;
 
 import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
+import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.WebSocketHandler;
+import org.springframework.web.socket.WebSocketMessage;
+import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.server.HandshakeInterceptor;
+
+import com.howard.www.core.base.util.FrameworkStringUtils;
+
+import net.sf.json.JSONObject;
 /**
  * 
  * @ClassName:  HttpSessionIdHandshakeInterceptor   
@@ -57,5 +65,4 @@ public class HttpSessionIdHandshakeInterceptor implements HandshakeInterceptor {
 		logger.info("在握手之后执行该方法."
 				+ " 无论是否握手成功都指明了响应状态码和相应头.");
 	}
-
 }

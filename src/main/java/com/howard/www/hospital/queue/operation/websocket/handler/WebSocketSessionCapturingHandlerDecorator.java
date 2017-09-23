@@ -29,12 +29,11 @@ public class WebSocketSessionCapturingHandlerDecorator extends WebSocketHandlerD
 
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		logger.info("afterConnectionEstablished");
-		logger.info(FrameworkStringUtils.asString(JSONObject.fromObject(session)));
 		super.afterConnectionEstablished(session);
 	}
 
 	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
-		logger.info("handleMessage");
+		logger.info("handleMessage:"+FrameworkStringUtils.asString(JSONObject.fromObject(message)));
 		super.handleMessage(session, message);
 	}
 

@@ -32,7 +32,29 @@ public class TreatmentProcessController {
 	public String obtainMedicalInformation(IDataTransferObject requiredParameter) throws Exception {
 		return null;
 	}
-	
+	/**
+	 * 
+	 * @Title: obtainHomeScreenDisplayPageURI   
+	 * @Description: TODO 获取屏幕首页展示页面的URI地址 
+	 * @param: @return
+	 * @param: @throws Exception      
+	 * @return: String      
+	 * @throws
+	 */
+	@RequestMapping(value="/treatment/hospital/queue/obtain.home.screen.display.page.uri.process")
+	public String obtainHomeScreenDisplayPageURI(IDataTransferObject requiredParameter)throws Exception{
+		return FrameworkStringUtils.asString(obtainIOperationScreenDeviceService().obtainHomeScreenDisplayPageURI(requiredParameter));
+	}
+	/**
+	 * 
+	 * @Title: obtainHomeScreenDisplayPage   
+	 * @Description: TODO 获取屏幕首页展示信息  
+	 * @param: @param requiredParameter
+	 * @param: @return
+	 * @param: @throws Exception      
+	 * @return: String      
+	 * @throws
+	 */
 	@RequestMapping(value="/treatment/hospital/queue/obtain.home.screen.display.page.process")
 	public String obtainHomeScreenDisplayPage(IDataTransferObject requiredParameter)throws Exception{
 		/**

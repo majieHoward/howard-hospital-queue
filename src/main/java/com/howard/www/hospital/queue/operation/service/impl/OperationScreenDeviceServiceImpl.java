@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import com.howard.www.core.base.util.FrameworkStringUtils;
 import com.howard.www.core.data.transfer.dto.IDataTransferObject;
+import com.howard.www.hospital.queue.operation.config.HospitalQueueConstantToConfigure;
 import com.howard.www.hospital.queue.operation.dao.IOperationScreenDeviceDao;
 import com.howard.www.hospital.queue.operation.domain.ScreenDeviceEntity;
 import com.howard.www.hospital.queue.operation.service.IOperationConsultingRoomSerivce;
@@ -98,12 +99,38 @@ public class OperationScreenDeviceServiceImpl implements IOperationScreenDeviceS
 	public ScreenDeviceEntity obtainScreenDeviceByIPFromMap(String internetProtocol) throws Exception {
 		if("".equals(FrameworkStringUtils.asString(internetProtocol))){
 			logger.info("obtainScreenDeviceByIPFromMap方法传入internetProtocol参数为空");
+			throw new RuntimeException("40051");
+			//throw new RuntimeException("缺少设备IP地址(internetProtocol)");
+		}else if(false==internetProtocolCheck(internetProtocol)){
+			throw new RuntimeException("40052");
+			//throw new RuntimeException("无效的设备IP地址(internetProtocol)请开发者检查internetProtocol的正确性(例如:127.0.0.1),避免异常字符,注意大小写,中文采用UTF-8编码");
 		}else{
 			return screenDeviceMap.get(internetProtocol);
 		}
-		return null;
 	}
 
+	/**
+	 * 
+	 * @Title: internetProtocolCheck   
+	 * @Description: TODO 通过正则表达式判断IP地址格式是否正确   
+	 * @param: @param internetProtocol
+	 * @param: @return      
+	 * @return: boolean      
+	 * @throws
+	 */
+	@Override
+	public boolean internetProtocolCheck(String internetProtocol) throws Exception{
+        if (!"".equals(FrameworkStringUtils.asString(internetProtocol))) {
+            // 判断internetProtocol地址是否与正则表达式匹配
+            if (internetProtocol.matches(HospitalQueueConstantToConfigure.internetProtocolRegularExpressions)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+	
 	@Override
 	public boolean existScreenDeviceByIP(String internetProtocol) throws Exception {
 		// TODO Auto-generated method stub
@@ -120,11 +147,40 @@ public class OperationScreenDeviceServiceImpl implements IOperationScreenDeviceS
 	@Override
 	public JSONObject obtainHomeScreenDisplayPage(IDataTransferObject queryParameters) throws Exception {
 		if(queryParameters!=null){
-			return JSONObject.fromObject(obtainScreenDeviceByIPFromMap(
-					FrameworkStringUtils.asString(queryParameters.obtainMapOfRequiredParameter().get("internetProtocol"))));
+			return JSONObject.fromObject(obtainScreenDeviceByIPFromMap(queryParameters));
 		}
 		return null;
 	}
+	
+	@Override
+	public ScreenDeviceEntity obtainScreenDeviceByIPFromMap(IDataTransferObject queryParameters) throws Exception {
+		// TODO Auto-generated method stub
+		if(queryParameters!=null){
+			return obtainScreenDeviceByIPFromMap(
+					FrameworkStringUtils.asString(queryParameters.obtainMapOfRequiredParameter().get("internetProtocol")));
+		}
+		return null;
+	}
+	
+	@Override
+	public String obtainHomeScreenDisplayPageURI(IDataTransferObject queryParameters) throws Exception {
+		// TODO Auto-generated method stub
+		if(queryParameters!=null){
+			return obtainHomeScreenDisplayPageURIByIP(
+					FrameworkStringUtils.asString(queryParameters.obtainMapOfRequiredParameter().get("internetProtocol")));
+		}
+		return null;
+	}
+
+	@Override
+	public String obtainHomeScreenDisplayPageURIByIP(String internetProtocol) throws Exception {
+		if(true==existScreenDeviceByIP(internetProtocol)){
+			return obtainScreenDeviceByIPFromMap(internetProtocol).getPageUrlAddress();
+		}
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 	@Override
 	public ScreenDeviceEntity obtainScreenDeviceByIdentityFromMap(String screenDeviceIdentity) throws Exception {
@@ -176,6 +232,5 @@ public class OperationScreenDeviceServiceImpl implements IOperationScreenDeviceS
 		return (IOperationConsultingRoomSerivce) cApplicationContext.getBean("operationConsultingRoomSerivce");
 	}
 
-	
 	
 }

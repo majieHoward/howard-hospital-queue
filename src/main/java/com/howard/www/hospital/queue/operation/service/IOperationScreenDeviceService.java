@@ -12,6 +12,8 @@ public interface IOperationScreenDeviceService extends IOperationBasicDataServic
 
     public ScreenDeviceEntity obtainScreenDeviceByIPFromMap(String internetProtocol)throws Exception;
     
+    public ScreenDeviceEntity obtainScreenDeviceByIPFromMap(IDataTransferObject queryParameters)throws Exception;
+    
     public JSONObject obtainHomeScreenDisplayPage(IDataTransferObject queryParameters)throws Exception;
     
     public boolean existScreenDeviceByIP(String internetProtocol)throws Exception;
@@ -19,4 +21,10 @@ public interface IOperationScreenDeviceService extends IOperationBasicDataServic
     public ScreenDeviceEntity obtainScreenDeviceByIdentityFromMap(String screenDeviceIdentity)throws Exception;
 
     public void structureSreenRoomContrast(String roomCode,String internetProtocol)throws Exception;
+    
+    public String obtainHomeScreenDisplayPageURI(IDataTransferObject queryParameters)throws Exception;
+    
+    public String obtainHomeScreenDisplayPageURIByIP(String internetProtocol)throws Exception;
+    
+    public boolean internetProtocolCheck(String internetProtocol) throws Exception;
 }
