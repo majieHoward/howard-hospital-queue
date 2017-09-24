@@ -219,6 +219,7 @@
 				if(quote&&messageBody&&messageBody.msgType){
 					AbstractMessageHandlingFactory.obtainMessageType(messageBody.msgType,messageBody);
 				}
+				/**edit by mayijie at 2017.09.24 **/
 				/**
 				 * Socket ack (acknowledgement)
 				 * 客户端必须使用该message.ack()方法通知服务器它已经确认了该消息
