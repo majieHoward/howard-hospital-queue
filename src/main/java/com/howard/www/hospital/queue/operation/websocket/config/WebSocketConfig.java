@@ -19,7 +19,6 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketTransportRegistration;
 import org.springframework.web.socket.handler.WebSocketHandlerDecoratorFactory;
-
 import com.howard.www.hospital.queue.operation.websocket.handler.HospitalQueueWebSocketHandler;
 import com.howard.www.hospital.queue.operation.websocket.handler.WebSocketSessionCapturingHandlerDecorator;
 import com.howard.www.hospital.queue.operation.websocket.interceptors.HttpSessionIdHandshakeInterceptor;
