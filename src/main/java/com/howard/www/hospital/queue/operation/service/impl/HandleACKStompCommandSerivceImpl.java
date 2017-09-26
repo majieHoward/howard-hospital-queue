@@ -56,7 +56,6 @@ public class HandleACKStompCommandSerivceImpl implements IHandleStompCommandSeri
          * ***]
          * }
          */
-		 logger.info("message.getHeaders().getId():"+message.getHeaders().getId());
 		 logger.info(FrameworkStringUtils.asString(JSONObject.fromObject(message)));
 		 
 	}

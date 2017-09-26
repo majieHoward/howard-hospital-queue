@@ -7,20 +7,28 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.messaging.simp.stomp.StompCommand;
 import org.springframework.stereotype.Component;
-import org.springframework.web.socket.messaging.SessionSubscribeEvent;
 import com.howard.www.hospital.queue.operation.service.IHandleStompCommandSerivce;
+import com.howard.www.hospital.queue.operation.websocket.socket.messaging.SessionACKEvent;
 
-
+/**
+ * 
+ * @ClassName:  WebSocketAckListener   
+ * @Description:TODO    
+ * @author: mayijie
+ * @date:   2017年9月26日 下午8:57:08   
+ *     
+ * @Copyright: 2017 https://github.com/majieHoward Inc. All rights reserved.
+ */
 @Component
-public class WebSocketSubscribeListener extends HospitalQueueWebSocketListener<SessionSubscribeEvent> implements ApplicationListener<SessionSubscribeEvent> {
+public class WebSocketAckListener extends HospitalQueueWebSocketListener<SessionACKEvent> implements ApplicationListener<SessionACKEvent> {
 
-	private static final Logger logger = LoggerFactory.getLogger(WebSocketSubscribeListener.class);
+	private static final Logger logger = LoggerFactory.getLogger(WebSocketAckListener.class);
 
 	@Autowired
 	private ApplicationContext cApplicationContext;
 
 	@Override
-	public void onApplicationEvent(SessionSubscribeEvent event) {
+	public void onApplicationEvent(SessionACKEvent event) {
 		// TODO Auto-generated method stub
 		
 	    /**
@@ -46,7 +54,7 @@ public class WebSocketSubscribeListener extends HospitalQueueWebSocketListener<S
 	     * }
 	     */
 		try {
-			super.analysisMessage(event, StompCommand.SUBSCRIBE);
+			super.analysisMessage(event, StompCommand.ACK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -6,16 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
-import org.springframework.messaging.simp.stomp.StompCommand;
-import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.messaging.support.ChannelInterceptorAdapter;
-import org.springframework.messaging.support.MessageHeaderAccessor;
-
-import com.howard.www.core.base.util.FrameworkStringUtils;
-import com.howard.www.hospital.queue.operation.service.IHandleStompCommandSerivce;
-
-import net.sf.json.JSONObject;
-
 /**
  * 
  * @ClassName: SessionKeepAliveChannelInterceptor
@@ -61,21 +52,6 @@ public class SessionKeepAliveChannelInterceptor extends ChannelInterceptorAdapte
          * ***"payload":[]
          * }
          */
-		StompHeaderAccessor accessor = MessageHeaderAccessor.getAccessor(message, StompHeaderAccessor.class);
-
-		/**
-		 * 获取
-		 */
-		if (StompCommand.CONNECT.equals(accessor.getCommand())) {
-			logger.info("obtain connected screenDevice identification is " + accessor.getFirstNativeHeader("screenDevice")+" message:"+FrameworkStringUtils.asString(JSONObject.fromObject(message)));
-		}
-		logger.info("在消息实际发送到频道之前调用(preSend):"+FrameworkStringUtils.asString(JSONObject.fromObject(message)));
-		try {
-			analysisMessage(message);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return super.preSend(message, channel);
 	}
 
@@ -106,18 +82,6 @@ public class SessionKeepAliveChannelInterceptor extends ChannelInterceptorAdapte
          * ***"payload":[]
          * }
          */
-		StompHeaderAccessor accessor =StompHeaderAccessor.wrap(message);
-		StompCommand command =accessor.getCommand();
-		if(StompCommand.DISCONNECT.equals(command)){
-		   logger.info("断开连接:"+FrameworkStringUtils.asString(JSONObject.fromObject(message)));
-		}
-		logger.info("在完成发送后调用(afterSendCompletion):"+FrameworkStringUtils.asString(JSONObject.fromObject(message)));
-		try {
-			analysisMessage(message);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		super.afterSendCompletion(message, channel, sent, ex);
 	}
 
@@ -197,43 +161,59 @@ public class SessionKeepAliveChannelInterceptor extends ChannelInterceptorAdapte
 		 * ***"payload":[]
 		 * }
 		 */
-		logger.info("在发送调用后立即调用:"+FrameworkStringUtils.asString(JSONObject.fromObject(message)));
 		super.postSend(message, channel, sent);
 	}
 
+	/**
+	 * 
+	 * <p>Title: preReceive</p>   
+	 * <p>Description: 一旦接收到被调用并在实际检索到一个消息之前就调用它</p>   
+	 * @param channel
+	 * @return   
+	 * @see org.springframework.messaging.support.ChannelInterceptorAdapter#preReceive(org.springframework.messaging.MessageChannel)
+	 */
 	@Override
 	public boolean preReceive(MessageChannel channel) {
 		// TODO Auto-generated method stub
-	    logger.info("在消息已被检索之后,但在返回给调用者之前立即调用.");
+	    /**
+	     * 一旦接收到被调用并在实际检索到一个消息之前就调用它
+	     */
 		return super.preReceive(channel);
 	}
 
+	/**
+	 * 
+	 * <p>Title: postReceive</p>   
+	 * <p>Description: 在消息已被检索之后,但在返回给调用者之前立即调用</p>   
+	 * @param message
+	 * @param channel
+	 * @return   
+	 * @see org.springframework.messaging.support.ChannelInterceptorAdapter#postReceive(org.springframework.messaging.Message, org.springframework.messaging.MessageChannel)
+	 */
 	@Override
 	public Message<?> postReceive(Message<?> message, MessageChannel channel) {
 		// TODO Auto-generated method stub
-		logger.info("在消息已被检索之后,但在返回给调用者之前立即调用.");
+		/**
+		 * 在消息已被检索之后,但在返回给调用者之前立即调用
+		 */
 		return super.postReceive(message, channel);
 	}
 
+	/**
+	 * 
+	 * <p>Title: afterReceiveCompletion</p>   
+	 * <p>Description: 在完成接收后调用,无论任何异常已被提出,从而允许正确的资源清理</p>   
+	 * @param message
+	 * @param channel
+	 * @param ex   
+	 * @see org.springframework.messaging.support.ChannelInterceptorAdapter#afterReceiveCompletion(org.springframework.messaging.Message, org.springframework.messaging.MessageChannel, java.lang.Exception)
+	 */
 	@Override
 	public void afterReceiveCompletion(Message<?> message, MessageChannel channel, Exception ex) {
 		// TODO Auto-generated method stub
-		logger.info("在完成接收后调用,无论任何异常已被提升,从而允许正确的资源清理.");
+		/**
+		 * 在完成接收后调用,无论任何异常已被提升,从而允许正确的资源清理
+		 */
 		super.afterReceiveCompletion(message, channel, ex);
 	}
-	
-	private void analysisMessage(Message<?> message)throws Exception{
-		String stompCommand=FrameworkStringUtils.asString(message.getHeaders().get("stompCommand"));
-		if(!"".equals(stompCommand)){
-			StringBuffer stompCommandSerivceName=new StringBuffer();
-			stompCommandSerivceName.append("stompCommand");
-			stompCommandSerivceName.append(stompCommand);
-			stompCommandSerivceName.append("Serivce");
-			IHandleStompCommandSerivce stompCommandSerivce=(IHandleStompCommandSerivce) cApplicationContext.getBean(stompCommandSerivceName.toString());
-			stompCommandSerivceName.setLength(0);
-			stompCommandSerivce.executeStompCommand(message);
-		}
-	}
-	
-	
 }

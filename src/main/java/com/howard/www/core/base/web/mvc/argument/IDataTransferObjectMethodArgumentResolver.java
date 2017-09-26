@@ -58,11 +58,10 @@ public class IDataTransferObjectMethodArgumentResolver implements HandlerMethodA
 		IDataTransferObject dataTransferObject = new DataTransferObject();
 		HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
 		//得到请求的内容区数据的类型    
-        log.info("ContentType:" + request.getContentType());  
+        log.info("ContentType:" + request.getContentType()+"  "+"CharacterEncoding:" + request.getCharacterEncoding());  
         //得到请求的内容区数据的编码方式，如果请求中没有指定则为null  
         //CharacterEncodingFilter这个过滤器设置了编码(UTF-8)  
         //编码只能被指定一次，即如果客户端设置了编码，则过滤器不会再设置  
-        log.info("CharacterEncoding:" + request.getCharacterEncoding());  
 		dataTransferObject.evaluateRequestParams(request);
 		return dataTransferObject;
 	}

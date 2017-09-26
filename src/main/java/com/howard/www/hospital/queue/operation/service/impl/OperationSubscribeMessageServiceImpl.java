@@ -17,7 +17,15 @@ import com.howard.www.core.base.util.FrameworkStringUtils;
 import com.howard.www.hospital.queue.operation.service.IOperationConsultingRoomSerivce;
 import com.howard.www.hospital.queue.operation.service.IOperationSubscribeMessageService;
 
-
+/**
+ * 
+ * @ClassName:  OperationSubscribeMessageServiceImpl   
+ * @Description:TODO(这里用一句话描述这个类的作用)   
+ * @author: mayijie
+ * @date:   2017年9月24日 下午10:55:02   
+ *     
+ * @Copyright: 2017 https://github.com/majieHoward Inc. All rights reserved.
+ */
 public class OperationSubscribeMessageServiceImpl implements IOperationSubscribeMessageService {
 
 	private static final Logger logger = LoggerFactory.getLogger(OperationSubscribeMessageServiceImpl.class);

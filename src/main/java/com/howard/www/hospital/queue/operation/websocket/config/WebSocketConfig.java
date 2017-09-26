@@ -19,6 +19,7 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketTransportRegistration;
 import org.springframework.web.socket.handler.WebSocketHandlerDecoratorFactory;
+
 import com.howard.www.hospital.queue.operation.websocket.handler.HospitalQueueWebSocketHandler;
 import com.howard.www.hospital.queue.operation.websocket.handler.WebSocketSessionCapturingHandlerDecorator;
 import com.howard.www.hospital.queue.operation.websocket.interceptors.HttpSessionIdHandshakeInterceptor;
@@ -42,7 +43,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer,WebSock
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		// TODO Auto-generated method stub
-        registry.addHandler(hospitalQueueWebSocketHandler(), "/screenDevice").addInterceptors(httpSessionIdHandshakeInterceptor());
+		registry.addHandler(hospitalQueueWebSocketHandler(), "/screenDevice").addInterceptors(httpSessionIdHandshakeInterceptor());
         registry.addHandler(hospitalQueueWebSocketHandler(), "/callTheName").addInterceptors(httpSessionIdHandshakeInterceptor());
         registry.addHandler(hospitalQueueWebSocketHandler(), "/hospitalQueue").addInterceptors(httpSessionIdHandshakeInterceptor());
 

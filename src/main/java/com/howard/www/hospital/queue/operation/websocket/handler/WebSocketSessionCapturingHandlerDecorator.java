@@ -8,9 +8,6 @@ import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.WebSocketHandlerDecorator;
 
-import com.howard.www.core.base.util.FrameworkStringUtils;
-
-import net.sf.json.JSONObject;
 /**
  * 
  * @ClassName:  WebSocketSessionCapturingHandlerDecorator   
@@ -27,23 +24,66 @@ public class WebSocketSessionCapturingHandlerDecorator extends WebSocketHandlerD
 		super(delegate);
 	}
 
+	/**
+	 * 
+	 * <p>Title: afterConnectionEstablished</p>   
+	 * <p>Description: 在WebSocket协商成功并且WebSocket连接打开并可以使用之后调用</p>   
+	 * @param session
+	 * @throws Exception   
+	 * @see org.springframework.web.socket.handler.WebSocketHandlerDecorator#afterConnectionEstablished(org.springframework.web.socket.WebSocketSession)
+	 */
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		logger.info("afterConnectionEstablished");
+		/**
+		 * 在WebSocket协商成功并且WebSocket连接打开并可以使用之后调用
+		 */
 		super.afterConnectionEstablished(session);
 	}
 
+	/**
+	 * 
+	 * <p>Title: handleMessage</p>   
+	 * <p>Description: 当新的WebSocket消息到达时调用</p>   
+	 * @param session
+	 * @param message
+	 * @throws Exception   
+	 * @see org.springframework.web.socket.handler.WebSocketHandlerDecorator#handleMessage(org.springframework.web.socket.WebSocketSession, org.springframework.web.socket.WebSocketMessage)
+	 */
 	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
-		logger.info("handleMessage:"+FrameworkStringUtils.asString(JSONObject.fromObject(message)));
+		/**
+		 * 当新的WebSocket消息到达时调用
+		 */
 		super.handleMessage(session, message);
 	}
 
+	/**
+	 * 
+	 * <p>Title: handleTransportError</p>   
+	 * <p>Description: 处理底层WebSocket消息传输中的错误</p>   
+	 * @param session
+	 * @param exception
+	 * @throws Exception   
+	 * @see org.springframework.web.socket.handler.WebSocketHandlerDecorator#handleTransportError(org.springframework.web.socket.WebSocketSession, java.lang.Throwable)
+	 */
 	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
-		logger.info("handleTransportError");
+		/**
+		 * 处理底层WebSocket消息传输中的错误
+		 */
 		super.handleTransportError(session, exception);
 	}
 
+	/**
+	 * 
+	 * <p>Title: afterConnectionClosed</p>   
+	 * <p>Description: 在WebSocket连接已经被任何一方关闭之后，或在发生传输错误之后调用</p>   
+	 * @param session
+	 * @param closeStatus
+	 * @throws Exception   
+	 * @see org.springframework.web.socket.handler.WebSocketHandlerDecorator#afterConnectionClosed(org.springframework.web.socket.WebSocketSession, org.springframework.web.socket.CloseStatus)
+	 */
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
-		logger.info("afterConnectionClosed");
+		/**
+		 * 在WebSocket连接已经被任何一方关闭之后，或在发生传输错误之后调用
+		 */
 		super.afterConnectionClosed(session, closeStatus);
 	}
 }
