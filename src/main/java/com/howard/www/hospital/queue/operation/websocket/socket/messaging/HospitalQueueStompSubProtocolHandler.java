@@ -56,7 +56,7 @@ import com.howard.www.hospital.queue.operation.websocket.listener.WebSocketSubsc
 /**
  * 
  * @ClassName:  HospitalQueueStompSubProtocolHandler   
- * @Description:TODO
+ * @Description:TODO 
  * @author: mayijie
  * @date:   2017年9月26日 下午5:39:48   
  *     
@@ -81,8 +81,6 @@ public class HospitalQueueStompSubProtocolHandler implements SubProtocolHandler,
 
 	private static final byte[] EMPTY_PAYLOAD = new byte[0];
 
-
-	
 	private StompSubProtocolErrorHandler errorHandler;
 
 	private int messageSizeLimit = 64 * 1024;
@@ -290,6 +288,9 @@ public class HospitalQueueStompSubProtocolHandler implements SubProtocolHandler,
 							else if (StompCommand.UNSUBSCRIBE.equals(headerAccessor.getCommand())) {
 								publishEvent(this.eventPublisher, new SessionUnsubscribeEvent(this, message, user));
 							}
+							/**
+							 * 添加ACK
+							 */
 							else if(StompCommand.ACK.equals(headerAccessor.getCommand())){
 								publishEvent(this.eventPublisher, new SessionACKEvent(this, message, user));
 							}

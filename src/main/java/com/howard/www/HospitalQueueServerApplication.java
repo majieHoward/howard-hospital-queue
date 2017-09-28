@@ -26,13 +26,7 @@ public class HospitalQueueServerApplication implements EmbeddedServletContainerC
 
 	public static void main(String[] args) {
 		System.setProperty("spring.devtools.restart.enabled", "false");
-		ApplicationContext ctx = SpringApplication.run(HospitalQueueServerApplication.class, args);
-		String[] beanNames = ctx.getBeanDefinitionNames();
-
-		for (String beanName : beanNames) {
-			logger.info("Spring 容器中的Bean:" + ctx.getBean(beanName).getClass().getName());
-		}
-
+		SpringApplication.run(HospitalQueueServerApplication.class, args);
 	}
 
 	/**

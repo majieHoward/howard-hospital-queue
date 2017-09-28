@@ -7,7 +7,7 @@ import org.springframework.web.socket.messaging.AbstractSubProtocolEvent;
 /**
  * 
  * @ClassName:  SessionACKEvent   
- * @Description:TODO(这里用一句话描述这个类的作用)   
+ * @Description:TODO
  * @author: mayijie
  * @date:   2017年9月26日 下午8:46:42   
  *     

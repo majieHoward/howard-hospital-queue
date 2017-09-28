@@ -42,6 +42,7 @@ public class HospitalQueueApplicationStartup implements ApplicationListener<Cont
 				"Interface to be implemented by application event listeners. Based on the standard java.util.EventListener interface for the Observer design pattern.");
 		cApplicationContext = event.getApplicationContext();
 		try {
+			outputContainerInstance();
 			/**
 			 * 初始化诊室列表
 			 */
@@ -83,6 +84,20 @@ public class HospitalQueueApplicationStartup implements ApplicationListener<Cont
 		}
 	}
 
+	/**
+	 * 
+	 * @Title: outputContainerInstance   
+	 * @Description: TODO 输出Spring容器中所有实例化出的Bean 
+	 * @param: @throws Exception      
+	 * @return: void      
+	 * @throws
+	 */
+	private void outputContainerInstance()throws Exception{
+		for(String instanceBeanName:this.cApplicationContext.getBeanDefinitionNames()){
+			log.info("Spring 容器中的Bean:"+instanceBeanName);
+		}
+	}
+	
 	private void replacedStompSubProtocolHandler() throws Exception {
 		SubProtocolWebSocketHandler subProtocolWebSocketHandler = obtainsubProtocolWebSocketHandler();
 		Map<String, SubProtocolHandler> subProtocolHandlerMap = subProtocolWebSocketHandler.getProtocolHandlerMap();
